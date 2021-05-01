@@ -1,20 +1,22 @@
+
 var main = d3.select("main");
 var mediaScrolly = main.select("#media-scrolly");
 var mediaFigure = mediaScrolly.select("#media-figure");
 var mediaArticle = mediaScrolly.select("#media-article");
 var mediaStep = mediaArticle.selectAll(".step");
 
+
 var scroller = scrollama();
 
 function handleResize() {
     // 1. update height of step elements
     var stepH = Math.floor(window.innerHeight * 0.4);
-    postCrashStep.style("height", stepH + "px");
+    mediaStep.style("height", stepH + "px");
   
     var figureHeight = window.innerHeight * 0.8;
     var figureMarginTop = (window.innerHeight - figureHeight) / 2;
   
-    postCrashFigure
+    mediaFigure
       .style("height", figureHeight + "px")
       .style("top", figureMarginTop + "px");
   
@@ -46,7 +48,7 @@ function handleResize() {
   
     scroller
       .setup({
-        step: mediaStep,
+        step: "#media-scrolly #media-article .step",
         offset: 0.5,
       })
       .onStepEnter(handleMediaStepEnter);
