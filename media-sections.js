@@ -68,7 +68,6 @@ function handleResize() {
       })
       .onStepEnter(handleMediaStepEnter);
   
-    console.log(d3.selectAll("#post-crash-scrolly #post-crash-article .step"));
   
     window.addEventListener("resize", handleResize);
   }
