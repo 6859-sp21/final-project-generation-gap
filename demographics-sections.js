@@ -10,6 +10,11 @@ var demographicsStep = demographicsArticle.selectAll(".step");
 
 var scroller = scrollama();
 
+var genzTitle = d3.select('#gen-z-title')
+var boomerTitle = d3.select('#boomer-title')
+var genzSVG = d3.select('#gen-z-area').append('svg').attr('width', 400).attr('height', 400)
+var boomerSVG = d3.select('#boomer-area').append('svg').attr('width', 400).attr('height', 400)
+
 
 function handleResize() {
     // 1. update height of step elements
@@ -42,29 +47,34 @@ function handleResize() {
 
     console.log(response.index);
     if (response.index == 0) {
-      var svg = d3.select("body")
-                .append("svg")
-                .attr("width", 200)
-                .attr("height", 100)
-                .style("border", "1px solid black");
-      var imgs = svg.selectAll("img").data([0]);
-      imgs.enter()
-          .append("svg:img")
-          .attr("xlink:href", "genx_population.png")
-          .attr("x", "60")
-          .attr("y", "60")
-          .attr("width", "20")
-          .attr("height", "20");
+      genzTitle.text('GenZ Age Range')
+      genzSVG.selectAll('image').remove()
+      genzSVG.append('image')
+      .attr('xlink:href', 'genz_age.png')
+      .attr('width', 370).attr('height', 300)
+      boomerTitle.text('Boomer Age Range')
+      boomerSVG.selectAll('image').remove()
+      boomerSVG.selectAll('image').remove()
+      boomerSVG.append('image')
+      .attr('xlink:href', 'boomer_age.png')
+      .attr('width', 370).attr('height', 300)
+
+
     } else if (response.index == 1) {
-      var imgs = svg.selectAll("img").data([0]);
-      imgs.enter()
-          .append("svg:img")
-          .attr("xlink:href", "genx_population.png")
-          .attr("x", "60")
-          .attr("y", "60")
-          .attr("width", "20")
-          .attr("height", "20");
+      genzTitle.text('GenZ Population: 68 Million')
+      genzSVG.selectAll('image').remove()
+      genzSVG.append('image')
+      .attr('xlink:href', 'genz_population.png')
+      .attr('width', 400).attr('height', 330)
+      boomerTitle.text('Boomer Population: 71.6 Million')
+      boomerSVG.selectAll('image').remove()
+      boomerSVG.selectAll('image').remove()
+      boomerSVG.append('image')
+      .attr('xlink:href', 'boomer_population.png')
+      .attr('width', 400).attr('height', 350)
+
     } else if (response.index == 2) {
+
     }
   }
   

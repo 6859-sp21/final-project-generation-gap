@@ -32,15 +32,43 @@
 
   .gen-z-figure {
     /* background-color: None; */
-    display: flex;
-    justify-content: center;
+    display: block;
+    flex-direction: column;
+    justify-content: flex-start;
     width: 50%
   }
   .boomer-figure{
     /* background-color: None; */
-    display: flex;
-    justify-content: center;
+    display: block;
+    flex-direction: column;
+    justify-content: flex-end;
     width: 50%
+  }
+
+  .genz-area {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .boomer-area {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .genz-title {
+    display: flex;
+    justify-content: flex-start;
+    /* width:50%; */
+    font-size: 32px;
+    color:rgb(196, 255, 240);
+  }
+
+  .boomer-title {
+    display: flex;
+    justify-content: flex-end;
+    /* width:80%; */
+    font-size: 32px;
+    color:rgb(250, 226, 161);
   }
 
 
