@@ -29,7 +29,7 @@ body {
     -webkit-transform: translate3d(0, 0, 0);
     -moz-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-    background-color: #8a8a8a;
+    /* background-color: #8a8a8a; */
     z-index: 0;
   }
 
@@ -38,14 +38,16 @@ body {
     display: block;
     flex-direction: column;
     justify-content: flex-start;
-    width: 50%
+    width: 50%;
+    margin-right: 3rem;
   }
   .boomer-figure{
     /* background-color: None; */
     display: block;
     flex-direction: column;
     justify-content: flex-end;
-    width: 50%
+    width: 50%;
+    margin-right: 3rem;
   }
 
   .genz-area {
@@ -78,7 +80,7 @@ body {
   .step {
     margin: 0 auto 3rem auto;
     color: #fff;
-    background-color: rgba(1, 0, 0, 0.1);
+    background-color: rgba(1, 0, 0, 0);
   }
 
   .step:last-child {
@@ -96,3 +98,6 @@ body {
     font-size: 1.5rem;
     background-color: #3b3b3b;
   }
+span {
+
+}
