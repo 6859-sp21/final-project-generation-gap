@@ -1,0 +1,63 @@
+.scrolly {
+    position: relative;
+    background-color: #f3f3f3;
+    padding: 1rem;
+  }
+#media-scrolly{
+    position: relative;
+    background-color: #f3f3f3;
+    padding: 1rem;
+}
+
+  article {
+    position: relative;
+    padding: 0;
+    max-width: 20rem;
+    margin: 0 auto;
+  }
+
+  figure {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    background-color: #8a8a8a;
+    z-index: 0;
+  }
+
+  .gen-z-figure {
+      margin-right: 3rem;
+     
+  }
+  .boomer-figure {
+    margin-left: 3rem;
+    
+}
+
+
+  .step {
+    margin: 0 auto 3rem auto;
+    color: #fff;
+    background-color: rgba(1, 0, 0, 0.1);
+  }
+
+  .step:last-child {
+    margin-bottom: 10rem;
+  }
+
+  .step.is-active p {
+    background-color: goldenrod;
+    color: #3b3b3b;
+  }
+
+  .step p {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: #3b3b3b;
+  }
