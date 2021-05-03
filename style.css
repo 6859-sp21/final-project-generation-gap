@@ -31,10 +31,16 @@
   }
 
   .gen-z-figure {
-    background-color: red;
+    /* background-color: None; */
+    display: flex;
+    justify-content: center;
+    width: 50%
   }
   .boomer-figure{
-    background-color: blue;
+    /* background-color: None; */
+    display: flex;
+    justify-content: center;
+    width: 50%
   }
 
 

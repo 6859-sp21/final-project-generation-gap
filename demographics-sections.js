@@ -42,8 +42,28 @@ function handleResize() {
 
     console.log(response.index);
     if (response.index == 0) {
-        
+      var svg = d3.select("body")
+                .append("svg")
+                .attr("width", 200)
+                .attr("height", 100)
+                .style("border", "1px solid black");
+      var imgs = svg.selectAll("img").data([0]);
+      imgs.enter()
+          .append("svg:img")
+          .attr("xlink:href", "genx_population.png")
+          .attr("x", "60")
+          .attr("y", "60")
+          .attr("width", "20")
+          .attr("height", "20");
     } else if (response.index == 1) {
+      var imgs = svg.selectAll("img").data([0]);
+      imgs.enter()
+          .append("svg:img")
+          .attr("xlink:href", "genx_population.png")
+          .attr("x", "60")
+          .attr("y", "60")
+          .attr("width", "20")
+          .attr("height", "20");
     } else if (response.index == 2) {
     }
   }
