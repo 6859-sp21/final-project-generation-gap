@@ -3,12 +3,11 @@ body {
 }
 .scrolly {
     position: relative;
-    background-color: #f3f3f3;
+    background-color: #F6F2EB;;
     padding: 1rem;
   }
 #media-scrolly{
     position: relative;
-    background-color: #f3f3f3;
     padding: 1rem;
 }
 
@@ -35,19 +34,20 @@ body {
 
   .gen-z-figure {
     /* background-color: None; */
-    display: block;
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     width: 50%;
-    margin-right: 3rem;
+    margin-left: 2rem;
+    
   }
   .boomer-figure{
     /* background-color: None; */
-    display: block;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
     width: 50%;
-    margin-right: 3rem;
+    margin-left: 10rem;
   }
 
   .genz-area {
@@ -65,7 +65,7 @@ body {
     justify-content: flex-start;
     /* width:50%; */
     font-size: 32px;
-    color:rgb(196, 255, 240);
+    color:#282828;
   }
 
   .boomer-title {
@@ -73,7 +73,7 @@ body {
     justify-content: flex-end;
     /* width:80%; */
     font-size: 32px;
-    color:rgb(250, 226, 161);
+    color:#282828;
   }
 
 
@@ -81,6 +81,7 @@ body {
     margin: 0 auto 3rem auto;
     color: #fff;
     background-color: rgba(1, 0, 0, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;
   }
 
   .step:last-child {
@@ -99,5 +100,7 @@ body {
     background-color: #3b3b3b;
   }
 span {
-
+  font-size: 2.5rem;
+  text-align: center;
+  order: 0;
 }

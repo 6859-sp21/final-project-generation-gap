@@ -34,7 +34,7 @@ const genZNewsOutlet = [
   { source: "MSNBC", percent: 0.09 },
   { source: "CNN", percent: 0.16 },
   { source: "NYT", percent: 0.21 },
-  { source: "Washington\n Post", percent: 0.15 },
+  { source: "Washington Post", percent: 0.15 },
   { source: "National TV", percent: 0.32 },
   { source: "NPR", percent: 0.16 },
   { source: "Fox", percent: 0.11 },
@@ -44,7 +44,7 @@ const boomerNewsOutlet = [
   { source: "MSNBC", percent: 0.18 },
   { source: "CNN", percent: 0.23 },
   { source: "NYT", percent: 0.12 },
-  { source: "Washington\n Post", percent: 0.1 },
+  { source: "Washington Post", percent: 0.1 },
   { source: "National TV", percent: 0.38 },
   { source: "NPR", percent: 0.14 },
   { source: "Fox", percent: 0.33 },
@@ -71,7 +71,7 @@ const boomerNewsSource = [
   { source: "News Website", percent: 0.16 },
 ];
 
-var width = 500;
+var width = 600;
 var height = 500;
 var margin = { top: 50, right: 0, bottom: 50, left: 40 };
 
@@ -111,19 +111,25 @@ function handleMediaStepEnter(response) {
 
   console.log(response.index);
   if (response.index == 0) {
+    mediaGenZSVG.selectAll("text").remove();
+    mediaBoomerSVG.selectAll("text").remove();
   } else if (response.index == 1) {
     followNews();
   } else if (response.index == 2) {
     newsSource();
   } else if (response.index == 3) {
-    newsOutlet();
+    newsOutlet1();
   } else if (response.index == 4) {
-    headlineExample1();
+    newsOutlet2();
   } else if (response.index == 5) {
-    headlineExample2();
+    newsOutlet3();
   } else if (response.index == 6) {
-    headlineExample3();
+    headlineExample1();
   } else if (response.index == 7) {
+    headlineExample2();
+  } else if (response.index == 8) {
+    headlineExample3();
+  } else if (response.index == 9) {
     mediaExplore();
   }
 }
@@ -151,7 +157,7 @@ function followNews() {
     .attr("y", (d) => y(d.percent))
     .attr("height", (d) => y(0) - y(d.percent))
     .attr("width", x.bandwidth())
-    .transition();
+    .attr("fill", "#3b3b3b");
 
     var genZxAxis = (g) =>
     g.attr("transform", `translate(0,${height - margin.bottom})`).call(
@@ -184,7 +190,8 @@ function followNews() {
     .attr("x", (d, i) => x(i))
     .attr("y", (d) => y(d.percent))
     .attr("height", (d) => y(0) - y(d.percent))
-    .attr("width", x.bandwidth());
+    .attr("width", x.bandwidth())
+    .attr("fill", "#3b3b3b");
     var boomerXAxis = (g) =>
     g.attr("transform", `translate(0,${height - margin.bottom})`).call(
       d3
@@ -284,7 +291,7 @@ function newsSource() {
   mediaBoomerSVG.append("g").call(boomerYAxis);
 
 }
-function newsOutlet() {
+function newsOutlet1() {
   var y2 = d3
     .scaleLinear()
     .domain([0, 1])
@@ -303,7 +310,14 @@ function newsOutlet() {
     .attr("x", (d, i) => x2(i))
     .attr("y", (d) => y2(d.percent))
     .attr("height", (d) => y2(0) - y2(d.percent))
-    .attr("width", x2.bandwidth());
+    .attr("width", x2.bandwidth())
+    .attr("fill", (d) => {
+      if (d.source == "National TV"){
+        return "goldenrod";
+      } else {
+        return "#3b3b3b";
+      }
+    });
 
   var genZxAxis = (g) =>
     g.attr("transform", `translate(0,${height - margin.bottom})`).call(
@@ -336,7 +350,14 @@ function newsOutlet() {
     .attr("x", (d, i) => x2(i))
     .attr("y", (d) => y2(d.percent))
     .attr("height", (d) => y2(0) - y2(d.percent))
-    .attr("width", x2.bandwidth());
+    .attr("width", x2.bandwidth())
+    .attr("fill", (d) => {
+      if (d.source == "National TV"){
+        return "goldenrod";
+      } else {
+        return "#3b3b3b";
+      }
+    });;
   var boomerxAxis = (g) =>
     g.attr("transform", `translate(0,${height - margin.bottom})`).call(
       d3
@@ -361,53 +382,224 @@ function newsOutlet() {
       );
   mediaBoomerSVG.append("g").call(boomerYAxis);
 }
-function headlineExample1() {
+function newsOutlet2() {
+  var y2 = d3
+    .scaleLinear()
+    .domain([0, 1])
+    .nice()
+    .range([height - margin.bottom, margin.top]);
+  var x2 = d3
+    .scaleBand()
+    .domain(d3.range(genZNewsOutlet.length))
+    .range([margin.left, width - margin.right])
+    .padding(0.1);
+
+  mediaGenZSVG
+    .selectAll("rect")
+    .data(genZNewsOutlet)
+    .join("rect")
+    .attr("x", (d, i) => x2(i))
+    .attr("y", (d) => y2(d.percent))
+    .attr("height", (d) => y2(0) - y2(d.percent))
+    .attr("width", x2.bandwidth()).attr("fill", (d) => {
+      if (d.source == "NYT" || d.source == "Washington Post"){
+        return "goldenrod";
+      } else {
+        return "#3b3b3b";
+      }
+    });
+
+  var genZxAxis = (g) =>
+    g.attr("transform", `translate(0,${height - margin.bottom})`).call(
+      d3
+        .axisBottom(x2)
+        .tickFormat((i) => genZNewsOutlet[i].source)
+        .tickSizeOuter(0)
+    );
+  var genZyAxis = (g) =>
+    g
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y2).ticks(null, genZNewsOutlet.format))
+      .call((g) => g.select(".domain").remove())
+      .call((g) =>
+        g
+          .append("text")
+          .attr("x", -margin.left)
+          .attr("y", 10)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "start")
+          .text(genZNewsOutlet.percent)
+      );
+  mediaGenZSVG.append("g").call(genZyAxis);
+  mediaGenZSVG.append("g").call(genZxAxis);
+
   mediaBoomerSVG
-    .append("text")
+    .selectAll("rect")
+    .data(boomerNewsOutlet)
+    .join("rect")
+    .attr("x", (d, i) => x2(i))
+    .attr("y", (d) => y2(d.percent))
+    .attr("height", (d) => y2(0) - y2(d.percent))
+    .attr("width", x2.bandwidth()).attr("fill", (d) => {
+      if (d.source == "NYT" || d.source == "Washington Post"){
+        return "goldenrod";
+      } else {
+        return "#3b3b3b";
+      }
+    });
+  var boomerxAxis = (g) =>
+    g.attr("transform", `translate(0,${height - margin.bottom})`).call(
+      d3
+        .axisBottom(x2)
+        .tickFormat((i) => boomerNewsOutlet[i].source)
+        .tickSizeOuter(0)
+    );
+  mediaBoomerSVG.append("g").call(boomerxAxis);
+  var boomerYAxis = (g) =>
+    g
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y2).ticks(null, boomerNewsOutlet.format))
+      .call((g) => g.select(".domain").remove())
+      .call((g) =>
+        g
+          .append("text")
+          .attr("x", -margin.left)
+          .attr("y", 10)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "start")
+          .text(boomerNewsOutlet.percent)
+      );
+  mediaBoomerSVG.append("g").call(boomerYAxis);
+}
+function newsOutlet3() {
+  var y2 = d3
+    .scaleLinear()
+    .domain([0, 1])
+    .nice()
+    .range([height - margin.bottom, margin.top]);
+  var x2 = d3
+    .scaleBand()
+    .domain(d3.range(genZNewsOutlet.length))
+    .range([margin.left, width - margin.right])
+    .padding(0.1);
+
+  mediaGenZSVG
+    .selectAll("rect")
+    .data(genZNewsOutlet)
+    .join("rect")
+    .attr("x", (d, i) => x2(i))
+    .attr("y", (d) => y2(d.percent))
+    .attr("height", (d) => y2(0) - y2(d.percent))
+    .attr("width", x2.bandwidth()).attr("fill", (d) => {
+      if (d.source == "Fox" || d.source == "Talk Radio"){
+        return "goldenrod";
+      } else {
+        return "#3b3b3b";
+      }
+    });
+
+  var genZxAxis = (g) =>
+    g.attr("transform", `translate(0,${height - margin.bottom})`).call(
+      d3
+        .axisBottom(x2)
+        .tickFormat((i) => genZNewsOutlet[i].source)
+        .tickSizeOuter(0)
+    );
+  var genZyAxis = (g) =>
+    g
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y2).ticks(null, genZNewsOutlet.format))
+      .call((g) => g.select(".domain").remove())
+      .call((g) =>
+        g
+          .append("text")
+          .attr("x", -margin.left)
+          .attr("y", 10)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "start")
+          .text(genZNewsOutlet.percent)
+      );
+  mediaGenZSVG.append("g").call(genZyAxis);
+  mediaGenZSVG.append("g").call(genZxAxis);
+
+  mediaBoomerSVG
+    .selectAll("rect")
+    .data(boomerNewsOutlet)
+    .join("rect")
+    .attr("x", (d, i) => x2(i))
+    .attr("y", (d) => y2(d.percent))
+    .attr("height", (d) => y2(0) - y2(d.percent))
+    .attr("width", x2.bandwidth()).attr("fill", (d) => {
+      if (d.source == "Fox" || d.source == "Talk Radio"){
+        return "goldenrod";
+      } else {
+        return "#3b3b3b";
+      }
+    });
+  var boomerxAxis = (g) =>
+    g.attr("transform", `translate(0,${height - margin.bottom})`).call(
+      d3
+        .axisBottom(x2)
+        .tickFormat((i) => boomerNewsOutlet[i].source)
+        .tickSizeOuter(0)
+    );
+  mediaBoomerSVG.append("g").call(boomerxAxis);
+  var boomerYAxis = (g) =>
+    g
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y2).ticks(null, boomerNewsOutlet.format))
+      .call((g) => g.select(".domain").remove())
+      .call((g) =>
+        g
+          .append("text")
+          .attr("x", -margin.left)
+          .attr("y", 10)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "start")
+          .text(boomerNewsOutlet.percent)
+      );
+  mediaBoomerSVG.append("g").call(boomerYAxis);
+}
+
+function headlineExample1() {
+  mediaBoomerFigure
+    .append("span")
     .text(
       "GOP senators offer Covid-19 relief counterproposal to force talks with White House back to middle"
     )
-    .attr("x", "5%")
-    .attr("y", "30%");
-  mediaGenZSVG
-    .append("text")
+    
+  mediaGenZFigure
+    .append("span")
     .text(
       "GOP senators to meet Biden Monday on coronavirus relief as Dems ready to pass bill without Republican support"
     )
-    .attr("x", "5%")
-    .attr("y", "30%");
+    
 }
 function headlineExample2() {
-  mediaBoomerSVG
-    .append("text")
+  mediaBoomerFigure
+    .append("span")
     .text(
       "Biden's spending, tax plans will have 'bumps along the way': Economic Advisers chair"
     )
-    .attr("x", "5%")
-    .attr("y", "30%");
-  mediaGenZSVG
-    .append("text")
+    mediaGenZFigure
+    .append("span")
     .text(
       "Here's how Biden wants to raise taxes on the wealthy and corporations"
     )
-    .attr("x", "5%")
-    .attr("y", "30%");
+
 }
 function headlineExample3() {
-  mediaGenZSVG
-    .append("text")
+  mediaGenZFigure
+    .append("span")
     .text(
       "Biden makes the economic case for fighting climate change on second day of virtual summit"
     )
-    .attr("x", "5%")
-    .attr("y", "30%");
-  mediaBoomerSVG
-    .append("text")
+
+    mediaBoomerFigure
+    .append("span")
     .text(
       "Biden avoids confronting China over climate in Earth Day speech with world leaders"
     )
-    .attr("x", "5%")
-    .attr("y", "30%");
 }
 
 function stepReset() {
@@ -417,6 +609,8 @@ function stepReset() {
   mediaBoomerSVG.selectAll("g").remove();
   mediaGenZSVG.selectAll("text").remove();
   mediaBoomerSVG.selectAll("text").remove();
+  mediaGenZFigure.selectAll("span").remove();
+  mediaBoomerFigure.selectAll("span").remove();
 }
 function init() {
   handleResize();
