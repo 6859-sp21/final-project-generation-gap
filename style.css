@@ -31,11 +31,13 @@
   }
 
   .gen-z-figure {
-    background-color: red;
+      margin-right: 3rem;
+     
   }
-  .boomer-figure{
-    background-color: blue;
-  }
+  .boomer-figure {
+    margin-left: 3rem;
+    
+}
 
 
   .step {
