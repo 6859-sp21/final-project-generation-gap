@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./style.css" />
     <script src="./node_modules/scrollama/build/scrollama.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="radialBarChart.js"></script>
   </head>
   <body>
     <main>
@@ -25,7 +26,7 @@
         </article>
         
       </section>
-      <section class="scrolly" id="politics-scrolly">
+      <!-- <section class="scrolly" id="politics-scrolly">
         <figure id="politics-figure">
             <div class = "gen-z-figure" id="politics-gen-z-figure"></div>
             <div class = "boomer-figure" id="politics-boomer-figure"></div>
@@ -39,22 +40,35 @@
           </div>
         </article>
         
-      </section>
+      </section> -->
       <section class="scrolly" id="media-scrolly">
         <figure class = "overall-figure" id="media-figure">
             <div class = "gen-z-figure" id="media-gen-z-figure"></div>
             <div class = "boomer-figure" id="media-boomer-figure"></div>
         </figure>
         <article id="media-article">
+          <div class="step" id="step-style" data-step="0">
+            <p class="progress" id="section-text">Media Intro</p>
+          </div>
           <div class="step" id="step-style" data-step="1">
-            <p class="progress" id="section-text">Media 1</p>
+            <p class="progress" id="section-text">Media Behaviors</p>
           </div>
           <div class="step" id="step-style" data-step="2">
-            <p class="progress" id="section-text">Media 2</p>
+            <p class="progress" id="section-text">Media News Sources</p>
           </div>
           <div class="step" id="step-style" data-step="2">
-            <p class="progress" id="section-text">Media 3</p>
+            <p class="progress" id="section-text">Media News Outlets</p>
           </div>
+          <div class="step" id="step-style" data-step="3">
+            <p class="progress" id="section-text">Media Headline Covid</p>
+          </div>
+          <div class="step" id="step-style" data-step="4">
+            <p class="progress" id="section-text">Media Headline Economy</p>
+          </div>
+          <div class="step" id="step-style" data-step="5">
+            <p class="progress" id="section-text">Media Headline Climate</p>
+          </div>
+          
         </article>
         
       </section>
