@@ -1,37 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head> 
+  <head>
     <title>Souls of the Titanic</title>
     <meta name="description" content="Souls of the Titanic" />
     <link rel="stylesheet" href="./style.css" />
     <script src="./node_modules/scrollama/build/scrollama.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap");
+    </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100&display=swap");
+    </style>
   </head>
   <body>
     <main>
-      <section id="intro"></section>
+      <section
+        id="intro"
+        style="
+          height: 100vh;
+          width: 100%;
+          display: flex;
+          background-image: url('titleimage.jpg');
+          background-size: cover;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          font-family: 'Antonio', sans-serif;
+          background-color: rgba(255, 255, 255, 0.6);
+          background-blend-mode: lighten;
+        "
+      >
+        <h1 id="title" style="color: black; font-size: 4em; opacity: 1">
+          BRIDGING THE GENERATIONAL GAP
+        </h1>
+        <h1 style="color: black; font-size: 1.5em">
+          Start scrolling to explore how Generation-Z compares to Baby Boomers.
+        </h1>
+      </section>
       <section class="scrolly" id="demographics-scrolly">
         <figure id="demographics-figure">
-          <div class = "gen-z-figure" id="demographics-gen-z-figure">
+          <div class="gen-z-figure" id="demographics-gen-z-figure">
             <!-- <img src='genz_age.png'></img> -->
-            <div class='genz-title' id='gen-z-title'></div>
-            <div class='genz-area' id='gen-z-area'></div>
+            <div class="genz-title" id="gen-z-title"></div>
+            <div class="genz-area" id="gen-z-area"></div>
           </div>
-          <div class = "boomer-figure" id="demographics-boomer-figure">
+          <div class="boomer-figure" id="demographics-boomer-figure">
             <!-- <img src='boomer_age.png'></img> -->
-            <div class='boomer-title' id='boomer-title'></div>
-            <div class='boomer-area' id='boomer-area'></div>
+            <div class="boomer-title" id="boomer-title"></div>
+            <div class="boomer-area" id="boomer-area"></div>
           </div>
         </figure>
         <article id="demographics-article">
           <div class="step" id="step-style" data-step="1">
-            <p class="progress" id="section-text">It's 2021! This is how old GenZ and Boomers are today.</p>
+            <p class="progress" id="section-text">
+              It's 2021! This is how old GenZ and Boomers are today.
+            </p>
           </div>
           <div class="step" id="step-style" data-step="2">
-            <p class="progress" id="section-text">This is the population of GenZ and Boomers.</p>
+            <p class="progress" id="section-text">
+              This is the population of GenZ and Boomers.
+            </p>
           </div>
         </article>
-        
+
         <!-- <figure id="demographics-figure">
           <div class = "gen-z-figure" id="demographics-gen-z-figure">
             <img style='width: 90%' src='genz_population.png'></img>
@@ -40,12 +72,11 @@
             <img style='width: 90%' src='boomer_population.png'></img>
           </div>
         </figure> -->
-        
       </section>
       <section class="scrolly" id="politics-scrolly">
         <figure id="politics-figure">
-            <div class = "gen-z-figure" id="politics-gen-z-figure"></div>
-            <div class = "boomer-figure" id="politics-boomer-figure"></div>
+          <div class="gen-z-figure" id="politics-gen-z-figure"></div>
+          <div class="boomer-figure" id="politics-boomer-figure"></div>
         </figure>
         <article id="politics-article">
           <div class="step" id="step-style" data-step="1">
@@ -55,12 +86,11 @@
             <p class="progress" id="section-text">Text for each scrolly</p>
           </div>
         </article>
-        
       </section>
       <section class="scrolly" id="media-scrolly">
-        <figure class = "overall-figure" id="media-figure">
-            <div class = "gen-z-figure" id="media-gen-z-figure"></div>
-            <div class = "boomer-figure" id="media-boomer-figure"></div>
+        <figure class="overall-figure" id="media-figure">
+          <div class="gen-z-figure" id="media-gen-z-figure"></div>
+          <div class="boomer-figure" id="media-boomer-figure"></div>
         </figure>
         <article id="media-article">
           <div class="step" id="step-style" data-step="1">
@@ -70,11 +100,8 @@
             <p class="progress" id="section-text">Text for each scrolly</p>
           </div>
         </article>
-        
       </section>
-      <section id="outro"> 
-
-      </section>
+      <section id="outro"></section>
     </main>
   </body>
   <script src="demographics-sections.js"></script>
