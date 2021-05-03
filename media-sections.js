@@ -234,7 +234,7 @@ function newsSource() {
     .attr("x", (d, i) => x(i))
     .attr("y", (d) => y(d.percent))
     .attr("height", (d) => y(0) - y(d.percent))
-    .attr("width", x.bandwidth());
+    .attr("width", x.bandwidth()).attr("fill", "#3b3b3b");
   var genZxAxis = (g) =>
     g.attr("transform", `translate(0,${height - margin.bottom})`).call(
       d3
@@ -265,7 +265,7 @@ function newsSource() {
     .attr("x", (d, i) => x(i))
     .attr("y", (d) => y(d.percent))
     .attr("height", (d) => y(0) - y(d.percent))
-    .attr("width", x.bandwidth());
+    .attr("width", x.bandwidth()).attr("fill", "#3b3b3b");
   var boomerXAxis = (g) =>
     g.attr("transform", `translate(0,${height - margin.bottom})`).call(
       d3
