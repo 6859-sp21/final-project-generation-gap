@@ -47,6 +47,11 @@ function handleResize() {
 
     console.log(response.index);
     if (response.index == 0) {
+      genzSVG.selectAll('image').remove()
+      boomerSVG.selectAll('image').remove()
+      genzTitle.text('')
+      boomerTitle.text('')
+    } else if (response.index == 1) {
       genzTitle.text('GenZ Age Range')
       genzSVG.selectAll('image').remove()
       genzSVG.append('image')
@@ -54,13 +59,12 @@ function handleResize() {
       .attr('width', 370).attr('height', 300)
       boomerTitle.text('Boomer Age Range')
       boomerSVG.selectAll('image').remove()
-      boomerSVG.selectAll('image').remove()
       boomerSVG.append('image')
       .attr('xlink:href', 'boomer_age.png')
       .attr('width', 370).attr('height', 300)
 
 
-    } else if (response.index == 1) {
+    } else if (response.index == 2) {
       genzTitle.text('GenZ Population: 68 Million')
       genzSVG.selectAll('image').remove()
       genzSVG.append('image')
@@ -68,13 +72,45 @@ function handleResize() {
       .attr('width', 400).attr('height', 330)
       boomerTitle.text('Boomer Population: 71.6 Million')
       boomerSVG.selectAll('image').remove()
-      boomerSVG.selectAll('image').remove()
       boomerSVG.append('image')
       .attr('xlink:href', 'boomer_population.png')
       .attr('width', 400).attr('height', 350)
 
-    } else if (response.index == 2) {
-
+    } else if (response.index == 3) {
+      genzTitle.text('Smartphones')
+      genzSVG.selectAll('image').remove()
+      genzSVG.append('image')
+      .attr('xlink:href', 'smartphone.png')
+      .attr('width', 400).attr('height', 330)
+      boomerTitle.text('Television')
+      boomerSVG.selectAll('image').remove()
+      boomerSVG.append('image')
+      .attr('xlink:href', 'retrotv.png')
+      .attr('width', 400).attr('height', 350)
+    } else if (response.index == 4) {
+      genzTitle.text('Black Lives Matter Movement')
+      genzSVG.selectAll('image').remove()
+      genzSVG.append('image')
+      .attr('xlink:href', 'blm.png')
+      .attr('width', 400).attr('height', 300)
+      boomerTitle.text('Civil Rights Movement')
+      boomerSVG.selectAll('image').remove()
+      boomerSVG.append('image')
+      .attr('xlink:href', 'crm.png')
+      .attr('width', 400).attr('height', 300)
+    } else if (response.index == 5) {
+      genzTitle.text('SpaceX Falcon 9')
+      genzSVG.selectAll('image').remove()
+      genzSVG.append('image')
+      .attr('xlink:href', 'falcon.png')
+      .attr('width', 400).attr('height', 300)
+      boomerTitle.text('Mercury Freedom 7')
+      boomerSVG.selectAll('image').remove()
+      boomerSVG.append('image')
+      .attr('xlink:href', 'freedom.png')
+      .attr('width', 400).attr('height', 300)
+    } else if (response.index == 6) {
+      
     }
   }
   
