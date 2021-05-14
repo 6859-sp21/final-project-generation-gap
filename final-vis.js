@@ -54,10 +54,10 @@ function render() {
       .attr("stroke", squareColor)
       .attr("fill", squareColor)
       .on("mouseover", handleMouseOver)
-      .on("mouseout", handleMouseOut);
-    // .on("mouseover", handleMouseOver)
-    // .on("mouseout", handleMouseOut_died)
-    // .on("click", handleClick);
+      .on("mouseout", handleMouseOut)
+      // .on("mouseover", handleMouseOver)
+      // .on("mouseout", handleMouseOut_died)
+      .on("click", handleClick);
 
     g.append("text")
       .attr("x", (d, i) => {
@@ -101,7 +101,7 @@ function render() {
     tooltip.transition().duration(30).style("opacity", 1);
     tooltip
       .html(
-        `${d.Headline}, ${d.Source}<br><div class='tooltip-more'> Click to learn more </div>`
+        `${d.Headline}, ${d.Source}<br><div class='tooltip-more'> Click to read more </div>`
       )
       .style("left", d3.event.pageX + 20 + "px")
       .style("top", d3.event.pageY - 20 + "px")
@@ -121,6 +121,20 @@ function render() {
     // tooltip
     tooltip.transition().duration(30).style("opacity", 0);
     d3.select(this).attr("class", null);
+  }
+
+  function handleClick(d) {
+    $("#myModal").modal({
+      fadeDuration: 300,
+    }).html(`<h1 id="modal_name">${d.Headline}</h1>
+                      <h1 id="modal_info" style="color:${
+                        bias_colors[d.Bias]
+                      }">${d.Bias}</h1>
+                      <h1 id="modal_info">Source: ${d.Source}</h1>
+                      <h1 id="modal_info">Date: ${d.Date}</h1>
+                      <div style="text-align:center"><a href=${
+                        d.URL
+                      } class="button1" target="blank">Read this story</a></div>`);
   }
 }
 
