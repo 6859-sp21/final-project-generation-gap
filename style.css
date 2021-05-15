@@ -13,6 +13,74 @@ body {
   margin-top: 5%;
   font-size: 1.5rem;
 }
+
+div.tooltip {	
+  position: absolute;			
+  text-align: left;
+  display: inline-block;
+  max-width: 30rem;
+  min-height: 2rem;								
+  padding: .5rem;
+  color: black;
+  font-size: 20px;	
+
+  background: white;	
+  border-radius: 7px;		
+  pointer-events: none;	
+  box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 500;
+}
+.tooltip-more{
+  color: black;
+  font-size: 15px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 300;
+}
+
+h1#modal_name {
+  font-size: 30px;
+  font-family: 'Red Hat Display', sans-serif;
+  color:whitesmoke;
+  text-align: center;
+}
+
+h1#modal_info {
+  font-size: 20px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 500;
+  color:whitesmoke;
+  text-align: left;
+}
+
+
+a.button1 {
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  text-align:center;
+  transition: all 0.2s;
+  font-size: 15px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 300;
+  color:whitesmoke;
+}
+
+a.button1:hover{
+  color:#000000;
+  background-color:#FFFFFF;
+}
+@media all and (max-width:30em){
+  a.button1{
+    display:block;
+    margin:0.4em auto;
+  }
+}
+
 .scrolly {
     position: relative;
     background-color: #F6F2EB;
