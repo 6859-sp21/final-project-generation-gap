@@ -1,17 +1,19 @@
 const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
-  final_width = 1500 - final_margin.left - final_margin.right,
+  final_width = 1700 - final_margin.left - final_margin.right,
   final_height = 2500 - final_margin.top - final_margin.bottom,
   //   width_survived = 700 - margin.left - margin.right,
   //   height_survived = 300 - margin.top - margin.bottom,
-  newsWidth = 70,
-  newsHeight = 90,
+  newsWidth = 80,
+  newsHeight = 100,
+  headerContainerWidth = 60,
+  headerContainerMargin = {top: 1, left: 1}
   strokeWidth = 0,
   numRow = 10,
   //Square and Highlight Colors
   squareColor = "rgba(198, 198, 198, .5)",
   highlightColor = "grey";
 
-var row = d3.scaleLinear().domain([0, numRow]).range([0, 1000]);
+var row = d3.scaleLinear().domain([0, numRow]).range([0, 1100]);
 
 var svg = d3
   .select("#final_news")
@@ -37,7 +39,30 @@ function render() {
     //     .selectAll("rect")
     //     .data(data)
     //     .enter()
-    g.append("rect")
+    // g.append("rect")
+    //   .attr("x", (d, i) => {
+    //     const n = i % numRow;
+    //     return row(n);
+    //   })
+    //   .attr("y", (d, i) => {
+    //     const n = Math.floor(i / numRow);
+    //     return row(n);
+    //   })
+    //   .attr("rx", 1)
+    //   .attr("ry", 1)
+    //   .attr("width", newsWidth)
+    //   .attr("height", newsHeight)
+    //   .attr("stroke-width", strokeWidth)
+    //   .attr("stroke", squareColor)
+    //   .attr("fill", squareColor)
+    //   .on("mouseover", handleMouseOver)
+    //   .on("mouseout", handleMouseOut)
+    //   // .on("mouseover", handleMouseOver)
+    //   // .on("mouseout", handleMouseOut_died)
+    //   .on("click", handleClick);
+
+      g.append("image")
+      .attr("xlink:href", "img/newspaper_icon.png")
       .attr("x", (d, i) => {
         const n = i % numRow;
         return row(n);
@@ -55,8 +80,6 @@ function render() {
       .attr("fill", squareColor)
       .on("mouseover", handleMouseOver)
       .on("mouseout", handleMouseOut)
-      // .on("mouseover", handleMouseOver)
-      // .on("mouseout", handleMouseOut_died)
       .on("click", handleClick);
 
     g.append("text")
@@ -76,7 +99,10 @@ function render() {
         return d.Headline;
       })
       .attr("font-size", "9px")
-      .call(wrap, newsWidth);
+    //   .on("mouseover", handleMouseOver)
+    //   .on("mouseout", handleMouseOut)
+      .on("click", handleClick)
+      .call(wrap, headerContainerWidth);
   });
 
   var tooltip = d3
@@ -155,7 +181,8 @@ function wrap(text, width) {
         .append("tspan")
         .attr("x", x)
         .attr("y", y)
-        .attr("dy", dy + "em");
+        .attr("dx", headerContainerMargin.left + "em")
+        .attr("dy", headerContainerMargin.top + dy + "em");
     while ((word = words.pop())) {
       line.push(word);
       tspan.text(line.join("\n"));
@@ -167,7 +194,8 @@ function wrap(text, width) {
           .append("tspan")
           .attr("x", x)
           .attr("y", y)
-          .attr("dy", ++lineNumber * lineHeight + dy + "em")
+          .attr("dx", headerContainerMargin.left + "em")
+          .attr("dy", ++lineNumber * lineHeight + headerContainerMargin.top + dy + "em")
           .text(word);
       }
     }
