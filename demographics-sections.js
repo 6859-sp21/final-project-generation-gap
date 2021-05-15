@@ -23,7 +23,7 @@ function handleResize() {
     var stepH = Math.floor(window.innerHeight * 0.4);
     demographicsStep.style("height", stepH + "px");
   
-    var demographicsFigureHeight = window.innerHeight / 2;
+    var demographicsFigureHeight = window.innerHeight * .8;
     var demographicsFigureMarginTop = (window.innerHeight - demographicsFigureHeight) / 2;
 
     demographicsGenZFigure
@@ -54,73 +54,42 @@ function handleResize() {
       genzTitle.text('')
       boomerTitle.text('')
     } else if (response.index == 1) {
-      genzTitle.text('GenZ Age Range')
-      genzText.text('')
-      genzSVG.selectAll('image').remove()
-      genzSVG.append('image')
-      .attr('xlink:href', 'genz_age.png')
-      .attr('width', 370).attr('height', 300)
-      boomerTitle.text('Boomer Age Range')
-      boomerText.text('')
-      boomerSVG.selectAll('image').remove()
-      boomerSVG.append('image')
-      .attr('xlink:href', 'boomer_age.png')
-      .attr('width', 370).attr('height', 300)
+      // genzTitle.text('GenZ Age Range')
+      // genzText.text('')
+      // genzSVG.selectAll('image').remove()
+      // genzSVG.append('image')
+      // .attr('xlink:href', 'genz_age.png')
+      // .attr('width', 370).attr('height', 300)
+      // boomerTitle.text('Boomer Age Range')
+      // boomerText.text('')
+      // boomerSVG.selectAll('image').remove()
+      // boomerSVG.append('image')
+      // .attr('xlink:href', 'boomer_age.png')
+      // .attr('width', 370).attr('height', 300)
 
 
     } else if (response.index == 2) {
-      genzTitle.text('GenZ Population: 68 Million')
-      genzText.text('')
-      genzSVG.selectAll('image').remove()
-      genzSVG.append('image')
-      .attr('xlink:href', 'genz_population.png')
-      .attr('width', 400).attr('height', 330)
-      boomerTitle.text('Boomer Population: 71.6 Million')
-      boomerText.text('')
-      boomerSVG.selectAll('image').remove()
-      boomerSVG.append('image')
-      .attr('xlink:href', 'boomer_population.png')
-      .attr('width', 400).attr('height', 330)
+      // genzTitle.text('GenZ Population: 68 Million')
+      // .attr('xlink:href', 'genz_population.png')
+      // .attr('width', 400).attr('height', 330)
+      // boomerTitle.text('Boomer Population: 71.6 Million')
+      // boomerText.text('')
+      // boomerSVG.selectAll('image').remove()
+      // boomerSVG.append('image')
+      // .attr('xlink:href', 'boomer_population.png')
+      // .attr('width', 400).attr('height', 330)
 
     } else if (response.index == 3) {
-      genzTitle.text('Smartphones')
-      genzText.text('')
-      genzSVG.selectAll('image').remove()
-      genzSVG.append('image')
-      .attr('xlink:href', 'smartphone.png')
-      .attr('width', 400).attr('height', 330)
-      boomerTitle.text('Television')
-      boomerText.text('')
-      boomerSVG.selectAll('image').remove()
-      boomerSVG.append('image')
-      .attr('xlink:href', 'retrotv.png')
-      .attr('width', 400).attr('height', 330)
+      // TIMELINE DIFFERENCES
+      
+
+
     } else if (response.index == 4) {
-      genzTitle.text('Black Lives Matter Movement')
-      genzText.text('Started summer of 2013, when the Zoomers were around 13 years old.')
-      genzSVG.selectAll('image').remove()
-      genzSVG.append('image')
-      .attr('xlink:href', 'blm.png')
-      .attr('width', 300).attr('height', 300)
-      boomerTitle.text('Civil Rights Movement')
-      boomerText.text('From 1854-1968, when the Boomers were around 10 years old.')
-      boomerSVG.selectAll('image').remove()
-      boomerSVG.append('image')
-      .attr('xlink:href', 'crm.png')
-      .attr('width', 300).attr('height', 300)
+      // TIMELINE SIMILARITY 1
+      // TECHNOLOGY
     } else if (response.index == 5) {
-      genzTitle.text('SpaceX Falcon 9')
-      genzText.text('Launched November 15 2020, the first launch in a decade.')
-      genzSVG.selectAll('image').remove()
-      genzSVG.append('image')
-      .attr('xlink:href', 'falcon.png')
-      .attr('width', 300).attr('height', 250)
-      boomerTitle.text('Mercury Freedom 7')
-      boomerText.text('Launched May 5 1961, the first successful human launch into space')
-      boomerSVG.selectAll('image').remove()
-      boomerSVG.append('image')
-      .attr('xlink:href', 'freedom.png')
-      .attr('width', 300).attr('height', 250)
+      // TIMELINE SIMILARITY 2
+      // BLM + CIVIL RIGHTS MOVEMENT
     } else if (response.index == 6) {
       
     }
