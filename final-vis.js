@@ -10,6 +10,52 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   //Square and Highlight Colors
   squareColor = "rgba(198, 198, 198, .5)",
   highlightColor = "grey";
+var boomerData;
+var genZData;
+
+d3.csv("./data/boomers.csv").then(function (data) {
+  boomerData = data;
+});
+setTimeout(function(){
+  console.log(boomerData);
+},200);
+
+d3.csv("./data/genZ.csv").then(function (data) {
+  get
+});
+setTimeout(function(){
+  console.log(genZData);
+},200);
+
+
+function getSources(age, region, metro, sex, education, race) {
+  // see what sourceuse
+  // give a function of media
+  console.log(age);
+  var result;
+  if (age == "18-29") {
+    result = genZData.filter((d) => {
+      d.F_CREGION == region &&
+        d.F_SEX == sex &&
+        d.F_EDUCCAT == education &&
+        d.F_RACECMB == race &&
+        d.F_METRO == metro;
+    });
+  }
+
+  if (age == "65+") {
+    result = boomerData.filter((d) => {
+      d.F_CREGION == region &&
+        d.F_SEX == sex &&
+        d.F_EDUCCAT == education &&
+        d.F_RACECMB == race &&
+        d.F_METRO == metro;
+    });
+  }
+  var randomPerson = _.sample(result);
+  console.log(randomPerson);
+
+}
 
 var row = d3.scaleLinear().domain([0, numRow]).range([0, 1000]);
 
@@ -22,7 +68,16 @@ var svg = d3
 //   .attr("transform", "translate(" + final_margin.left + "," + final_margin.top + ")");
 
 function render() {
-  d3.csv("data/allsides.csv").then(function (data) {
+  getSources(
+    "65+",
+    "Midwest",
+    "Metropolitan",
+    "Female",
+    "College graduate+",
+    "Asian or Asian-American"
+  );
+
+  d3.csv("./data/allsides.csv").then(function (data) {
     var g = svg
       .selectAll("g")
       .data(data)
@@ -72,7 +127,7 @@ function render() {
       .attr("dy", "1em")
       .style("color", "black")
       .text((d) => {
-        console.log(d.Headline);
+        // console.log(d.Headline);
         return d.Headline;
       })
       .attr("font-size", "9px")
