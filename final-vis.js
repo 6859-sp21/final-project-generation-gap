@@ -16,6 +16,54 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   curSquareColor = squareColor,
   highlightColor = "grey";
 
+
+// var boomerData;
+// var genZData;
+
+// d3.csv("./data/boomers.csv").then(function (data) {
+//   boomerData = data;
+// });
+// setTimeout(function(){
+//   console.log(boomerData);
+// },200);
+
+// d3.csv("./data/genZ.csv").then(function (data) {
+//     get
+// });
+// setTimeout(function(){
+//   console.log(genZData);
+// },200);
+
+
+// function getSources(age, region, metro, sex, education, race) {
+//   // see what sourceuse
+//   // give a function of media
+//   console.log(age);
+//   var result;
+//   if (age == "18-29") {
+//     result = genZData.filter((d) => {
+//       d.F_CREGION == region &&
+//         d.F_SEX == sex &&
+//         d.F_EDUCCAT == education &&
+//         d.F_RACECMB == race &&
+//         d.F_METRO == metro;
+//     });
+//   }
+
+//   if (age == "65+") {
+//     result = boomerData.filter((d) => {
+//       d.F_CREGION == region &&
+//         d.F_SEX == sex &&
+//         d.F_EDUCCAT == education &&
+//         d.F_RACECMB == race &&
+//         d.F_METRO == metro;
+//     });
+//   }
+//   var randomPerson = _.sample(result);
+//   console.log(randomPerson);
+
+// }
+
   var biasColors = {
     "Left": "#2E65A0",
     "Lean Left": "#9EC8EB",
@@ -119,13 +167,61 @@ function updateFilter() {
     );
   }
 
+// function render() {
+//   d3.csv("data/allsides.csv").then(function (data) {
+//     svg.selectAll("g").remove();
+//     // svg.selectAll("image").remove();
+//     // svg.selectAll("text").remove();
+//     highlightedData = highlighted(data)
+//     updateFilter()
+/*Person Card Dropdowns Fix for all dropdowns*/
+// Listening for Dropdown Clicks
+[...document.querySelectorAll(".custom-select-wrapper")].forEach(function (
+  item
+) {
+  item.addEventListener("click", function () {
+    this.querySelector(".custom-select").classList.toggle("open");
+  });
+});
+//Listening for Option Clicks
+for (const option of document.querySelectorAll(".custom-option")) {
+  option.addEventListener("click", function () {
+    if (!this.classList.contains("selected")) {
+      this.parentNode
+        .querySelector(".custom-option.selected")
+        .classList.remove("selected");
+      this.classList.add("selected");
+      this.closest(".custom-select").querySelector(
+        ".custom-select__trigger span"
+      ).textContent = this.textContent;
+    }
+  });
+}
+//Listening for Clicking Outside Dropdown
+window.addEventListener("click", function (e) {
+  [...document.querySelectorAll(".custom-select")].forEach(function (item) {
+    if (!item.contains(e.target)) {
+      item.classList.remove("open");
+    }
+  });
+});
+
+// RENDER
 function render() {
-  d3.csv("data/allsides.csv").then(function (data) {
+//   getSources(
+//     "65+",
+//     "Midwest",
+//     "Metropolitan",
+//     "Female",
+//     "College graduate+",
+//     "Asian or Asian-American"
+//   );
+
+  d3.csv("./data/allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
-    // svg.selectAll("image").remove();
-    // svg.selectAll("text").remove();
     highlightedData = highlighted(data)
     updateFilter()
+
     var g = svg
       .selectAll("g")
       .data(data)
@@ -193,7 +289,7 @@ function render() {
       .attr("dy", "1em")
       .style("color", "black")
       .text((d) => {
-        console.log(d.Headline);
+        // console.log(d.Headline);
         return d.Headline;
       })
       .attr("font-size", "9px")

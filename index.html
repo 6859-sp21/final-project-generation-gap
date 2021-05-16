@@ -45,33 +45,87 @@
             <div class="timeline" id="gen-z-timeline">
               <div class="container left">
                 <div class="content">
-                  <h2>2017</h2>
-                  <p>Lorem ipsum..</p>
+                  <div id="year">1997-2012</div>
+                  <p id="timeline-description">Beginning of Generation Z</p>
                 </div>
               </div>
               <div class="container left">
                 <div class="content">
-                  <h2>2016</h2>
-                  <p>Lorem ipsum..</p>
+                  <div id="year">2001</div>
+                  <p id="timeline-description">September 11 Attacks</p>
+                </div>
+              </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">2003</div>
+                  <p id="timeline-description">Beginning of Iraq War</p>
+                </div>
+              </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">2007</div>
+                  <p id="timeline-description">First iPhone released</p>
+                </div>
+              </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">2012</div>
+                  <p id="timeline-description">Sandy Hook Shooting</p>
+                </div>
+              </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">2020</div>
+                  <p id="timeline-description">SpaceX Launch</p>
+                </div>
+              </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">2020</div>
+                  <p id="timeline-description">Black Lives Matter Protests</p>
                 </div>
               </div>
             </div>
           </div>
           <div class="boomer-figure" id="demographics-boomer-figure">
-            <!-- <img src='boomer_age.png'></img> -->
             <div class="timeline" id="boomer-timeline">
               <div class="container left">
                 <div class="content">
-                  <h2>2017</h2>
-                  <p>Lorem ipsum..</p>
+                  <div id="year">1946-1964</div>
+                  <p id="timeline-description">Beginning of Baby Boomers</p>
                 </div>
               </div>
               <div class="container left">
                 <div class="content">
-                  <h2>2016</h2>
-                  <p>Lorem ipsum..</p>
+                  <div id="year">1964</div>
+                  <p id="timeline-description">Civil Rights Acts of 1964</p>
                 </div>
               </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">1969</div>
+                  <p id="timeline-description">Vietnam War Draft</p>
+                </div>
+              </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">1969</div>
+                  <p id="timeline-description">First Moon Landing</p>
+                </div>
+              </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">1970</div>
+                  <p id="timeline-description">Kent State Shooting</p>
+                </div>
+              </div>
+              <div class="container left">
+                <div class="content">
+                  <div id="year">1981</div>
+                  <p id="timeline-description">IBM PC Invented</p>
+                </div>
+              </div>
+              
             </div>
           </div>
         </figure>
@@ -130,21 +184,6 @@
           </div>
         </figure> -->
       </section>
-      <!-- <section class="scrolly" id="politics-scrolly">
-        <figure id="politics-figure">
-          <div class="gen-z-figure" id="politics-gen-z-figure"></div>
-          <div class="boomer-figure" id="politics-boomer-figure"></div>
-        </figure>
-        <article id="politics-article">
-          <div class="step" id="step-style" data-step="1">
-            <p class="progress" id="section-text">Text for each scrolly</p>
-          </div>
-          <div class="step" id="step-style" data-step="2">
-            <p class="progress" id="section-text">Text for each scrolly</p>
-          </div>
-        </article>
-        
-      </section> -->
       <section class="scrolly" id="media-scrolly">
         <figure class="overall-figure" id="media-figure">
           <div class="gen-z-figure" id="media-gen-z-figure"></div>
@@ -210,6 +249,134 @@
       <section id="outro">
         <div>
           <div style="display: flex; flex-direction: row">
+            <div
+              id="person_card"
+              style="
+                display: flex;
+                flex-direction: column;
+                background-color: white;
+                border: 1px solid black;
+                padding: 30px;
+                align-items: center;
+              "
+            >
+              <img src="img/jess.png" style="width: 180px" />
+              <h1
+                id="demographic_category"
+                style="margin-top: 10px; white-space: nowrap"
+              >
+                Meet Jess
+              </h1>
+              <span class="custom-dropdown-words">A</span>
+              <div class="custom-select-wrapper" id="ethnicity">
+                <div class="custom-select">
+                  <div class="custom-select__trigger">
+                    <span class="custom-dropdown-words">white</span>
+                    <div class="arrow"></div>
+                  </div>
+                  <div class="custom-options">
+                    <span class="custom-option selected" data-value="White"
+                      >white</span
+                    >
+                    <span class="custom-option" data-value="Black">black</span>
+                    <span class="custom-option" data-value="Asian">asian</span>
+                    <span class="custom-option" data-value="Mixed">mixed</span>
+                  </div>
+                </div>
+              </div>
+              <div class="custom-select-wrapper" id="gender">
+                <div class="custom-select">
+                  <div class="custom-select__trigger">
+                    <span class="custom-dropdown-words">woman</span>
+                    <div class="arrow"></div>
+                  </div>
+                  <div class="custom-options">
+                    <span class="custom-option selected" data-value="woman"
+                      >woman</span
+                    >
+                    <span class="custom-option" data-value="man">man</span>
+                  </div>
+                </div>
+              </div>
+              <span class="custom-dropdown-words">between age</span>
+              <div class="custom-select-wrapper" id="age">
+                <div class="custom-select">
+                  <div class="custom-select__trigger">
+                    <span class="custom-dropdown-words">18-29</span>
+                    <div class="arrow"></div>
+                  </div>
+                  <div class="custom-options">
+                    <span class="custom-option selected" data-value="18-29"
+                      >18-29</span
+                    >
+                    <span class="custom-option" data-value="30-49">30-49</span>
+                    <span class="custom-option" data-value="50-64">50-64</span>
+                    <span class="custom-option" data-value="65">65+</span>
+                  </div>
+                </div>
+              </div>
+              <span class="custom-dropdown-words">who has</span>
+              <div class="custom-select-wrapper" id="education">
+                <div class="custom-select">
+                  <div class="custom-select__trigger">
+                    <span class="custom-dropdown-words">no highschool</span>
+                    <div class="arrow"></div>
+                  </div>
+                  <div class="custom-options">
+                    <span
+                      class="custom-option selected"
+                      data-value="no highschool"
+                      >no highschool</span
+                    >
+                    <span class="custom-option" data-value="highschool"
+                      >a highschool</span
+                    >
+                    <span class="custom-option" data-value="no college"
+                      >no college</span
+                    >
+                    <span class="custom-option" data-value="college"
+                      >a college</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <span class="custom-dropdown-words">degree and lives in</span>
+              <div class="custom-select-wrapper" id="metro">
+                <div class="custom-select">
+                  <div class="custom-select__trigger">
+                    <span class="custom-dropdown-words">the city</span>
+                    <div class="arrow"></div>
+                  </div>
+                  <div class="custom-options">
+                    <span class="custom-option selected" data-value="metro"
+                      >the city</span
+                    >
+                    <span class="custom-option" data-value="nonmetro"
+                      >a non-metro area</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <span class="custom-dropdown-words">in the</span>
+              <div class="custom-select-wrapper" id="region">
+                <div class="custom-select">
+                  <div class="custom-select__trigger">
+                    <span class="custom-dropdown-words">northeast</span>
+                    <div class="arrow"></div>
+                  </div>
+                  <div class="custom-options">
+                    <span class="custom-option selected" data-value="northeast"
+                      >northeast</span
+                    >
+                    <span class="custom-option" data-value="south">south</span>
+                    <span class="custom-option" data-value="west">west</span>
+                    <span class="custom-option" data-value="mid-west"
+                      >mid-west</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
             <div
               id="final_news"
               style="width: 100%; height: 300px; width: 1200px"
