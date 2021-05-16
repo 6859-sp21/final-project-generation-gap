@@ -317,7 +317,7 @@ span {
   align-items: center;
   width: 130px;
   font-size: 15px;
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 500;
   padding-left: 35px;
   margin-top: 10px;
@@ -396,7 +396,7 @@ span {
 
 h1#filter_category{
   font-size: 30px;
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   color:black;
 }
 
@@ -428,13 +428,13 @@ table {
 
 h1#demographic_category{
   font-size: 30px;
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   color:black;
 }
 
-span {
+.custom-dropdown-words {
   font-size: 15px;
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   color:black;
 }
 
