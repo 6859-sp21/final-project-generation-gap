@@ -42,7 +42,6 @@ function handleResize() {
   }
 
   function handleDemographicsStepEnter(response) {
-    demographicsFigure.select("p").text(response.index + 1);
     demographicsStep.classed("is-active", function(d, i) {
         return i === response.index;
       });
