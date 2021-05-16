@@ -391,7 +391,7 @@ span {
 }
 
 .container2 input:checked ~ .custom-label {
-  color: black;
+  color: rgb(68, 68, 68);
 }
 
 h1#filter_category{
