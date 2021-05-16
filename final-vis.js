@@ -67,6 +67,39 @@ var svg = d3
 //   .append("g")
 //   .attr("transform", "translate(" + final_margin.left + "," + final_margin.top + ")");
 
+/*Person Card Dropdowns Fix for all dropdowns*/
+//Listening for Dropdown Clicks
+[...document.querySelectorAll(".custom-select-wrapper")].forEach(function (
+  item
+) {
+  item.addEventListener("click", function () {
+    this.querySelector(".custom-select").classList.toggle("open");
+  });
+});
+//Listening for Option Clicks
+for (const option of document.querySelectorAll(".custom-option")) {
+  option.addEventListener("click", function () {
+    if (!this.classList.contains("selected")) {
+      this.parentNode
+        .querySelector(".custom-option.selected")
+        .classList.remove("selected");
+      this.classList.add("selected");
+      this.closest(".custom-select").querySelector(
+        ".custom-select__trigger span"
+      ).textContent = this.textContent;
+    }
+  });
+}
+//Listening for Clicking Outside Dropdown
+window.addEventListener("click", function (e) {
+  [...document.querySelectorAll(".custom-select")].forEach(function (item) {
+    if (!item.contains(e.target)) {
+      item.classList.remove("open");
+    }
+  });
+});
+
+// RENDER
 function render() {
   getSources(
     "65+",
