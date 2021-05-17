@@ -340,7 +340,8 @@ div#year::after {
 }
 #timeline-description{
   font-family: 'Roboto', sans-serif;
-  padding-left: 10%;
+  margin-left: 10%;
+  padding: 5px;
   margin-top: 5px;
 }
 
