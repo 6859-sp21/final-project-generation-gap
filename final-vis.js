@@ -255,7 +255,6 @@ function render() {
     g.append("text")
       .attr("x", (d, i) => {
         const n = i % numRow;
-        // console.log(row(n));
         return row(n);
       })
       .attr("y", (d, i) => {
@@ -289,9 +288,8 @@ function render() {
     //   })
     //   .call(wrap, headerContainerWidth);
 
-
-      g.append("rect")
-    //   .attr("xlink:href", "img/newspaper_icon.png")
+    g.append("rect")
+      //   .attr("xlink:href", "img/newspaper_icon.png")
       .attr("x", (d, i) => {
         const n = i % numRow;
         return row(n);
@@ -316,8 +314,6 @@ function render() {
       .on("click", handleClick);
   });
 
-  
-
   // MouseOvers
   function handleMouseOver(d) {
     d3.select(this).style("fill", d3.select(this).attr("fill"));
@@ -327,15 +323,23 @@ function render() {
     tooltip.transition().duration(30).style("opacity", 1);
     tooltip
       .html(
-        `<div class='tooltip-header' style='background:${biasColors[d.Bias]}; opacity:.8'> ${d.Headline}, ${d.Source} </div> <br> 
+        `<div class='tooltip-header' style='background:${
+          biasColors[d.Bias]
+        }; opacity:.8'> ${d.Headline}, ${d.Source} </div> <br> 
         <div class='tooltip-header2'> Headlines From Different Sources </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${d.Headline} </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${d.Headline} </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${d.Headline} </div>
+        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
+          d.Headline
+        } </div>
+        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
+          d.Headline
+        } </div>
+        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
+          d.Headline
+        } </div>
         <div class='tooltip-more'> Click to read more </div>`
       )
       .style("left", d3.event.pageX + 20 + "px")
-      .style("top", d3.event.pageY - 20 + "px")
+      .style("top", d3.event.pageY - 20 + "px");
     //   .style("background", biasColors[d.Bias]);
     d3.select(this).attr("class", "info").datum(d).style("cursor", "pointer");
   }
