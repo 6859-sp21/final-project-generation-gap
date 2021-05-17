@@ -5,9 +5,10 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   //   height_survived = 300 - margin.top - margin.bottom,
   newsWidth = 80,
   newsHeight = 100,
-  maxLineNumber = 7,
-  headerContainerWidth = 60,
+  maxLineNumber = 10,
+  headerContainerWidth = 70,
   headerContainerMargin = {top: 1, left: 1}
+  bylineMarginTop = 40
   strokeWidth = 0,
   numRow = 10,
   numFilters = 10,
@@ -17,11 +18,12 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   highlightColor = "grey";
 
 
-// var boomerData;
-// var genZData;
+  var boomerData;
+  var genZData;
 
 // d3.csv("./data/boomers.csv").then(function (data) {
 //   boomerData = data;
+//   console.log('data', boomerData)
 // });
 // setTimeout(function(){
 //   console.log(boomerData);
@@ -35,34 +37,49 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
 // },200);
 
 
-// function getSources(age, region, metro, sex, education, race) {
-//   // see what sourceuse
-//   // give a function of media
-//   console.log(age);
-//   var result;
-//   if (age == "18-29") {
-//     result = genZData.filter((d) => {
-//       d.F_CREGION == region &&
-//         d.F_SEX == sex &&
-//         d.F_EDUCCAT == education &&
-//         d.F_RACECMB == race &&
-//         d.F_METRO == metro;
-//     });
-//   }
+function getSources(age, region, metro, sex, education, race) {
+  // see what sourceuse
+  // give a function of media
+  var boomerData;
+  var genZData;
+  var result;
+  d3.csv("./data/boomers.csv").then(function (data) {
+    boomerData = data;
+    // console.log('data', boomerData)
+    if (age == "65+") {
+        result = boomerData.filter((d) => {
+          d.F_CREGION == region &&
+            d.F_SEX == sex &&
+            d.F_EDUCCAT == education &&
+            d.F_RACECMB == race &&
+            d.F_METRO == metro;
+        });
+      }
+  });
+  d3.csv("./data/genZ.csv").then(function (data) {
+    genZData = data;
+    // console.log('data', genZData)
+    if (age == "18-29") {
+        result = genZData.filter((d) => {
+          d.F_CREGION == region &&
+            d.F_SEX == sex &&
+            d.F_EDUCCAT == education &&
+            d.F_RACECMB == race &&
+            d.F_METRO == metro;
+        });
+      }
+  });
+  console.log(age);
+  console.log('data', genZData)
+  console.log('result', result)
+  
+  
 
-//   if (age == "65+") {
-//     result = boomerData.filter((d) => {
-//       d.F_CREGION == region &&
-//         d.F_SEX == sex &&
-//         d.F_EDUCCAT == education &&
-//         d.F_RACECMB == race &&
-//         d.F_METRO == metro;
-//     });
-//   }
+  
 //   var randomPerson = _.sample(result);
 //   console.log(randomPerson);
 
-// }
+}
 
   var biasColors = {
     "Left": "#2E65A0",
@@ -208,19 +225,21 @@ window.addEventListener("click", function (e) {
 
 // RENDER
 function render() {
-//   getSources(
-//     "65+",
-//     "Midwest",
-//     "Metropolitan",
-//     "Female",
-//     "College graduate+",
-//     "Asian or Asian-American"
-//   );
+    console.log('boomer', boomerData)
+  getSources(
+    "65+",
+    "Midwest",
+    "Metropolitan",
+    "Female",
+    "College graduate+",
+    "Asian or Asian-American"
+  );
 
   d3.csv("./data/allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
-    highlightedData = highlighted(data)
     updateFilter()
+    highlightedData = highlighted(data)
+    
 
     var g = svg
       .selectAll("g")
@@ -275,11 +294,11 @@ function render() {
       .attr("stroke-width", strokeWidth)
       .attr("stroke", squareColor)
       .attr("fill", squareColor)
+    //   .attr("class", "shape")
 
     g.append("text")
       .attr("x", (d, i) => {
         const n = i % numRow;
-        console.log(row(n));
         return row(n);
       })
       .attr("y", (d, i) => {
@@ -290,10 +309,29 @@ function render() {
       .style("color", "black")
       .text((d) => {
         // console.log(d.Headline);
-        return d.Headline;
+        return d.Source;
       })
-      .attr("font-size", "9px")
+      .attr("font-size", "10px")
       .call(wrap, headerContainerWidth);
+
+    //   g.append("text")
+    //   .attr("x", (d, i) => {
+    //     const n = i % numRow;
+    //     console.log('ugh');
+    //     return row(n);
+    //   })
+    //   .attr("y", (d, i) => {
+    //     const n = Math.floor(i / numRow);
+    //     return row(n)+bylineMarginTop;
+    //   })
+    //   .attr("dy", "1em")
+    //   .style("color", "black")
+    //   .text((d) => {
+    //     console.log(d.Headline);
+    //     return d.Byline;
+    //   })
+    //   .call(wrap, headerContainerWidth);
+
 
       g.append("rect")
     //   .attr("xlink:href", "img/newspaper_icon.png")
@@ -319,6 +357,8 @@ function render() {
       .on("click", handleClick);
   });
 
+  
+
   // MouseOvers
   function handleMouseOver(d) {
     d3.select(this).style("fill", d3.select(this).attr("fill"));
@@ -328,11 +368,16 @@ function render() {
     tooltip.transition().duration(30).style("opacity", 1);
     tooltip
       .html(
-        `${d.Headline}, ${d.Source}<br><div class='tooltip-more'> Click to read more </div>`
+        `<div class='tooltip-header' style='background:${biasColors[d.Bias]}; opacity:.8'> ${d.Headline}, ${d.Source} </div> <br> 
+        <div class='tooltip-header2'> Headlines From Different Sources </div>
+        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${d.Headline} </div>
+        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${d.Headline} </div>
+        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${d.Headline} </div>
+        <div class='tooltip-more'> Click to read more </div>`
       )
       .style("left", d3.event.pageX + 20 + "px")
       .style("top", d3.event.pageY - 20 + "px")
-      .style("background", biasColors[d.Bias]);
+    //   .style("background", biasColors[d.Bias]);
     d3.select(this).attr("class", "info").datum(d).style("cursor", "pointer");
   }
 
