@@ -17,12 +17,12 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   (curSquareColor = squareColor),
   (highlightColor = "grey");
 
-  var sourceData;
+var sourceData;
 
-  d3.csv("./data/people.csv").then(function(data){
-    sourceData = data;
-    render();
-  })
+d3.csv("./data/people.csv").then(function (data) {
+  sourceData = data;
+  render();
+});
 
 var biasColors = {
   Left: "#2E65A0",
@@ -168,26 +168,26 @@ window.addEventListener("click", function (e) {
 function render() {
   console.log(sourceData);
   var person = {
-   age: "65+",
+    age: "65+",
     region: "Midwest",
-    metro:"Metropolitan",
-    sex:"Female",
-    education:"College graduate+",
-    race:"White"
+    metro: "Metropolitan",
+    sex: "Female",
+    education: "College graduate+",
+    race: "White",
   };
   result = sourceData.filter((d) => {
-    d.F_AGECAT == person.age && 
-    d.F_CREGION == person.region &&
+    d.F_AGECAT == person.age &&
+      d.F_CREGION == person.region &&
       d.F_SEX == person.sex &&
       d.F_EDUCCAT == person.education &&
       d.F_RACECMB == person.race &&
       d.F_METRO == person.metro;
   });
-  var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)]
+  var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
   console.log(randomPerson);
-  var sources = []
+  var sources = [];
   for (const property in randomPerson) {
-    if (randomPerson[property] == "Yes"){
+    if (randomPerson[property] == "Yes") {
       sources.push(property);
     }
   }
@@ -375,7 +375,7 @@ function render() {
     } class="button1" target="blank" style="background-color:${
       biasColors[d.Bias]
     }">Read this story</a></div>
-    <h1 id="modal_name">Recommended Reads:</h1>  
+    <h1 id="modal_name">Recommended Reads for the Same Topic:</h1>  
     <div style="align-items: center; flex-direction: column; display: flex;">
     <div class="line-container">
     <span class="line arrow-left"></span>
