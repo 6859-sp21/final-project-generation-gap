@@ -8,6 +8,7 @@ body {
 }
 #title{
   font-size: 4rem;
+  font-weight: 600;
 }
 #subtitle{
   margin-top: 5%;
