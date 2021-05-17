@@ -17,30 +17,12 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   (curSquareColor = squareColor),
   (highlightColor = "grey");
 
-var boomerData;
-var genZData;
+  var sourceData;
 
-function getSources(age, region, metro, sex, education, race) {
-  d3.csv("./data/people.csv").then(function (data) {
-    result = data.filter((d) => {
-      d.F_AGECAT == age &&
-        d.F_CREGION == region &&
-        d.F_SEX == sex &&
-        d.F_EDUCCAT == education &&
-        d.F_RACECMB == race &&
-        d.F_METRO == metro;
-    });
-    var randomPerson = data[Math.floor(Math.random() * data.length)];
-    console.log(randomPerson);
-    var sources = [];
-    for (const property in randomPerson) {
-      if (randomPerson[property] == "Yes") {
-        sources.push(property);
-      }
-    }
-    console.log(sources);
-  });
-}
+  d3.csv("./data/people.csv").then(function(data){
+    sourceData = data;
+    render();
+  })
 
 var biasColors = {
   Left: "#2E65A0",
@@ -143,6 +125,18 @@ function fitsFilter(d) {
   return filters["bias"].includes(d.Bias) && filters["topic"].includes(d.Topic);
 }
 
+function sortData(data, sources) {
+    newData = []
+    for (news in data) {
+        for (source in sources) {
+            if (news.Source.contains(source)) {
+                newData.push(news)
+            }
+        }
+    }
+    return newData
+}
+
 // function render() {
 //   d3.csv("data/allsides.csv").then(function (data) {
 //     svg.selectAll("g").remove();
@@ -184,23 +178,45 @@ window.addEventListener("click", function (e) {
 
 // RENDER
 function render() {
-    // getSources(
-    //     "65+",
-    //     "Midwest",
-    //     "Metropolitan",
-    //     "Female",
-    //     "College graduate+",
-    //     "Asian or Asian-American"
-    //   );
+  console.log(sourceData);
+  var person = {
+   age: "65+",
+    region: "Midwest",
+    metro:"Metropolitan",
+    sex:"Female",
+    education:"College graduate+",
+    race:"White"
+  };
+  result = sourceData.filter((d) => {
+    d.F_AGECAT == person.age && 
+    d.F_CREGION == person.region &&
+      d.F_SEX == person.sex &&
+      d.F_EDUCCAT == person.education &&
+      d.F_RACECMB == person.race &&
+      d.F_METRO == person.metro;
+  });
+  var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)]
+  console.log(randomPerson);
+  var sources = []
+  for (const property in randomPerson) {
+    if (randomPerson[property] == "Yes"){
+      sources.push(property);
+    }
+  }
+  console.log(sources);
 
   d3.csv("./data/allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
     highlightedData = highlighted(data);
     updateFilter();
+    console.log(sources);
+    // sortedData = data.filter((d) => sources.forEach(source => {if (d.Source.includes(source)) return true}))
+    sortedData = sortData(data, sources)
+    console.log('sorted', sortedData)
 
     var g = svg
       .selectAll("g")
-      .data(data)
+      .data(sortedData)
       .enter()
       .append("g")
       .attr(
