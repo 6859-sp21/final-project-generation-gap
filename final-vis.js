@@ -20,49 +20,29 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
 // var boomerData;
 // var genZData;
 
-// d3.csv("./data/boomers.csv").then(function (data) {
-//   boomerData = data;
-// });
-// setTimeout(function(){
-//   console.log(boomerData);
-// },200);
-
-// d3.csv("./data/genZ.csv").then(function (data) {
-//     get
-// });
-// setTimeout(function(){
-//   console.log(genZData);
-// },200);
 
 
-// function getSources(age, region, metro, sex, education, race) {
-//   // see what sourceuse
-//   // give a function of media
-//   console.log(age);
-//   var result;
-//   if (age == "18-29") {
-//     result = genZData.filter((d) => {
-//       d.F_CREGION == region &&
-//         d.F_SEX == sex &&
-//         d.F_EDUCCAT == education &&
-//         d.F_RACECMB == race &&
-//         d.F_METRO == metro;
-//     });
-//   }
-
-//   if (age == "65+") {
-//     result = boomerData.filter((d) => {
-//       d.F_CREGION == region &&
-//         d.F_SEX == sex &&
-//         d.F_EDUCCAT == education &&
-//         d.F_RACECMB == race &&
-//         d.F_METRO == metro;
-//     });
-//   }
-//   var randomPerson = _.sample(result);
-//   console.log(randomPerson);
-
-// }
+function getSources(age, region, metro, sex, education, race) {
+  d3.csv("./data/people.csv").then(function(data){
+    result = data.filter((d) => {
+      d.F_AGECAT == age && 
+      d.F_CREGION == region &&
+        d.F_SEX == sex &&
+        d.F_EDUCCAT == education &&
+        d.F_RACECMB == race &&
+        d.F_METRO == metro;
+    });
+    var randomPerson = data[Math.floor(Math.random() * data.length)]
+    console.log(randomPerson);
+    var sources = []
+    for (const property in randomPerson) {
+      if (randomPerson[property] == "Yes"){
+        sources.push(property);
+      }
+    }
+    console.log(sources);
+  })
+}
 
   var biasColors = {
     "Left": "#2E65A0",
@@ -208,14 +188,14 @@ window.addEventListener("click", function (e) {
 
 // RENDER
 function render() {
-//   getSources(
-//     "65+",
-//     "Midwest",
-//     "Metropolitan",
-//     "Female",
-//     "College graduate+",
-//     "Asian or Asian-American"
-//   );
+  getSources(
+    "65+",
+    "Midwest",
+    "Metropolitan",
+    "Female",
+    "College graduate+",
+    "White"
+  );
 
   d3.csv("./data/allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
@@ -279,7 +259,7 @@ function render() {
     g.append("text")
       .attr("x", (d, i) => {
         const n = i % numRow;
-        console.log(row(n));
+        // console.log(row(n));
         return row(n);
       })
       .attr("y", (d, i) => {
