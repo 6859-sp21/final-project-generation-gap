@@ -164,6 +164,36 @@ window.addEventListener("click", function (e) {
   });
 });
 
+//Listening for multiple select
+$(".multipleSelect").fastselect({ placeholder: "Select your news sources" });
+var options = "";
+[
+  "MSNBC",
+  "CNN (Online News)",
+  "CNN (Opinion)",
+  "New York Times (Opinion)",
+  "NBC News (Online)",
+  "CBS News (Online)",
+  "ABC News (Online)",
+  "New York Times (News)",
+  "Washington Post",
+  "NPR (Opinion)",
+  "NPR (Online News)",
+  "BBC News",
+  "USA TODAY",
+  "Wall Street Journal (News)",
+  "Wall Street Journal (Opinion)",
+  "Fox News (Online News)",
+  "Drudge Report",
+  "TheBlaze.com",
+  "Breitbart News",
+  "Fox News (Opinion)",
+].forEach((element) => {
+  options +=
+    `<option value=${element.split(" ").join("")}>` + element + `</option>`;
+});
+document.getElementById("news_select").innerHTML = options;
+
 // RENDER
 function render() {
   console.log(sourceData);

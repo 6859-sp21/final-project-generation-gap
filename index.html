@@ -11,6 +11,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link
       rel="stylesheet"
+      href="https://rawgit.com/dbrekalo/fastselect/master/dist/fastselect.min.css"
+    />
+    <script src="https://rawgit.com/dbrekalo/fastselect/master/dist/fastselect.standalone.min.js"></script>
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
     />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -24,11 +29,6 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100&display=swap");
     </style>
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap"
-      rel="stylesheet"
-    />
 
     <script src="radialBarChart.js"></script>
   </head>
@@ -97,7 +97,7 @@
             </div>
           </div>
           <div class="boomer-figure" id="demographics-boomer-figure">
-            <div class="boomer-title"> Baby Boomer </div>
+            <div class="boomer-title">Baby Boomer</div>
             <div class="timeline" id="boomer-timeline" style="opacity: 0">
               <div class="container left">
                 <div class="content" , id="boomer-1">
@@ -144,7 +144,8 @@
           <div class="step" id="step-style" data-step="0">
             <p class="progress" id="section-text">
               Before we dive into the data, let's learn more about who the GenZ
-              and Boomers are. Gen Z is born 1996-2012. Boomers are born 1946-1964.
+              and Boomers are. Gen Z is born 1996-2012. Boomers are born
+              1946-1964.
             </p>
           </div>
           <div class="step" id="step-style" data-step="1">
@@ -154,19 +155,17 @@
           </div>
           <div class="step" id="step-style" data-step="1">
             <p class="progress" id="section-text">
-              Gen Z is the most diverse generation. 
+              Gen Z is the most diverse generation.
             </p>
           </div>
           <div class="step" id="step-style" data-step="4">
             <p class="progress" id="section-text">
-              Often media highlights differences in generations, but more similar
+              Often media highlights differences in generations, but more
+              similar
             </p>
           </div>
           <div class="step" id="step-style" data-step="4">
-          
-            <p class="progress" id="section-text">
-              War
-            </p>
+            <p class="progress" id="section-text">War</p>
           </div>
           <div class="step" id="step-style" data-step="5">
             <p class="progress" id="section-text">
@@ -182,7 +181,6 @@
               experience for Boomers and GenZ.
             </p>
           </div>
-          
         </article>
       </section>
       <section class="scrolly" id="media-scrolly">
@@ -258,13 +256,11 @@
           flex-direction: column;
         "
       >
-        <div id="title">Where do you get your news?</div>
-        <div
-          id="subtitle"
-          style="margin-bottom: 2%; text-align: center; margin-top: 2%"
-        >
-          Select your news sources
+        <div id="title" style="margin-bottom: 3%">
+          Where do you get your news?
         </div>
+        <select class="multipleSelect" multiple id="news_select"></select>
+        <button class="submit_media">Submit</button>
       </section>
       <section id="outro">
         <div>
@@ -473,7 +469,7 @@
                     id="Right"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label" >Right</div>
+                  <div class="custom-label">Right</div>
                   <span class="checkmark"></span>
                 </label>
               </div>
