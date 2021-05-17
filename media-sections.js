@@ -10,12 +10,12 @@ var mediaGenZSVG = d3
   .select("#media-gen-z-figure")
   .append("svg")
   .attr("width", "100%")
-  .attr("height", window.innerHeight / 2);
+  .attr("height", window.innerHeight);
 var mediaBoomerSVG = d3
   .select("#media-boomer-figure")
   .append("svg")
   .attr("width", "100%")
-  .attr("height", window.innerHeight / 2);
+  .attr("height", window.innerHeight);
 
 const genZFollowNews = [
   { category: "Very Closely", percent: 0.15 },
@@ -82,7 +82,7 @@ function handleResize() {
   var stepH = Math.floor(window.innerHeight * 0.4);
   mediaStep.style("height", stepH + "px");
 
-  var mediaFigureHeight = window.innerHeight / 2;
+  var mediaFigureHeight = window.innerHeight * .8;
   var mediaFigureMarginTop = (window.innerHeight - mediaFigureHeight) / 2;
 
   mediaGenZFigure
