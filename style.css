@@ -15,6 +15,31 @@ body {
   font-size: 1.5rem;
 }
 
+/* Multiple Select for News Sources */
+.fstElement {
+  width: 75% !important;
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+.fstControls {
+  width: 100% !important;
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+.fstMultipleNode, .fstQueryInput, .fstResultItem {
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+  font-size: 1.5em !important;
+}
+
+.fstSelected, .fstChoiceItem, .fstFocused{
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+  background-color: #c5ac1c !important;
+  border: 0px !important;
+  font-size: 1.5em !important;
+}
+
+
+/* Tooltip */
 div.tooltip {	
   position: absolute;			
   text-align: center;
@@ -83,9 +108,10 @@ h1#modal_byline {
 }
 
 h1#source_name {
-  font-size: 40px;
-  font-family: 'Pirata One', cursive;
+  font-size: 30px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   color:black;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -128,6 +154,21 @@ a.button1:hover{
     display:block;
     margin:0.4em auto;
   }
+}
+
+button.submit_media{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 30px;
+  margin-top: 20px;
+  border: 2px solid black;
+  border-radius: 0px;
+  color: black;
+  padding: 10px;
+  background-color: transparent;
+}
+
+button.submit_media:hover{
+  background-color: #c5ac1c;
 }
 
 .line-container {
@@ -340,7 +381,8 @@ div#year::after {
 }
 #timeline-description{
   font-family: 'Roboto', sans-serif;
-  padding-left: 10%;
+  margin-left: 10%;
+  padding: 5px;
   margin-top: 5px;
 }
 

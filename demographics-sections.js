@@ -41,70 +41,54 @@ function handleResize() {
 
 function handleDemographicsStepEnter(response) {
   if (response.index == 0) {
-    timelineHide()
+    timelineHide();
   } else if (response.index == 1) {
-    timelineHide()
-
+    timelineHide();
   } else if (response.index == 2) {
-    
-    timelineHide()
+    timelineHide();
   } else if (response.index == 3) {
-    demographicsGenZFigure
-    .selectAll("div")
-    .style("opacity", 1.0)
-    demographicsBoomerFigure
-    .selectAll("div")
-    .style("opacity", 1.0)
+    demographicsGenZFigure.selectAll("div").style("opacity", 1.0);
+    demographicsBoomerFigure.selectAll("div").style("opacity", 1.0);
+    demographicsGenZFigure.selectAll("div").style("color", "#282828");
+    demographicsBoomerFigure.selectAll("div").style("color", "#282828");
     // Iraq War
   } else if (response.index == 4) {
     // TIMELINE SIMILARITY 1
-    // First iPhone released
-    stepReset()
+
+    demographicsGenZFigure.selectAll("div").style("opacity", 1.0);
+    demographicsBoomerFigure.selectAll("div").style("opacity", 1.0);
+    demographicsGenZFigure.selectAll("div").style("color", "#282828");
+    demographicsBoomerFigure.selectAll("div").style("color", "#282828");
+
     demographicsGenZFigure
-    .selectAll("div")
-    .style("opacity", 1.0)
+      .select(".timeline")
+      .selectAll("#gen-z-2")
+      .select("#timeline-description")
+      .style("background-color", "#AA78A6");
     demographicsBoomerFigure
-    .selectAll("div")
-    .style("opacity", 1.0)
-    demographicsGenZFigure
-    .select(".timeline")
-    .selectAll(".container")
-    .selectAll("#gen-z-2")
-    .style("color", "#AA78A6");
+      .select(".timeline")
+      .selectAll("#boomer-3")
+      .select("#timeline-description")
+      .style("background-color", "#008577");
   } else if (response.index == 5) {
-    // TIMELINE SIMILARITY 2
+    demographicsGenZFigure.selectAll("div").style("opacity", 1.0);
+    demographicsBoomerFigure.selectAll("div").style("opacity", 1.0);
+    demographicsGenZFigure.selectAll("div").style("color", "#282828").style("background-color", "transparent");
+    demographicsBoomerFigure.selectAll("div").style("color", "#282828").style("background-color", "transparent");
     // Sandy Hook Shooting
-
-
   } else if (response.index == 6) {
     // Black Lives Matter Protests during Ferguson Unrest
+    demographicsGenZFigure.selectAll("div").style("opacity", 1.0);
+    demographicsBoomerFigure.selectAll("div").style("opacity", 1.0);
+    demographicsGenZFigure.selectAll("div").style("color", "#282828");
+    demographicsBoomerFigure.selectAll("div").style("color", "#282828");
   } else if (response.index == 7) {
     // SpaceX Launches
   }
 }
 function timelineHide() {
-  demographicsGenZFigure
-  .selectAll("div")
-  .style("opacity", 0.0)
-  demographicsBoomerFigure
-  .selectAll("div")
-  .style("opacity", 0.0)
-}
-
-function stepReset() {
-  demographicsGenZFigure
-    .selectAll("div")
-    .style("opacity", 1.0)
-    demographicsBoomerFigure
-    .selectAll("div")
-    .style("opacity", 1.0)
-    demographicsGenZFigure
-    .selectAll("div")
-    .style("color", "#282828");
-    demographicsBoomerFigure
-    .selectAll("div")
-    .style("color", "#282828");
-
+  demographicsGenZFigure.select(".timeline").style("opacity", 0.0);
+  demographicsBoomerFigure.select(".timeline").style("opacity", 0.0);
 }
 
 function init() {
