@@ -184,14 +184,14 @@ window.addEventListener("click", function (e) {
 
 // RENDER
 function render() {
-  //   getSources(
-  //     "65+",
-  //     "Midwest",
-  //     "Metropolitan",
-  //     "Female",
-  //     "College graduate+",
-  //     "Asian or Asian-American"
-  //   );
+    // getSources(
+    //     "65+",
+    //     "Midwest",
+    //     "Metropolitan",
+    //     "Female",
+    //     "College graduate+",
+    //     "Asian or Asian-American"
+    //   );
 
   d3.csv("./data/allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
