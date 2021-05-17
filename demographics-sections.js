@@ -70,16 +70,23 @@ function handleDemographicsStepEnter(response) {
   } else if (response.index == 3) {
     demographicsGenZFigure
     .selectAll("div")
-    .style("opacity", 1.0)
+    .style("opacity", 0.0)
     demographicsBoomerFigure
     .selectAll("div")
-    .style("opacity", 1.0)
+    .style("opacity", 0.0)
     // Iraq War
   } else if (response.index == 4) {
     // TIMELINE SIMILARITY 1
     // First iPhone released
+    
     demographicsGenZFigure
-    .select("#gen-z-1")
+    .selectAll("div")
+    .style("opacity", 1.0)
+    demographicsBoomerFigure
+    .selectAll("div")
+    .style("opacity", 1.0)
+    demographicsGenZFigure
+    .select("#container")
     .attr("color", "red")
   } else if (response.index == 5) {
     // TIMELINE SIMILARITY 2
