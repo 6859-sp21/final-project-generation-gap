@@ -12,10 +12,8 @@ var demographicsStep = demographicsArticle.selectAll(".step");
 
 var scroller = scrollama();
 
-var genzTitle = d3.select("#gen-z-title");
-var boomerTitle = d3.select("#boomer-title");
-var genzText = d3.select("#gen-z-text");
-var boomerText = d3.select("#boomer-text");
+var genzTitle = demographicsGenZFigure.selectAll("#gen-z-title");
+var boomerTitle = demographicsBoomerFigure.selectAll("#boomer-title");
 
 function handleResize() {
   // 1. update height of step elements
@@ -43,42 +41,25 @@ function handleResize() {
 
 function handleDemographicsStepEnter(response) {
   if (response.index == 0) {
-    demographicsGenZFigure
-    .selectAll("div")
-    .style("opacity", 0.0)
-    demographicsBoomerFigure
-    .selectAll("div")
-    .style("opacity", 0.0)
+    timelineHide()
   } else if (response.index == 1) {
-    demographicsGenZFigure
-    .selectAll("div")
-    .style("opacity", 0.0)
-    demographicsBoomerFigure
-    .selectAll("div")
-    .style("opacity", 0.0)
-    genzTitle.text("Generation Z");
-    boomerTitle.text("Baby Boomers");
+    timelineHide()
+
   } else if (response.index == 2) {
-    genzTitle.text("Generation Z");
-    boomerTitle.text("Baby Boomers");
-    demographicsGenZFigure
-    .selectAll("div")
-    .style("opacity", 0.0)
-    demographicsBoomerFigure
-    .selectAll("div")
-    .style("opacity", 0.0)
+    
+    timelineHide()
   } else if (response.index == 3) {
     demographicsGenZFigure
     .selectAll("div")
-    .style("opacity", 0.0)
+    .style("opacity", 1.0)
     demographicsBoomerFigure
     .selectAll("div")
-    .style("opacity", 0.0)
+    .style("opacity", 1.0)
     // Iraq War
   } else if (response.index == 4) {
     // TIMELINE SIMILARITY 1
     // First iPhone released
-    
+    stepReset()
     demographicsGenZFigure
     .selectAll("div")
     .style("opacity", 1.0)
@@ -86,8 +67,10 @@ function handleDemographicsStepEnter(response) {
     .selectAll("div")
     .style("opacity", 1.0)
     demographicsGenZFigure
-    .select("#container")
-    .attr("color", "red")
+    .select(".timeline")
+    .selectAll(".container")
+    .selectAll("#gen-z-2")
+    .style("color", "#AA78A6");
   } else if (response.index == 5) {
     // TIMELINE SIMILARITY 2
     // Sandy Hook Shooting
@@ -98,6 +81,30 @@ function handleDemographicsStepEnter(response) {
   } else if (response.index == 7) {
     // SpaceX Launches
   }
+}
+function timelineHide() {
+  demographicsGenZFigure
+  .selectAll("div")
+  .style("opacity", 0.0)
+  demographicsBoomerFigure
+  .selectAll("div")
+  .style("opacity", 0.0)
+}
+
+function stepReset() {
+  demographicsGenZFigure
+    .selectAll("div")
+    .style("opacity", 1.0)
+    demographicsBoomerFigure
+    .selectAll("div")
+    .style("opacity", 1.0)
+    demographicsGenZFigure
+    .selectAll("div")
+    .style("color", "#282828");
+    demographicsBoomerFigure
+    .selectAll("div")
+    .style("color", "#282828");
+
 }
 
 function init() {
@@ -112,4 +119,5 @@ function init() {
 
   window.addEventListener("resize", handleResize);
 }
+
 init();

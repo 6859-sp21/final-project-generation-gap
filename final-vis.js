@@ -17,32 +17,12 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   (curSquareColor = squareColor),
   (highlightColor = "grey");
 
-  var boomerData;
-  var genZData;
+  var sourceData;
 
-
-
-function getSources(age, region, metro, sex, education, race) {
   d3.csv("./data/people.csv").then(function(data){
-    result = data.filter((d) => {
-      d.F_AGECAT == age && 
-      d.F_CREGION == region &&
-        d.F_SEX == sex &&
-        d.F_EDUCCAT == education &&
-        d.F_RACECMB == race &&
-        d.F_METRO == metro;
-    });
-    var randomPerson = data[Math.floor(Math.random() * data.length)]
-    console.log(randomPerson);
-    var sources = []
-    for (const property in randomPerson) {
-      if (randomPerson[property] == "Yes"){
-        sources.push(property);
-      }
-    }
-    console.log(sources);
+    sourceData = data;
+    render();
   })
-}
 
 var biasColors = {
   Left: "#2E65A0",
@@ -186,25 +166,32 @@ window.addEventListener("click", function (e) {
 
 // RENDER
 function render() {
-<<<<<<< HEAD
-  getSources(
-    "65+",
-    "Midwest",
-    "Metropolitan",
-    "Female",
-    "College graduate+",
-    "White"
-  );
-=======
-  //   getSources(
-  //     "65+",
-  //     "Midwest",
-  //     "Metropolitan",
-  //     "Female",
-  //     "College graduate+",
-  //     "Asian or Asian-American"
-  //   );
->>>>>>> 9f962367d124b26f2c3fd8369d45b8ff562413fe
+  console.log(sourceData);
+  var person = {
+   age: "65+",
+    region: "Midwest",
+    metro:"Metropolitan",
+    sex:"Female",
+    education:"College graduate+",
+    race:"White"
+  };
+  result = sourceData.filter((d) => {
+    d.F_AGECAT == person.age && 
+    d.F_CREGION == person.region &&
+      d.F_SEX == person.sex &&
+      d.F_EDUCCAT == person.education &&
+      d.F_RACECMB == person.race &&
+      d.F_METRO == person.metro;
+  });
+  var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)]
+  console.log(randomPerson);
+  var sources = []
+  for (const property in randomPerson) {
+    if (randomPerson[property] == "Yes"){
+      sources.push(property);
+    }
+  }
+  console.log(sources);
 
   d3.csv("./data/allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
@@ -268,10 +255,7 @@ function render() {
     g.append("text")
       .attr("x", (d, i) => {
         const n = i % numRow;
-<<<<<<< HEAD
         // console.log(row(n));
-=======
->>>>>>> 9f962367d124b26f2c3fd8369d45b8ff562413fe
         return row(n);
       })
       .attr("y", (d, i) => {
