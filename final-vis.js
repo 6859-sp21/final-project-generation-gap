@@ -18,21 +18,24 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   (highlightColor = "grey");
 
 sourcesMap = {
-    "CNN":["CNN (Online News)","CNN (Opinion)"],
-    "The New York Times":["New York Times (Opinion)","New York Times (News)"],
-    "NBC News": ["NBC News (Online)"],
-    "CBS News": ["CBS News (Online)"],
-    "ABC News": ["ABC News (online)"],
-    "Washington Post": ["Washington Post"],
-    "NPR": ["NPR (Opinion)","NPR (Online News)"],
-    "BBC": ["BBC News"],
-    "USA TODAY": ["USA TODAY"],
-    "The Wall Street Journal": ["Wall Street Journal (News)", "Wall Street Journal (Opinion)"],
-    "Fox News": ["Fox News (Online News)"],
-    // "Drudge Report",
-    // "TheBlaze.com",
-    "BrietBart": ["Breitbart News"]
-}
+  CNN: ["CNN (Online News)", "CNN (Opinion)"],
+  "The New York Times": ["New York Times (Opinion)", "New York Times (News)"],
+  "NBC News": ["NBC News (Online)"],
+  "CBS News": ["CBS News (Online)"],
+  "ABC News": ["ABC News (online)"],
+  "Washington Post": ["Washington Post"],
+  NPR: ["NPR (Opinion)", "NPR (Online News)"],
+  BBC: ["BBC News"],
+  "USA TODAY": ["USA TODAY"],
+  "The Wall Street Journal": [
+    "Wall Street Journal (News)",
+    "Wall Street Journal (Opinion)",
+  ],
+  "Fox News": ["Fox News (Online News)"],
+  // "Drudge Report",
+  // "TheBlaze.com",
+  BrietBart: ["Breitbart News"],
+};
 
 var sourceData;
 
@@ -140,7 +143,6 @@ function fitsFilter(d) {
   return filters["bias"].includes(d.Bias) && filters["topic"].includes(d.Topic);
 }
 
-
 /*Person Card Dropdowns Fix for all dropdowns*/
 // Listening for Dropdown Clicks
 [...document.querySelectorAll(".custom-select-wrapper")].forEach(function (
@@ -215,6 +217,22 @@ var options = "";
 });
 document.getElementById("news_select").innerHTML = options;
 
+//Listen for submitting your news sources
+document.querySelector(".submit_media").addEventListener("click", function () {
+  var final_viz =
+    document.getElementById("intro").scrollHeight +
+    document.getElementById("demographics-scrolly").scrollHeight +
+    document.getElementById("media-scrolly").scrollHeight +
+    document.getElementById("user-input").scrollHeight;
+  console.log("height", final_viz);
+  window.scrollTo({ top: final_viz, behavior: "smooth" });
+  sources_list = [];
+  document.querySelectorAll(".fstChoiceItem").forEach(function (item) {
+    sources_list.push(item.getAttribute("data-text"));
+  });
+  console.log(sources_list);
+});
+
 var ethnicity;
 var gender;
 var age;
@@ -236,55 +254,54 @@ var region;
 
 // convert source from people to allsides
 function convertSources(sources) {
-    newSources = []
-    for (i in sources) {
-        source = sources[i]
-        if (source in sourcesMap) {
-            for (i in sourcesMap[source]) {
-                s = sourcesMap[source][i]
-                newSources.push(s)
-            }
-            
-        }
+  newSources = [];
+  for (i in sources) {
+    source = sources[i];
+    if (source in sourcesMap) {
+      for (i in sourcesMap[source]) {
+        s = sourcesMap[source][i];
+        newSources.push(s);
+      }
     }
-    return newSources
+  }
+  return newSources;
 }
 
 // filters data to match the person card news sources
 // TODO make it so that it sorts by similarity to user
 function sortData(data, sources) {
-    newData = []
-    sources = convertSources(sources)
+  newData = [];
+  sources = convertSources(sources);
 
-    // filter to match person
-    for (i in data) {
-        news = data[i]
-        for (j in sources) {
-            source = sources[j]
-            if (news.Source==source) {
-                newData.push(news)
-            }
-        }
+  // filter to match person
+  for (i in data) {
+    news = data[i];
+    for (j in sources) {
+      source = sources[j];
+      if (news.Source == source) {
+        newData.push(news);
+      }
     }
-    // userSimilarData = []
-    // restOfData = []
+  }
+  // userSimilarData = []
+  // restOfData = []
 
-    // for (i in newData) {
-    //     d = newData[i]
-    //     if (options.contains(d.Source)) {
-    //         userSimilarData.push(d)
-    //     } else {
-    //         restOfData.push(d)
-    //     }
-    // }
-    // console.log('okay')
-    // console.log('concat', userSimilarData.concat(restOfData))
-    return newData
+  // for (i in newData) {
+  //     d = newData[i]
+  //     if (options.contains(d.Source)) {
+  //         userSimilarData.push(d)
+  //     } else {
+  //         restOfData.push(d)
+  //     }
+  // }
+  // console.log('okay')
+  // console.log('concat', userSimilarData.concat(restOfData))
+  return newData;
 }
 
 // RENDER
 function render() {
-    // updatePersonSources()
+  // updatePersonSources()
   var person = {
     age: "65+",
     region: "Midwest",
@@ -293,15 +310,15 @@ function render() {
     education: "College graduate+",
     race: "White",
   };
-//   var person = {
-//     age: age,
-//     region: region,
-//     metro: metro,
-//     sex: gender,
-//     education: education,
-//     race: ethnicity,
-//   };
-  console.log(person)
+  //   var person = {
+  //     age: age,
+  //     region: region,
+  //     metro: metro,
+  //     sex: gender,
+  //     education: education,
+  //     race: ethnicity,
+  //   };
+  console.log(person);
   result = sourceData.filter((d) => {
     d.F_AGECAT == person.age &&
       d.F_CREGION == person.region &&
@@ -310,8 +327,8 @@ function render() {
       d.F_RACECMB == person.race &&
       d.F_METRO == person.metro;
   });
-//   var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
-var randomPerson = sourceData[10];
+  //   var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
+  var randomPerson = sourceData[10];
   console.log(randomPerson);
   var sources = [];
   for (const property in randomPerson) {
@@ -325,8 +342,8 @@ var randomPerson = sourceData[10];
     highlightedData = highlighted(data);
     updateFilter();
     // sortedData = data.filter((d) => sources.forEach(source => {if (d.Source.includes(source)) return true}))
-    sortedData = sortData(data, sources)
-    console.log('sources', sources)
+    sortedData = sortData(data, sources);
+    console.log("sources", sources);
 
     var g = svg
       .selectAll("g")

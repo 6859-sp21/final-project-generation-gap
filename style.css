@@ -6,11 +6,11 @@ body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: #F6F2EB;
 }
-#title{
+.title{
   font-size: 4rem;
   font-weight: 600;
 }
-#subtitle{
+.subtitle{
   margin-top: 5%;
   font-size: 1.5rem;
 }
