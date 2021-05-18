@@ -9,12 +9,13 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   bylineMarginTop = 40,
   headerContainerWidth = 60,
   headerContainerMargin = { top: 1, left: 1 };
-(strokeWidth = 0),
+(strokeWidth = 5),
   (numRow = 10),
   (numFilters = 10),
   //Square and Highlight Colors
   (squareColor = "rgba(198, 198, 198, .5)"),
   (curSquareColor = squareColor),
+  (bridgeColor = "#c5ac1c"),
   (highlightColor = "grey");
 
 sourcesMap = {
@@ -39,6 +40,8 @@ sourcesMap = {
 
 var sourceData;
 var sources;
+var userInputSources = []; // TODO maybe add a default
+var similarityHighlighted = {} // map of newspapers that should be highlighted
 
 var biasColors = {
   Left: "#2E65A0",
@@ -112,7 +115,7 @@ function updateFilter() {
   return filters;
 }
 
-function highlighted(data) {
+function highlightedByFilter(data) {
   filtered_data = data.filter((d) => fitsFilter(d));
   rest_of_data = data.filter((d) => !filtered_data.includes(d));
 
@@ -121,7 +124,7 @@ function highlighted(data) {
   for (key in filtered_data) {
     if (filtered_data.hasOwnProperty(key)) {
       // all_data[i] = filtered_data[key];
-      all_data[filtered_data[key].Headline] =
+      all_data[filtered_data[key].Index] =
         biasColors[filtered_data[key].Bias];
       i++;
     }
@@ -129,7 +132,7 @@ function highlighted(data) {
   for (key in rest_of_data) {
     if (rest_of_data.hasOwnProperty(key)) {
       // all_data[i] = rest_of_data[key];
-      all_data[rest_of_data[key].Headline] = squareColor;
+      all_data[rest_of_data[key].Index] = squareColor;
       // i++;
     }
   }
@@ -222,11 +225,12 @@ document.querySelector(".submit_media").addEventListener("click", function () {
     document.getElementById("user-input").scrollHeight;
   console.log("height", final_viz);
   window.scrollTo({ top: final_viz, behavior: "smooth" });
-  sources_list = [];
+//   sources_list = [];
   document.querySelectorAll(".fstChoiceItem").forEach(function (item) {
-    sources_list.push(item.getAttribute("data-text"));
+    userInputSources.push(item.getAttribute("data-text"));
   });
-  console.log(sources_list);
+  console.log('user', userInputSources);
+  render();
 });
 
 var ethnicity;
@@ -279,20 +283,23 @@ function sortData(data, sources) {
       }
     }
   }
-  // userSimilarData = []
-  // restOfData = []
+  userSimilarData = []
+  restOfData = []
 
-  // for (i in newData) {
-  //     d = newData[i]
-  //     if (options.contains(d.Source)) {
-  //         userSimilarData.push(d)
-  //     } else {
-  //         restOfData.push(d)
-  //     }
-  // }
-  // console.log('okay')
-  // console.log('concat', userSimilarData.concat(restOfData))
-  return newData;
+  console.log(newData)
+
+  for (i in newData) {
+      d = newData[i]
+      if (userInputSources.includes(d.Source)) {
+          userSimilarData.push(d)
+          similarityHighlighted[d.Index] = bridgeColor;
+      } else {
+          restOfData.push(d)
+          similarityHighlighted[d.Index] = squareColor;
+      }
+  }
+
+  return userSimilarData.concat(restOfData);
 }
 
 // RENDER
@@ -349,11 +356,12 @@ function render1() {
 
   d3.csv("./data/final_allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
-    highlightedData = highlighted(data);
+    // highlightedData = highlighted(data);
     updateFilter();
     // sortedData = data.filter((d) => sources.forEach(source => {if (d.Source.includes(source)) return true}))
     sortedData = sortData(data, sources);
-    console.log("sources", sources);
+    console.log("sorted", sortedData);
+    highlightedData = highlightedByFilter(sortedData)
 
     var g = svg
       .selectAll("g")
@@ -434,10 +442,12 @@ function render1() {
       .attr("width", newsWidth)
       .attr("height", newsHeight)
       .attr("stroke-width", strokeWidth)
-      .attr("stroke", squareColor)
+      .attr("stroke", (d) => {
+          return similarityHighlighted[d.Index]
+      })
       //   .attr("fill", (d) => {return biasColors[d.Bias]})
       .attr("fill", (d) => {
-        return highlightedData[d.Headline];
+        return highlightedData[d.Index];
       })
       .attr("opacity", 0.3)
       .on("mouseover", handleMouseOver)
