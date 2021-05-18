@@ -17,6 +17,23 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   (curSquareColor = squareColor),
   (highlightColor = "grey");
 
+sourcesMap = {
+    "CNN":["CNN (Online News)","CNN (Opinion)"],
+    "The New York Times":["New York Times (Opinion)","New York Times (News)"],
+    "NBC News": ["NBC News (Online)"],
+    "CBS News": ["CBS News (Online)"],
+    "ABC News": ["ABC News (online)"],
+    "Washington Post": ["Washington Post"],
+    "NPR": ["NPR (Opinion)","NPR (Online News)"],
+    "BBC": ["BBC News"],
+    "USA TODAY": ["USA TODAY"],
+    "The Wall Street Journal": ["Wall Street Journal (News)", "Wall Street Journal (Opinion)"],
+    "Fox News": ["Fox News (Online News)"],
+    // "Drudge Report",
+    // "TheBlaze.com",
+    "BrietBart": ["Breitbart News"]
+}
+
 var sourceData;
 
 d3.csv("./data/people.csv").then(function (data) {
@@ -93,8 +110,6 @@ function updateFilter() {
     filters["topic"] = [];
   }
 
-  console.log("filters", filters);
-
   return filters;
 }
 
@@ -125,25 +140,7 @@ function fitsFilter(d) {
   return filters["bias"].includes(d.Bias) && filters["topic"].includes(d.Topic);
 }
 
-function sortData(data, sources) {
-    newData = []
-    for (news in data) {
-        for (source in sources) {
-            if (news.Source.contains(source)) {
-                newData.push(news)
-            }
-        }
-    }
-    return newData
-}
 
-// function render() {
-//   d3.csv("data/allsides.csv").then(function (data) {
-//     svg.selectAll("g").remove();
-//     // svg.selectAll("image").remove();
-//     // svg.selectAll("text").remove();
-//     highlightedData = highlighted(data)
-//     updateFilter()
 /*Person Card Dropdowns Fix for all dropdowns*/
 // Listening for Dropdown Clicks
 [...document.querySelectorAll(".custom-select-wrapper")].forEach(function (
@@ -206,9 +203,76 @@ var options = "";
 });
 document.getElementById("news_select").innerHTML = options;
 
+var ethnicity;
+var gender;
+var age;
+var education;
+var metro;
+var region;
+
+// function updatePersonSources() {
+//     console.log('update', document.getElementById("ethnicity-option").selectedIndex)
+//     ethnicity = document.getElementById("ethnicity").options[document.getElementById("ethnicity").selectedIndex].value
+//     console.log(ethnicity)
+//     gender = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].value
+//     age = document.getElementById("age").options[document.getElementById("age").selectedIndex].value
+//     education = document.getElementById("education").options[ document.getElementById("education").selectedIndex].value
+//     metro = document.getElementById("metro").options[document.getElementById("metro").selectedIndex].value
+//     region = document.getElementById("region").options[document.getElementById("region").selectedIndex].value
+
+// };
+
+// convert source from people to allsides
+function convertSources(sources) {
+    newSources = []
+    for (i in sources) {
+        source = sources[i]
+        if (source in sourcesMap) {
+            for (i in sourcesMap[source]) {
+                s = sourcesMap[source][i]
+                newSources.push(s)
+            }
+            
+        }
+    }
+    return newSources
+}
+
+// filters data to match the person card news sources
+// TODO make it so that it sorts by similarity to user
+function sortData(data, sources) {
+    newData = []
+    sources = convertSources(sources)
+
+    // filter to match person
+    for (i in data) {
+        news = data[i]
+        for (j in sources) {
+            source = sources[j]
+            if (news.Source==source) {
+                newData.push(news)
+            }
+        }
+    }
+    // userSimilarData = []
+    // restOfData = []
+
+    // for (i in newData) {
+    //     d = newData[i]
+    //     if (options.contains(d.Source)) {
+    //         userSimilarData.push(d)
+    //     } else {
+    //         restOfData.push(d)
+    //     }
+    // }
+    // console.log('okay')
+    // console.log('concat', userSimilarData.concat(restOfData))
+    return newData
+}
+
 // RENDER
 function render() {
-  console.log(sourceData);
+    // updatePersonSources()
   var person = {
     age: "65+",
     region: "Midwest",
@@ -217,6 +281,15 @@ function render() {
     education: "College graduate+",
     race: "White",
   };
+//   var person = {
+//     age: age,
+//     region: region,
+//     metro: metro,
+//     sex: gender,
+//     education: education,
+//     race: ethnicity,
+//   };
+  console.log(person)
   result = sourceData.filter((d) => {
     d.F_AGECAT == person.age &&
       d.F_CREGION == person.region &&
@@ -225,7 +298,8 @@ function render() {
       d.F_RACECMB == person.race &&
       d.F_METRO == person.metro;
   });
-  var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
+//   var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
+var randomPerson = sourceData[10];
   console.log(randomPerson);
   var sources = [];
   for (const property in randomPerson) {
@@ -233,16 +307,14 @@ function render() {
       sources.push(property);
     }
   }
-  console.log(sources);
 
   d3.csv("./data/allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
     highlightedData = highlighted(data);
     updateFilter();
-    console.log(sources);
     // sortedData = data.filter((d) => sources.forEach(source => {if (d.Source.includes(source)) return true}))
     sortedData = sortData(data, sources)
-    console.log('sorted', sortedData)
+    console.log('sources', sources)
 
     var g = svg
       .selectAll("g")
@@ -253,32 +325,6 @@ function render() {
         "transform",
         "translate(" + final_margin.left + "," + final_margin.top + ")"
       );
-
-    // var newspapers = svg
-    //     .selectAll("rect")
-    //     .data(data)
-    //     .enter()
-    // g.append("rect")
-    //   .attr("x", (d, i) => {
-    //     const n = i % numRow;
-    //     return row(n);
-    //   })
-    //   .attr("y", (d, i) => {
-    //     const n = Math.floor(i / numRow);
-    //     return row(n);
-    //   })
-    //   .attr("rx", 1)
-    //   .attr("ry", 1)
-    //   .attr("width", newsWidth)
-    //   .attr("height", newsHeight)
-    //   .attr("stroke-width", strokeWidth)
-    //   .attr("stroke", squareColor)
-    //   .attr("fill", squareColor)
-    //   .on("mouseover", handleMouseOver)
-    //   .on("mouseout", handleMouseOut)
-    //   // .on("mouseover", handleMouseOver)
-    //   // .on("mouseout", handleMouseOut_died)
-    //   .on("click", handleClick);
 
     g.append("image")
       .attr("xlink:href", "img/newspaper_icon.png")
