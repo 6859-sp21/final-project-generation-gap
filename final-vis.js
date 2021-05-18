@@ -80,6 +80,16 @@ function updateFilter() {
 
   console.log(document.getElementById("Left").checked);
 
+  //Change color of highlight on click
+  biasFilter.forEach(function (item) {
+    label = document.querySelector(`[value="${item}"]`);
+    if (document.getElementById(item).checked == true) {
+      label.setAttribute("style", `background-color: ${biasColors[item]};`);
+    } else {
+      label.setAttribute("style", `background-color: transparent;`);
+    }
+  });
+
   filters["bias"] = biasFilter.map((f) => {
     if (document.getElementById(f).checked == true) return f;
   });
@@ -227,6 +237,22 @@ document.querySelector(".submit_media").addEventListener("click", function () {
     sources_list.push(item.getAttribute("data-text"));
   });
   console.log(sources_list);
+});
+
+//Listen for hovering over bias filters
+[
+  ...document.querySelector("#media_filter").querySelectorAll(".container2"),
+].forEach(function (item) {
+  item.addEventListener("mouseover", function () {
+    label = item.querySelector("mark");
+    color = biasColors[label.getAttribute("value")];
+    label.setAttribute("style", `background-color: ${color};`);
+  });
+  item.addEventListener("mouseout", function () {
+    if (document.getElementById(label.getAttribute("value")).checked == false) {
+      label.setAttribute("style", `background-color: transparent`);
+    }
+  });
 });
 
 var ethnicity;
@@ -396,7 +422,7 @@ function render1() {
       .style("color", "black")
       .text((d) => {
         // console.log(d.Headline);
-        return d.Source;
+        return d.Source.toUpperCase();
       })
       .attr("font-size", "10px")
       .call(wrap, headerContainerWidth);
