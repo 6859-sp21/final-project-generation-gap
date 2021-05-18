@@ -1,5 +1,5 @@
 const final_margin = { top: 0, right: 30, bottom: 50, left: 30 },
-  final_width = window.innerWidth*.55 - final_margin.left - final_margin.right,
+  final_width = window.innerWidth*.6 - final_margin.left - final_margin.right,
   final_height = window.innerHeight  - final_margin.top - final_margin.bottom,
   newsWidth = 70,
   newsHeight = 90,
@@ -67,6 +67,7 @@ var biasColors = {
 };
 
 var row = d3.scaleLinear().domain([0, numRow]).range([0, window.innerWidth*.55]);
+var col = d3.scaleLinear().domain([0, numRow]).range([0, window.innerHeight*1.1]);
 
 var filters = {
   bias: [],
@@ -466,7 +467,7 @@ function renderUnitVis() {
       })
       .attr("y", (d, i) => {
         const n = Math.floor(i / numRow);
-        return row(n);
+        return col(n);
       })
       .attr("rx", 1)
       .attr("ry", 1)
@@ -483,7 +484,7 @@ function renderUnitVis() {
       })
       .attr("y", (d, i) => {
         const n = Math.floor(i / numRow);
-        return row(n);
+        return col(n);
       })
       .attr("dy", "1em")
       .style("color", "black")
@@ -520,7 +521,7 @@ function renderUnitVis() {
       })
       .attr("y", (d, i) => {
         const n = Math.floor(i / numRow);
-        return row(n);
+        return col(n);
       })
       .attr("rx", 1)
       .attr("ry", 1)
