@@ -1,14 +1,14 @@
-const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
-  final_width = 1700 - final_margin.left - final_margin.right,
+const final_margin = { top: 0, right: 50, bottom: 50, left: 50 },
+  final_width = 1200 - final_margin.left - final_margin.right,
   final_height = 2500 - final_margin.top - final_margin.bottom,
   //   width_survived = 700 - margin.left - margin.right,
   //   height_survived = 300 - margin.top - margin.bottom,
-  newsWidth = 80,
-  newsHeight = 100,
+  newsWidth = 70,
+  newsHeight = 90,
   maxLineNumber = 7,
   bylineMarginTop = 40,
-  headerContainerWidth = 60,
-  headerContainerMargin = { top: 1, left: 1 };
+  headerContainerWidth = 50,
+  headerContainerMargin = { top: .7, left: 1 };
 (strokeWidth = 5),
   (numRow = 10),
   (numFilters = 10),
@@ -43,6 +43,9 @@ var sources;
 var userInputSources = []; // TODO maybe add a default
 var similarityHighlighted = {} // map of newspapers that should be highlighted
 
+// add people to this map as they are chosen to remember the random selections
+var peopleMap = {}
+
 var biasColors = {
   Left: "#2E65A0",
   "Lean Left": "#9EC8EB",
@@ -51,7 +54,7 @@ var biasColors = {
   Right: "#CB2127",
 };
 
-var row = d3.scaleLinear().domain([0, numRow]).range([0, 1100]);
+var row = d3.scaleLinear().domain([0, numRow]).range([0, 1000]);
 
 var filters = {
   bias: [],
@@ -347,14 +350,6 @@ function render() {
     sourceData = data;
     updatePersonSources()
 
-    // var person = {
-    //   age: "18-29",
-    //   region: "Northeast",
-    //   metro: "Metropolitan",
-    //   sex: "Female",
-    //   education: "Some College",
-    //   race: "White",
-    // };
       var person = {
         age: age,
         region: region,
@@ -376,10 +371,23 @@ function render() {
         d.F_METRO == person.metro
       );
     });
-    //   var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
+
+    // determine random person
+    var currentDemographics = ethnicity+gender+age+education+metro+region
+    console.log('currentDemographics', currentDemographics)
+    if (currentDemographics in peopleMap) {
+        console.log('in peopleMap')
+        var randomPerson = peopleMap[currentDemographics]
+    } else {
+        var randomPerson = result[Math.floor(Math.random() * result.length)];
+        peopleMap[currentDemographics] = randomPerson
+    }
+
+      
     console.log("sourcessss", result);
-    var randomPerson = result[1];
+    // var randomPerson = result[1];
     console.log(randomPerson);
+
     sources = [];
     for (const property in randomPerson) {
       if (randomPerson[property] == "Yes") {
@@ -387,11 +395,11 @@ function render() {
       }
     }
     console.log(sources);
-    render1();
+    renderUnitVis();
   });
 }
 
-function render1() {
+function renderUnitVis() {
   // updatePersonSources()
 
   d3.csv("./data/final_allsides.csv").then(function (data) {
