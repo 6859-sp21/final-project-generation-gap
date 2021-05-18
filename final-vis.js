@@ -17,12 +17,28 @@ const final_margin = { top: 50, right: 50, bottom: 50, left: 100 },
   (curSquareColor = squareColor),
   (highlightColor = "grey");
 
-var sourceData;
+sourcesMap = {
+  CNN: ["CNN (Online News)", "CNN (Opinion)"],
+  "The New York Times": ["New York Times (Opinion)", "New York Times (News)"],
+  "NBC News": ["NBC News (Online)"],
+  "CBS News": ["CBS News (Online)"],
+  "ABC News": ["ABC News (online)"],
+  "Washington Post": ["Washington Post"],
+  NPR: ["NPR (Opinion)", "NPR (Online News)"],
+  BBC: ["BBC News"],
+  "USA TODAY": ["USA TODAY"],
+  "The Wall Street Journal": [
+    "Wall Street Journal (News)",
+    "Wall Street Journal (Opinion)",
+  ],
+  "Fox News": ["Fox News (Online News)"],
+  // "Drudge Report",
+  // "TheBlaze.com",
+  BrietBart: ["Breitbart News"],
+};
 
-d3.csv("./data/people.csv").then(function (data) {
-  sourceData = data;
-  render();
-});
+var sourceData;
+var sources;
 
 var biasColors = {
   Left: "#2E65A0",
@@ -41,7 +57,7 @@ var filters = {
 
 var filtersDefault = {
   bias: ["Left", "Lean Left", "Center", "Lean Right", "Right"],
-  topic: ["covid", "climate+change", "blm", "guns", "economy"],
+  topic: ["covid", "climate change", "blm", "guns", "economy"],
 };
 
 var svg = d3
@@ -60,7 +76,7 @@ var tooltip = d3
 
 function updateFilter() {
   biasFilter = ["Left", "Lean Left", "Center", "Lean Right", "Right"];
-  topicFilter = ["covid", "climate+change", "blm", "guns", "economy"];
+  topicFilter = ["covid", "climate change", "blm", "guns", "economy"];
 
   console.log(document.getElementById("Left").checked);
 
@@ -93,8 +109,6 @@ function updateFilter() {
     filters["topic"] = [];
   }
 
-  console.log("filters", filters);
-
   return filters;
 }
 
@@ -125,13 +139,6 @@ function fitsFilter(d) {
   return filters["bias"].includes(d.Bias) && filters["topic"].includes(d.Topic);
 }
 
-// function render() {
-//   d3.csv("data/allsides.csv").then(function (data) {
-//     svg.selectAll("g").remove();
-//     // svg.selectAll("image").remove();
-//     // svg.selectAll("text").remove();
-//     highlightedData = highlighted(data)
-//     updateFilter()
 /*Person Card Dropdowns Fix for all dropdowns*/
 // Listening for Dropdown Clicks
 [...document.querySelectorAll(".custom-select-wrapper")].forEach(function (
@@ -164,75 +171,199 @@ window.addEventListener("click", function (e) {
   });
 });
 
-// RENDER
-function render() {
-  console.log(sourceData);
-  var person = {
-    age: "65+",
-    region: "Midwest",
-    metro: "Metropolitan",
-    sex: "Female",
-    education: "College graduate+",
-    race: "White",
-  };
-  result = sourceData.filter((d) => {
-    d.F_AGECAT == person.age &&
-      d.F_CREGION == person.region &&
-      d.F_SEX == person.sex &&
-      d.F_EDUCCAT == person.education &&
-      d.F_RACECMB == person.race &&
-      d.F_METRO == person.metro;
+//Listening for multiple select
+$(".multipleSelect").fastselect({
+  placeholder: "Tell us where you get your news",
+});
+var options = "";
+[
+  "The Daily Caller",
+  "USA TODAY",
+  "HuffPost",
+  "Wall Street Journal (News)",
+  "New York Post (News)",
+  "New York Times (News)",
+  "CNN (Online News)",
+  "Wall Street Journal (Opinion)",
+  "The Hill",
+  "Vox",
+  "Time Magazine",
+  "Breitbart News",
+  "CBS News (Online)",
+  "BBC News",
+  "NBC News (Online)",
+  "Washington Examiner",
+  "Vice",
+  "Fox News (Online News)",
+  "The Guardian",
+  "NPR (Online News)",
+  "Politico",
+  "Newsweek",
+  "ABC News (Online)",
+  "CNN (Opinion)",
+  "New York Post (Opinion)",
+  "NPR (Opinion)",
+  "Washington Post",
+  "BuzzFeed News",
+  "New York Times (Opinion)",
+  "MSNBC",
+].forEach((element) => {
+  options +=
+    `<option value=${element.split(" ").join("")}>` + element + `</option>`;
+});
+document.getElementById("news_select").innerHTML = options;
+
+//Listen for submitting your news sources
+document.querySelector(".submit_media").addEventListener("click", function () {
+  var final_viz =
+    document.getElementById("intro").scrollHeight +
+    document.getElementById("demographics-scrolly").scrollHeight +
+    document.getElementById("media-scrolly").scrollHeight +
+    document.getElementById("user-input").scrollHeight;
+  console.log("height", final_viz);
+  window.scrollTo({ top: final_viz, behavior: "smooth" });
+  sources_list = [];
+  document.querySelectorAll(".fstChoiceItem").forEach(function (item) {
+    sources_list.push(item.getAttribute("data-text"));
   });
-  var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
-  console.log(randomPerson);
-  var sources = [];
-  for (const property in randomPerson) {
-    if (randomPerson[property] == "Yes") {
-      sources.push(property);
+  console.log(sources_list);
+});
+
+var ethnicity;
+var gender;
+var age;
+var education;
+var metro;
+var region;
+
+// function updatePersonSources() {
+//     console.log('update', document.getElementById("ethnicity-option").selectedIndex)
+//     ethnicity = document.getElementById("ethnicity").options[document.getElementById("ethnicity").selectedIndex].value
+//     console.log(ethnicity)
+//     gender = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].value
+//     age = document.getElementById("age").options[document.getElementById("age").selectedIndex].value
+//     education = document.getElementById("education").options[ document.getElementById("education").selectedIndex].value
+//     metro = document.getElementById("metro").options[document.getElementById("metro").selectedIndex].value
+//     region = document.getElementById("region").options[document.getElementById("region").selectedIndex].value
+
+// };
+
+// convert source from people to allsides
+function convertSources(sources) {
+  newSources = [];
+  for (i in sources) {
+    source = sources[i];
+    if (source in sourcesMap) {
+      for (i in sourcesMap[source]) {
+        s = sourcesMap[source][i];
+        newSources.push(s);
+      }
     }
   }
-  console.log(sources);
+  return newSources;
+}
 
-  d3.csv("./data/allsides.csv").then(function (data) {
+// filters data to match the person card news sources
+// TODO make it so that it sorts by similarity to user
+function sortData(data, sources) {
+  newData = [];
+  sources = convertSources(sources);
+
+  // filter to match person
+  for (i in data) {
+    news = data[i];
+    for (j in sources) {
+      source = sources[j];
+      if (news.Source == source) {
+        newData.push(news);
+      }
+    }
+  }
+  // userSimilarData = []
+  // restOfData = []
+
+  // for (i in newData) {
+  //     d = newData[i]
+  //     if (options.contains(d.Source)) {
+  //         userSimilarData.push(d)
+  //     } else {
+  //         restOfData.push(d)
+  //     }
+  // }
+  // console.log('okay')
+  // console.log('concat', userSimilarData.concat(restOfData))
+  return newData;
+}
+
+// RENDER
+function render() {
+  d3.csv("./data/people.csv").then(function (data) {
+    sourceData = data;
+
+    var person = {
+      age: "65+",
+      region: "Northeast",
+      metro: "Metropolitan",
+      sex: "Female",
+      education: "Some College",
+      race: "White",
+    };
+    //   var person = {
+    //     age: age,
+    //     region: region,
+    //     metro: metro,
+    //     sex: gender,
+    //     education: education,
+    //     race: ethnicity,
+    //   };
+    console.log(person.age);
+    console.log("sourcess", sourceData);
+
+    var result = sourceData.filter((d) => {
+      return (
+        d.F_AGECAT == person.age &&
+        d.F_CREGION == person.region &&
+        d.F_SEX == person.sex &&
+        d.F_EDUCCAT == person.education &&
+        d.F_RACECMB == person.race &&
+        d.F_METRO == person.metro
+      );
+    });
+    //   var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
+    console.log("sourcessss", result);
+    var randomPerson = result[5];
+    console.log(randomPerson);
+    sources = [];
+    for (const property in randomPerson) {
+      if (randomPerson[property] == "Yes") {
+        sources.push(property);
+      }
+    }
+    console.log(sources);
+    render1();
+  });
+}
+
+function render1() {
+  // updatePersonSources()
+
+  d3.csv("./data/final_allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
     highlightedData = highlighted(data);
     updateFilter();
+    // sortedData = data.filter((d) => sources.forEach(source => {if (d.Source.includes(source)) return true}))
+    sortedData = sortData(data, sources);
+    console.log("sources", sources);
 
     var g = svg
       .selectAll("g")
-      .data(data)
+      .data(sortedData)
       .enter()
       .append("g")
       .attr(
         "transform",
         "translate(" + final_margin.left + "," + final_margin.top + ")"
       );
-
-    // var newspapers = svg
-    //     .selectAll("rect")
-    //     .data(data)
-    //     .enter()
-    // g.append("rect")
-    //   .attr("x", (d, i) => {
-    //     const n = i % numRow;
-    //     return row(n);
-    //   })
-    //   .attr("y", (d, i) => {
-    //     const n = Math.floor(i / numRow);
-    //     return row(n);
-    //   })
-    //   .attr("rx", 1)
-    //   .attr("ry", 1)
-    //   .attr("width", newsWidth)
-    //   .attr("height", newsHeight)
-    //   .attr("stroke-width", strokeWidth)
-    //   .attr("stroke", squareColor)
-    //   .attr("fill", squareColor)
-    //   .on("mouseover", handleMouseOver)
-    //   .on("mouseout", handleMouseOut)
-    //   // .on("mouseover", handleMouseOver)
-    //   // .on("mouseout", handleMouseOut_died)
-    //   .on("click", handleClick);
 
     g.append("image")
       .attr("xlink:href", "img/newspaper_icon.png")
@@ -326,17 +457,17 @@ function render() {
         `<div class='tooltip-header' style='background:${
           biasColors[d.Bias]
         }; opacity:.8'> ${d.Headline}, ${d.Source} </div> <br> 
-        <div class='tooltip-header2'> Headlines From Different Sources </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
-          d.Headline
-        } </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
-          d.Headline
-        } </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
-          d.Headline
-        } </div>
-        <div class='tooltip-more'> Click to read more </div>`
+      <div class='tooltip-header2'> Headlines From Different Sources </div>
+      <div class='tooltip-sources' style='color:${
+        biasColors[d["Left Bias"]]
+      }'> ${d["Left Headline"]} </div>
+      <div class='tooltip-sources' style='color:${
+        biasColors[d["Center Bias"]]
+      }'> ${d["Center Headline"]} </div>
+      <div class='tooltip-sources' style='color:${
+        biasColors[d["Right Bias"]]
+      }'> ${d["Right Headline"]} </div>
+      <div class='tooltip-more'> Click to read more </div>`
       )
       .style("left", d3.event.pageX + 20 + "px")
       .style("top", d3.event.pageY - 20 + "px");

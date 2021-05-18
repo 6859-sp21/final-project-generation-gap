@@ -6,20 +6,45 @@ body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: #F6F2EB;
 }
-#title{
+.title{
   font-size: 4rem;
   font-weight: 600;
 }
-#subtitle{
+.subtitle{
   margin-top: 5%;
   font-size: 1.5rem;
 }
 
+/* Multiple Select for News Sources */
+.fstElement {
+  width: 75% !important;
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+.fstControls {
+  width: 100% !important;
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+}
+
+.fstMultipleNode, .fstQueryInput, .fstResultItem {
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+  font-size: 1.5em !important;
+}
+
+.fstSelected, .fstChoiceItem, .fstFocused{
+  font-family: Georgia, 'Times New Roman', Times, serif !important;
+  background-color: #c5ac1c !important;
+  border: 0px !important;
+  font-size: 1.5em !important;
+}
+
+
+/* Tooltip */
 div.tooltip {	
   position: absolute;			
   text-align: center;
   display: inline-block;
-  max-width: 20rem;
+  width: 20rem;
   min-height: 2rem;								
   padding: .5rem;
   color: black;
@@ -129,6 +154,21 @@ a.button1:hover{
     display:block;
     margin:0.4em auto;
   }
+}
+
+button.submit_media{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 30px;
+  margin-top: 20px;
+  border: 2px solid black;
+  border-radius: 0px;
+  color: black;
+  padding: 10px;
+  background-color: transparent;
+}
+
+button.submit_media:hover{
+  background-color: #c5ac1c;
 }
 
 .line-container {

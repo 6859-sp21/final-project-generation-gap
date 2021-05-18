@@ -11,6 +11,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link
       rel="stylesheet"
+      href="https://rawgit.com/dbrekalo/fastselect/master/dist/fastselect.min.css"
+    />
+    <script src="https://rawgit.com/dbrekalo/fastselect/master/dist/fastselect.standalone.min.js"></script>
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"
     />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -24,11 +29,6 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Antonio:wght@100&display=swap");
     </style>
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap"
-      rel="stylesheet"
-    />
 
     <script src="radialBarChart.js"></script>
   </head>
@@ -45,9 +45,13 @@
           flex-direction: column;
         "
       >
-        <div id="title">Bridging the Generational Gap</div>
-        <div id="subtitle">
-          Talking to your parents about politics is hard. Start scrolling to
+        <div class="title">
+          <mark style="background-color: #c5ac1cc0"
+            >Bridging the Generational Gap</mark
+          >
+        </div>
+        <div class="subtitle">
+          Talking to your parents about the news is hard. Start scrolling to
           learn why.
         </div>
       </section>
@@ -97,7 +101,7 @@
             </div>
           </div>
           <div class="boomer-figure" id="demographics-boomer-figure">
-            <div class="boomer-title"> Baby Boomer </div>
+            <div class="boomer-title">Baby Boomer</div>
             <div class="timeline" id="boomer-timeline" style="opacity: 0">
               <div class="container left">
                 <div class="content" , id="boomer-1">
@@ -204,7 +208,6 @@
               experience for Boomers and GenZ.
             </p>
           </div>
-          
         </article>
       </section>
       <section class="scrolly" id="media-scrolly">
@@ -266,7 +269,7 @@
       <section
         id="user-input"
         style="
-          height: 150vh;
+          height: 175vh;
           width: 100%;
           display: flex;
           align-items: center;
@@ -274,25 +277,28 @@
           flex-direction: column;
         "
       >
-        <div id="title">Where do you get your news?</div>
         <div
-          id="subtitle"
-          style="margin-bottom: 2%; text-align: center; margin-top: 2%"
+          class="title"
+          style="margin-bottom: 3%; text-align: center; width: 75%"
         >
-          Select your news sources
+          Have you ever wondered how
+          <mark style="background-color: #c5ac1cc0">your newsfeed</mark>
+          compares with other people?
         </div>
+        <select class="multipleSelect" multiple id="news_select"></select>
+        <button class="submit_media">Submit</button>
       </section>
       <section id="outro">
         <div>
-          <div id="title" style="text-align: center">
-            Bridge the Gap: Read Someone Else's Newsfeed
+          <div class="title" id="final_viz" style="text-align: center">
+            Bridge the Gap: Explore Another's Newsfeed
           </div>
           <div
-            id="subtitle"
+            class="subtitle"
             style="margin-bottom: 2%; text-align: center; margin-top: 2%"
           >
-            Build a reader and checkout the different articles they read sorted
-            by most to least similar to your news sources.
+            Select a reader and read their newfeed. Hover over articles to read
+            headlines. Articles are sorted by similarity to your news sources.
           </div>
           <div style="display: flex; flex-direction: row">
             <div
@@ -357,7 +363,7 @@
                     >
                     <span class="custom-option" data-value="30-49">30-49</span>
                     <span class="custom-option" data-value="50-64">50-64</span>
-                    <span class="custom-option" data-value="65">65+</span>
+                    <span class="custom-option" data-value="65+">65+</span>
                   </div>
                 </div>
               </div>
@@ -489,7 +495,7 @@
                     id="Right"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label" >Right</div>
+                  <div class="custom-label">Right</div>
                   <span class="checkmark"></span>
                 </label>
               </div>
@@ -510,7 +516,7 @@
                 <label class="container2">
                   <input
                     type="checkbox"
-                    id="climate+change"
+                    id="climate change"
                     onclick="updateFilter(); render();"
                   />
                   <div class="custom-label">Climate</div>
