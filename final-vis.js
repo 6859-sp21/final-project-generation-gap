@@ -41,7 +41,7 @@ var filters = {
 
 var filtersDefault = {
   bias: ["Left", "Lean Left", "Center", "Lean Right", "Right"],
-  topic: ["covid", "climate+change", "blm", "guns", "economy"],
+  topic: ["covid", "climate change", "blm", "guns", "economy"],
 };
 
 var svg = d3
@@ -60,7 +60,7 @@ var tooltip = d3
 
 function updateFilter() {
   biasFilter = ["Left", "Lean Left", "Center", "Lean Right", "Right"];
-  topicFilter = ["covid", "climate+change", "blm", "guns", "economy"];
+  topicFilter = ["covid", "climate change", "blm", "guns", "economy"];
 
   console.log(document.getElementById("Left").checked);
 
@@ -170,26 +170,36 @@ $(".multipleSelect").fastselect({
 });
 var options = "";
 [
-  "MSNBC",
-  "CNN (Online News)",
-  "CNN (Opinion)",
-  "New York Times (Opinion)",
-  "NBC News (Online)",
-  "CBS News (Online)",
-  "ABC News (Online)",
-  "New York Times (News)",
-  "Washington Post",
-  "NPR (Opinion)",
-  "NPR (Online News)",
-  "BBC News",
+  "The Daily Caller",
   "USA TODAY",
+  "HuffPost",
   "Wall Street Journal (News)",
+  "New York Post (News)",
+  "New York Times (News)",
+  "CNN (Online News)",
   "Wall Street Journal (Opinion)",
-  "Fox News (Online News)",
-  "Drudge Report",
-  "TheBlaze.com",
+  "The Hill",
+  "Vox",
+  "Time Magazine",
   "Breitbart News",
-  "Fox News (Opinion)",
+  "CBS News (Online)",
+  "BBC News",
+  "NBC News (Online)",
+  "Washington Examiner",
+  "Vice",
+  "Fox News (Online News)",
+  "The Guardian",
+  "NPR (Online News)",
+  "Politico",
+  "Newsweek",
+  "ABC News (Online)",
+  "CNN (Opinion)",
+  "New York Post (Opinion)",
+  "NPR (Opinion)",
+  "Washington Post",
+  "BuzzFeed News",
+  "New York Times (Opinion)",
+  "MSNBC",
 ].forEach((element) => {
   options +=
     `<option value=${element.split(" ").join("")}>` + element + `</option>`;
@@ -225,7 +235,7 @@ function render() {
   }
   console.log(sources);
 
-  d3.csv("./data/allsides.csv").then(function (data) {
+  d3.csv("./data/final_allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
     highlightedData = highlighted(data);
     updateFilter();
@@ -358,17 +368,17 @@ function render() {
         `<div class='tooltip-header' style='background:${
           biasColors[d.Bias]
         }; opacity:.8'> ${d.Headline}, ${d.Source} </div> <br> 
-        <div class='tooltip-header2'> Headlines From Different Sources </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
-          d.Headline
-        } </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
-          d.Headline
-        } </div>
-        <div class='tooltip-sources' style='color:${biasColors[d.Bias]}'> ${
-          d.Headline
-        } </div>
-        <div class='tooltip-more'> Click to read more </div>`
+      <div class='tooltip-header2'> Headlines From Different Sources </div>
+      <div class='tooltip-sources' style='color:${
+        biasColors[d["Left Bias"]]
+      }'> ${d["Left Headline"]} </div>
+      <div class='tooltip-sources' style='color:${
+        biasColors[d["Center Bias"]]
+      }'> ${d["Center Headline"]} </div>
+      <div class='tooltip-sources' style='color:${
+        biasColors[d["Right Bias"]]
+      }'> ${d["Right Headline"]} </div>
+      <div class='tooltip-more'> Click to read more </div>`
       )
       .style("left", d3.event.pageX + 20 + "px")
       .style("top", d3.event.pageY - 20 + "px");
