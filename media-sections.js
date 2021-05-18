@@ -6,7 +6,9 @@ var mediaBoomerFigure = mediaFigure.select("#media-boomer-figure");
 var mediaArticle = mediaScrolly.select("#media-article");
 var mediaStep = mediaArticle.selectAll(".step");
 
-
+var genZColor = "#FFA67D"
+var boomerColor = "#00A08F"
+var textColor = "#282828"
 
 var mediaGenZSVG = d3
   .select("#media-gen-z-figure")
@@ -62,7 +64,6 @@ function handleResize() {
 }
 
 function handleMediaStepEnter(response) {
-
   mediaFigure.select("p").text(response.index + 1);
   mediaStep.classed("is-active", function (d, i) {
     return i === response.index;
@@ -96,7 +97,7 @@ function handleMediaStepEnter(response) {
     newsOutlet3();
   } else if (response.index == 5) {
     stepReset();
-    headlineExample1();
+    areaChart1();
   } else if (response.index == 6) {
     stepReset();
     headlineExample2();
@@ -268,20 +269,18 @@ function newsOutlet1() {
   });
 }
 function newsOutlet2() {
-  mediaGenZSVG.selectAll("rect")
-  .attr("fill", (d) =>{
-    if (d.Source == "New York Times"){
+  mediaGenZSVG.selectAll("rect").attr("fill", (d) => {
+    if (d.Source == "New York Times") {
       return "goldenrod";
     } else {
       return "#282828";
     }
-  })
+  });
 }
 
 function newsOutlet3() {
   d3.csv("./data/genZNewsSource2.csv").then(function (genZData) {
     d3.csv("./data/boomerNewsSource2.csv").then(function (boomerData) {
-      
       var y = d3
         .scaleLinear()
         .domain([0, 1])
@@ -359,46 +358,137 @@ function newsOutlet3() {
     });
   });
 }
+function areaChart1() {
+  d3.csv("./data/cnn.csv").then(function (data) {
+    var x = d3.scaleBand().range([margin.left, width - margin.right]);
+    x.domain([
+      "Very liberal",
+      "Liberal",
+      "Moderate",
+      "Conservative",
+      "Very conservative",
+      "Refused",
+    ]);
+
+    mediaGenZSVG
+      .append("g")
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3
+      .scaleLinear()
+      .domain([0, 3000])
+      .range([height - margin.bottom, margin.top]);
+    mediaGenZSVG
+      .append("g")
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y));
+   
+    curve = d3.curveLinear
+    area = d3.area()
+      .curve(curve)
+      .x(d => {
+        return x(d.F_IDEO)
+      })
+      .y0(y(0))
+      .y1(d => y(d.QKEY))
+    // Add the area
+    mediaGenZSVG
+      .append("path")
+      .datum(data)
+      .attr("fill", "#cce5df")
+      .attr("stroke", "#69b3a2")
+      .attr("stroke-width", 1.5)
+      .attr("d", area);
+    
+  });
+  d3.csv("./data/fox.csv").then(function (data) {
+    var x = d3.scaleBand().range([margin.left, width - margin.right]);
+    x.domain([
+      "Very liberal",
+      "Liberal",
+      "Moderate",
+      "Conservative",
+      "Very conservative",
+      "Refused",
+    ]);
+
+    mediaBoomerSVG
+      .append("g")
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x));
+
+    // Add Y axis
+    var y = d3
+      .scaleLinear()
+      .domain([0, 3000])
+      .range([height - margin.bottom, margin.top]);
+    mediaBoomerSVG
+      .append("g")
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y));
+   
+    curve = d3.curveLinear
+    area = d3.area()
+      .curve(curve)
+      .x(d => {
+        return x(d.F_IDEO)
+      })
+      .y0(y(0))
+      .y1(d => y(d.QKEY))
+    // Add the area
+    mediaBoomerSVG
+      .append("path")
+      .datum(data)
+      .attr("fill", "#cce5df")
+      .attr("stroke", "#69b3a2")
+      .attr("stroke-width", 1.5)
+      .attr("d", area);
+    
+  });
+}
 function headlineExample1() {
   mediaBoomerFigure
-  .insert("span", ":first-child")
-  .attr('id', 'headline-example')
+    .insert("span", ":first-child")
+    .attr("id", "headline-example")
     .text(
       "GOP senators offer Covid-19 relief counterproposal to force talks with White House back to middle"
     );
 
   mediaGenZFigure
-  .insert("span", ":first-child")
-  .attr('id', 'headline-example')
+    .insert("span", ":first-child")
+    .attr("id", "headline-example")
     .text(
       "GOP senators to meet Biden Monday on coronavirus relief as Dems ready to pass bill without Republican support"
     );
 }
 function headlineExample2() {
   mediaBoomerFigure
-  .insert("span", ":first-child")
-  .attr('id', 'headline-example')
+    .insert("span", ":first-child")
+    .attr("id", "headline-example")
     .text(
       "Biden's spending, tax plans will have 'bumps along the way': Economic Advisers chair"
     );
   mediaGenZFigure
-  .insert("span", ":first-child")
-  .attr('id', 'headline-example')
+    .insert("span", ":first-child")
+    .attr("id", "headline-example")
     .text(
       "Here's how Biden wants to raise taxes on the wealthy and corporations"
     );
 }
 function headlineExample3() {
   mediaGenZFigure
-  .insert("span", ":first-child")
-  .attr('id', 'headline-example')
+    .insert("span", ":first-child")
+    .attr("id", "headline-example")
     .text(
       "Biden makes the economic case for fighting climate change on second day of virtual summit"
-    ).attr("padding-top", '10rem')
+    )
+    .attr("padding-top", "10rem");
 
   mediaBoomerFigure
-  .insert("span", ":first-child")
-  .attr('id', 'headline-example')
+    .insert("span", ":first-child")
+    .attr("id", "headline-example")
     .text(
       "Biden avoids confronting China over climate in Earth Day speech with world leaders"
     );
@@ -420,7 +510,7 @@ function init() {
   scroller
     .setup({
       step: "#media-scrolly #media-article .step",
-      offset: 0.5,
+      offset: 0.7,
     })
     .onStepEnter(handleMediaStepEnter);
 
