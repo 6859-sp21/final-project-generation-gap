@@ -234,17 +234,18 @@ label {
 
   .gen-z-title {
     display: flex;
-    justify-content: center;
-    /* width:50%; */
-    font-size: 32px;
+    margin-left:17%;
+    margin-bottom: 10px;
+    font-size: 24px;
     color:#282828;
   }
 
   .boomer-title {
     display: flex;
-    justify-content: center;
+    margin-left:17%;
+    margin-bottom: 10px;
     /* width:80%; */
-    font-size: 32px;
+    font-size: 24px;
     color:#282828;
   }
 
@@ -268,14 +269,13 @@ label {
     flex-direction: column;
   }
   .step-header {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic', sans-serif;
+    font-size: 1rem;
+    padding-bottom: 2rem;
   }
-
   .step:last-child {
     margin-bottom: 10rem;
   }
-
-
   .step p {
     text-align: center;
     padding: 1rem;
@@ -344,6 +344,9 @@ div#year::after {
   margin-left: 10%;
   padding: 5px;
   margin-top: 5px;
+}
+#headline-example{
+  padding-top: 10rem;
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
