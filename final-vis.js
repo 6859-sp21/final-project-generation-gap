@@ -454,20 +454,21 @@ function render1() {
     tooltip.transition().duration(30).style("opacity", 1);
     tooltip
       .html(
-        `<div class='tooltip-header' style='background:${
+        `<div class='tooltip-source'>${d.Source.toUpperCase()} </div>
+        <div class='tooltip-header'><mark style='background-color:${
           biasColors[d.Bias]
-        }; opacity:.8'> ${d.Headline}, ${d.Source} </div> <br> 
-      <div class='tooltip-header2'> Headlines From Different Sources </div>
-      <div class='tooltip-sources' style='color:${
+        }; opacity:.8'>${d.Headline}</mark></div>
+      <div class='tooltip-header2'>Headlines from other sources:</div>
+      <div class='tooltip-sources'><mark style='background-color:${
         biasColors[d["Left Bias"]]
-      }'> ${d["Left Headline"]} </div>
-      <div class='tooltip-sources' style='color:${
+      }'>${d["Left Headline"]} </mark></div>
+      <div class='tooltip-sources'><mark style='background-color:${
         biasColors[d["Center Bias"]]
-      }'> ${d["Center Headline"]} </div>
-      <div class='tooltip-sources' style='color:${
+      }'>${d["Center Headline"]}</mark></div>
+      <div class='tooltip-sources'> <mark style='background-color:${
         biasColors[d["Right Bias"]]
-      }'> ${d["Right Headline"]} </div>
-      <div class='tooltip-more'> Click to read more </div>`
+      }'>${d["Right Headline"]}</mark></div>
+      <div class='tooltip-more'>Click to read more</div>`
       )
       .style("left", d3.event.pageX + 20 + "px")
       .style("top", d3.event.pageY - 20 + "px");
