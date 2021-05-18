@@ -174,7 +174,9 @@ window.addEventListener("click", function (e) {
 });
 
 //Listening for multiple select
-$(".multipleSelect").fastselect({ placeholder: "Select your news sources" });
+$(".multipleSelect").fastselect({
+  placeholder: "Tell us where you get your news",
+});
 var options = "";
 [
   "MSNBC",
