@@ -163,6 +163,7 @@ for (const option of document.querySelectorAll(".custom-option")) {
         ".custom-select__trigger span"
       ).textContent = this.textContent;
     }
+    render(); // render if there's an update in person card
   });
 }
 //Listening for Clicking Outside Dropdown
@@ -233,24 +234,62 @@ document.querySelector(".submit_media").addEventListener("click", function () {
   render();
 });
 
-var ethnicity;
-var gender;
-var age;
-var education;
-var metro;
-var region;
+var ethnicity = "White";
+var gender = "Female";
+var age = "18-29";
+var education = "H.S. graduate or less";
+var metro = "Metropolitan";
+var region = "Northeast";
 
-// function updatePersonSources() {
-//     console.log('update', document.getElementById("ethnicity-option").selectedIndex)
-//     ethnicity = document.getElementById("ethnicity").options[document.getElementById("ethnicity").selectedIndex].value
-//     console.log(ethnicity)
-//     gender = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].value
-//     age = document.getElementById("age").options[document.getElementById("age").selectedIndex].value
-//     education = document.getElementById("education").options[ document.getElementById("education").selectedIndex].value
-//     metro = document.getElementById("metro").options[document.getElementById("metro").selectedIndex].value
-//     region = document.getElementById("region").options[document.getElementById("region").selectedIndex].value
+function updatePersonSources() {
+    // console.log('update', document.getElementById("ethnicity-option").selectedIndex)
+    // ethnicity = document.getElementById("ethnicity").options[document.getElementById("ethnicity").selectedIndex].value
+    // console.log(ethnicity)
+    // gender = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].value
+    // age = document.getElementById("age").options[document.getElementById("age").selectedIndex].value
+    // education = document.getElementById("education").options[ document.getElementById("education").selectedIndex].value
+    // metro = document.getElementById("metro").options[document.getElementById("metro").selectedIndex].value
+    // region = document.getElementById("region").options[document.getElementById("region").selectedIndex].value
 
-// };
+    dEthnicity = document.getElementById("ethnicity")
+    for (const option of dEthnicity.querySelectorAll(".custom-option")) {
+        if (option.classList.contains("selected")) {
+        ethnicity = option.dataset.value
+        }
+    }
+    dGender = document.getElementById("gender")
+    for (const option of dGender.querySelectorAll(".custom-option")) {
+        if (option.classList.contains("selected")) {
+        gender = option.dataset.value
+        }
+    }
+    dAge = document.getElementById("age")
+    for (const option of dAge.querySelectorAll(".custom-option")) {
+        if (option.classList.contains("selected")) {
+        age = option.dataset.value
+        }
+    }
+    dEducation = document.getElementById("education")
+    for (const option of dEducation.querySelectorAll(".custom-option")) {
+        if (option.classList.contains("selected")) {
+        education = option.dataset.value
+        }
+    }
+    dMetro = document.getElementById("metro")
+    for (const option of dMetro.querySelectorAll(".custom-option")) {
+        if (option.classList.contains("selected")) {
+        metro = option.dataset.value
+        }
+    }
+    dRegion = document.getElementById("region")
+    for (const option of dRegion.querySelectorAll(".custom-option")) {
+        if (option.classList.contains("selected")) {
+        region = option.dataset.value
+        }
+    }
+
+
+};
 
 // convert source from people to allsides
 function convertSources(sources) {
@@ -306,23 +345,24 @@ function sortData(data, sources) {
 function render() {
   d3.csv("./data/people.csv").then(function (data) {
     sourceData = data;
+    updatePersonSources()
 
-    var person = {
-      age: "65+",
-      region: "Northeast",
-      metro: "Metropolitan",
-      sex: "Female",
-      education: "Some College",
-      race: "White",
-    };
-    //   var person = {
-    //     age: age,
-    //     region: region,
-    //     metro: metro,
-    //     sex: gender,
-    //     education: education,
-    //     race: ethnicity,
-    //   };
+    // var person = {
+    //   age: "18-29",
+    //   region: "Northeast",
+    //   metro: "Metropolitan",
+    //   sex: "Female",
+    //   education: "Some College",
+    //   race: "White",
+    // };
+      var person = {
+        age: age,
+        region: region,
+        metro: metro,
+        sex: gender,
+        education: education,
+        race: ethnicity,
+      };
     console.log(person.age);
     console.log("sourcess", sourceData);
 
@@ -338,7 +378,7 @@ function render() {
     });
     //   var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
     console.log("sourcessss", result);
-    var randomPerson = result[5];
+    var randomPerson = result[1];
     console.log(randomPerson);
     sources = [];
     for (const property in randomPerson) {
