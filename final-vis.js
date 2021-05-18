@@ -1,8 +1,6 @@
-const final_margin = { top: 0, right: 50, bottom: 50, left: 50 },
-  final_width = 1200 - final_margin.left - final_margin.right,
-  final_height = 2500 - final_margin.top - final_margin.bottom,
-  //   width_survived = 700 - margin.left - margin.right,
-  //   height_survived = 300 - margin.top - margin.bottom,
+const final_margin = { top: 0, right: 30, bottom: 50, left: 30 },
+  final_width = window.innerWidth*.55 - final_margin.left - final_margin.right,
+  final_height = window.innerHeight  - final_margin.top - final_margin.bottom,
   newsWidth = 70,
   newsHeight = 90,
   maxLineNumber = 7,
@@ -10,7 +8,7 @@ const final_margin = { top: 0, right: 50, bottom: 50, left: 50 },
   headerContainerWidth = 60,
   headerContainerMargin = { top: 1, left: .8 };
 (strokeWidth = 5),
-  (numRow = 10),
+  (numRow = 9),
   (numFilters = 10),
   //Square and Highlight Colors
   (squareColor = "rgba(198, 198, 198, .5)"),
@@ -36,6 +34,20 @@ sourcesMap = {
   // "Drudge Report",
   // "TheBlaze.com",
   BrietBart: ["Breitbart News"],
+  HuffPost: ["HuffPost"],
+  Time: ["Time Magazine"],
+  Vice: ["Vice"],
+  "Daily Caller": ["The Daily Caller"],
+  MSNBC: ["MSNBC"],
+  Politico: ["Politico"],
+  Buzzfeed: ["BuzzFeed News"],
+  Newsweek: ["Newsweek"],
+  Vox: ["Vox"],
+  "The Hill": ["The Hill"],
+  "Washington Examiner": ["Washington Examiner"],
+  "New York Post": ["New York Post"],
+  "The Guardian": ["The Guardian"]
+
 };
 
 var sourceData;
@@ -54,7 +66,7 @@ var biasColors = {
   Right: "#CB2127",
 };
 
-var row = d3.scaleLinear().domain([0, numRow]).range([0, 1000]);
+var row = d3.scaleLinear().domain([0, numRow]).range([0, window.innerWidth*.55]);
 
 var filters = {
   bias: [],
@@ -402,7 +414,9 @@ function render() {
         console.log('in peopleMap')
         var randomPerson = peopleMap[currentDemographics]
     } else {
-        var randomPerson = result[Math.floor(Math.random() * result.length)];
+        // var randomPerson = result[Math.floor(Math.random() * result.length)];
+        console.log('min', Math.min(0,1))
+        var randomPerson = result[Math.min(1, result.length-1)]
         peopleMap[currentDemographics] = randomPerson
     }
 

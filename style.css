@@ -5,6 +5,7 @@
 body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: #F6F2EB;
+  width: 100vw;
 }
 .title{
   font-size: 4rem;
@@ -561,7 +562,7 @@ h1#demographic_category{
 .custom-select-wrapper {
   position: relative;
   user-select: none;
-  width: 100%;
+  width: 60%;
 }
 .custom-select {
   position: relative;
