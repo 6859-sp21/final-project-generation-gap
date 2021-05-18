@@ -7,8 +7,8 @@ const final_margin = { top: 0, right: 50, bottom: 50, left: 50 },
   newsHeight = 90,
   maxLineNumber = 7,
   bylineMarginTop = 40,
-  headerContainerWidth = 55,
-  headerContainerMargin = { top: .7, left: .7 };
+  headerContainerWidth = 60,
+  headerContainerMargin = { top: 1, left: .8 };
 (strokeWidth = 5),
   (numRow = 10),
   (numFilters = 10),
@@ -477,7 +477,7 @@ function renderUnitVis() {
         // console.log(d.Headline);
         return d.Source.toUpperCase();
       })
-      .attr("font-size", "10px")
+      .attr("font-size", "8px")
       .call(wrap, headerContainerWidth);
 
     //   g.append("text")
