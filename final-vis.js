@@ -35,11 +35,7 @@ sourcesMap = {
 }
 
 var sourceData;
-
-d3.csv("./data/people.csv").then(function (data) {
-  sourceData = data;
-  render();
-});
+var sources;
 
 var biasColors = {
   Left: "#2E65A0",
@@ -284,41 +280,55 @@ function sortData(data, sources) {
 
 // RENDER
 function render() {
+    d3.csv("./data/people.csv").then(function (data) {
+        sourceData = data;
+
+        var person = {
+            age: "65+",
+            region: "Northeast",
+            metro: "Metropolitan",
+            sex: "Female",
+            education: "Some College",
+            race: "White",
+          };
+        //   var person = {
+        //     age: age,
+        //     region: region,
+        //     metro: metro,
+        //     sex: gender,
+        //     education: education,
+        //     race: ethnicity,
+        //   };
+          console.log(person.age)
+          console.log('sourcess', sourceData)
+          
+          var result = sourceData.filter((d) => {
+            return (d.F_AGECAT == person.age &&
+              d.F_CREGION == person.region &&
+              d.F_SEX == person.sex &&
+              d.F_EDUCCAT == person.education &&
+              d.F_RACECMB == person.race &&
+              d.F_METRO == person.metro)
+          });
+        //   var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
+          console.log('sourcessss', result)
+        var randomPerson = result[5];
+          console.log(randomPerson);
+          sources = [];
+          for (const property in randomPerson) {
+            if (randomPerson[property] == "Yes") {
+              sources.push(property);
+            }
+          }
+        console.log(sources)
+        render1();
+      });
+    
+}
+
+function render1() {
     // updatePersonSources()
-  var person = {
-    age: "65+",
-    region: "Midwest",
-    metro: "Metropolitan",
-    sex: "Female",
-    education: "College graduate+",
-    race: "White",
-  };
-//   var person = {
-//     age: age,
-//     region: region,
-//     metro: metro,
-//     sex: gender,
-//     education: education,
-//     race: ethnicity,
-//   };
-  console.log(person)
-  result = sourceData.filter((d) => {
-    d.F_AGECAT == person.age &&
-      d.F_CREGION == person.region &&
-      d.F_SEX == person.sex &&
-      d.F_EDUCCAT == person.education &&
-      d.F_RACECMB == person.race &&
-      d.F_METRO == person.metro;
-  });
-//   var randomPerson = sourceData[Math.floor(Math.random() * sourceData.length)];
-var randomPerson = sourceData[10];
-  console.log(randomPerson);
-  var sources = [];
-  for (const property in randomPerson) {
-    if (randomPerson[property] == "Yes") {
-      sources.push(property);
-    }
-  }
+  
 
   d3.csv("./data/final_allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
