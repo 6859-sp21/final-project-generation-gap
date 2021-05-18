@@ -298,6 +298,7 @@
                 border: 1px solid black;
                 padding: 30px;
                 align-items: center;
+                width: 310px;
               "
             >
               <img src="img/jess.png" style="width: 180px" />
@@ -307,7 +308,8 @@
               >
                 Meet Jess
               </h1>
-              <span class="custom-dropdown-words">A</span>
+              <div style="display: flex; justify-content: center; width: 200px">
+                <span class="custom-dropdown-words">A</span>
               <div class="custom-select-wrapper" id="ethnicity">
                 <div class="custom-select">
                   <div class="custom-select__trigger">
@@ -318,9 +320,9 @@
                     <span class="custom-option selected" data-value="White"
                       >white</span
                     >
-                    <span class="custom-option" data-value="Black">black</span>
-                    <span class="custom-option" data-value="Asian">asian</span>
-                    <span class="custom-option" data-value="Mixed">mixed</span>
+                    <span class="custom-option" data-value="Black or African American">black</span>
+                    <span class="custom-option" data-value="Asian or Asian-American">asian</span>
+                    <span class="custom-option" data-value="Mixed Race">mixed</span>
                   </div>
                 </div>
               </div>
@@ -331,95 +333,106 @@
                     <div class="arrow"></div>
                   </div>
                   <div class="custom-options">
-                    <span class="custom-option selected" data-value="woman"
+                    <span class="custom-option selected" data-value="Female"
                       >woman</span
                     >
-                    <span class="custom-option" data-value="man">man</span>
+                    <span class="custom-option" data-value="Male">man</span>
                   </div>
                 </div>
               </div>
-              <span class="custom-dropdown-words">between age</span>
-              <div class="custom-select-wrapper" id="age">
-                <div class="custom-select">
-                  <div class="custom-select__trigger">
-                    <span class="custom-dropdown-words">18-29</span>
-                    <div class="arrow"></div>
-                  </div>
-                  <div class="custom-options">
-                    <span class="custom-option selected" data-value="18-29"
-                      >18-29</span
-                    >
-                    <span class="custom-option" data-value="30-49">30-49</span>
-                    <span class="custom-option" data-value="50-64">50-64</span>
-                    <span class="custom-option" data-value="65+">65+</span>
+              </div>
+              
+              <div style="display: flex; justify-content: center; width: 300px">
+                <span class="custom-dropdown-words">between age</span>
+                <div class="custom-select-wrapper" id="age">
+                  <div class="custom-select">
+                    <div class="custom-select__trigger">
+                      <span class="custom-dropdown-words">18-29</span>
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="custom-options">
+                      <span class="custom-option selected" data-value="18-29"
+                        >18-29</span
+                      >
+                      <span class="custom-option" data-value="30-49">30-49</span>
+                      <span class="custom-option" data-value="50-64">50-64</span>
+                      <span class="custom-option" data-value="65+">65+</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <span class="custom-dropdown-words">who has</span>
+
+              <span class="custom-dropdown-words" style="width: 300px">who has an educational experience of</span>
               <div class="custom-select-wrapper" id="education">
                 <div class="custom-select">
                   <div class="custom-select__trigger">
-                    <span class="custom-dropdown-words">no highschool</span>
+                    <span class="custom-dropdown-words">H.S. or less</span>
                     <div class="arrow"></div>
                   </div>
                   <div class="custom-options">
-                    <span
+                    <!-- <span
                       class="custom-option selected"
                       data-value="no highschool"
                       >no highschool</span
+                    > -->
+                    <span class="custom-option selected" data-value="H.S. graduate or less"
+                      >H.S. or less</span
                     >
-                    <span class="custom-option" data-value="highschool"
-                      >a highschool</span
+                    <span class="custom-option" data-value="Some College"
+                      >some college</span
                     >
-                    <span class="custom-option" data-value="no college"
-                      >no college</span
-                    >
-                    <span class="custom-option" data-value="college"
-                      >a college</span
-                    >
-                  </div>
-                </div>
-              </div>
-              <span class="custom-dropdown-words">degree and lives in</span>
-              <div class="custom-select-wrapper" id="metro">
-                <div class="custom-select">
-                  <div class="custom-select__trigger">
-                    <span class="custom-dropdown-words">the city</span>
-                    <div class="arrow"></div>
-                  </div>
-                  <div class="custom-options">
-                    <span class="custom-option selected" data-value="metro"
-                      >the city</span
-                    >
-                    <span class="custom-option" data-value="nonmetro"
-                      >a non-metro area</span
+                    <span class="custom-option" data-value="College graduate+"
+                      >college graduate+</span
                     >
                   </div>
                 </div>
               </div>
-              <span class="custom-dropdown-words">in the</span>
-              <div class="custom-select-wrapper" id="region">
-                <div class="custom-select">
-                  <div class="custom-select__trigger">
-                    <span class="custom-dropdown-words">northeast</span>
-                    <div class="arrow"></div>
+
+              <div style="display: flex; justify-content: center; width: 300px">
+                <span class="custom-dropdown-words">and lives in</span>
+                <div class="custom-select-wrapper" id="metro">
+                  <div class="custom-select">
+                    <div class="custom-select__trigger">
+                      <span class="custom-dropdown-words">the city</span>
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="custom-options">
+                      <span class="custom-option selected" data-value="Metropolitan"
+                        >the city</span
+                      >
+                      <span class="custom-option" data-value="Non-metropolitan"
+                        >a non-metro area</span
+                      >
+                    </div>
                   </div>
-                  <div class="custom-options">
-                    <span class="custom-option selected" data-value="northeast"
-                      >northeast</span
-                    >
-                    <span class="custom-option" data-value="south">south</span>
-                    <span class="custom-option" data-value="west">west</span>
-                    <span class="custom-option" data-value="mid-west"
-                      >mid-west</span
-                    >
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: center; width: 300px">
+                <span class="custom-dropdown-words">in the</span>
+                <div class="custom-select-wrapper" id="region">
+                  <div class="custom-select">
+                    <div class="custom-select__trigger">
+                      <span class="custom-dropdown-words">northeast</span>
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="custom-options">
+                      <span class="custom-option selected" data-value="Northeast"
+                        >northeast</span
+                      >
+                      <span class="custom-option" data-value="South">south</span>
+                      <span class="custom-option" data-value="West">west</span>
+                      <span class="custom-option" data-value="Midwest"
+                        >mid-west</span
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div
               id="final_news"
-              style="width: 100%; height: 300px; width: 1200px"
+              style="width: 80%; height: 500px;"
             ></div>
             <div
               id="filter_sections"
@@ -429,6 +442,8 @@
                 background-color: white;
                 border: 1px solid black;
                 padding: 30px;
+                margin-right: 10vw;
+                margin-left: 10px;
               "
             >
               <div
@@ -447,7 +462,11 @@
                     id="Left"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">Left</div>
+                  <div class="custom-label">
+                    <mark value="Left" style="background-color: transparent"
+                      >Left</mark
+                    >
+                  </div>
                   <span class="checkmark"></span>
                 </label>
                 <label class="container2">
@@ -456,7 +475,13 @@
                     id="Lean Left"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">Left Leaning</div>
+                  <div class="custom-label">
+                    <mark
+                      value="Lean Left"
+                      style="background-color: transparent"
+                      >Left Leaning</mark
+                    >
+                  </div>
                   <span class="checkmark"></span>
                 </label>
                 <label class="container2">
@@ -465,7 +490,11 @@
                     id="Center"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">Center</div>
+                  <div class="custom-label">
+                    <mark value="Center" style="background-color: transparent"
+                      >Center</mark
+                    >
+                  </div>
                   <span class="checkmark"></span>
                 </label>
                 <label class="container2">
@@ -474,7 +503,13 @@
                     id="Lean Right"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">Right Leaning</div>
+                  <div class="custom-label">
+                    <mark
+                      value="Lean Right"
+                      style="background-color: transparent"
+                      >Right Leaning</mark
+                    >
+                  </div>
                   <span class="checkmark"></span>
                 </label>
                 <label class="container2">
@@ -483,7 +518,11 @@
                     id="Right"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">Right</div>
+                  <div class="custom-label">
+                    <mark value="Right" style="background-color: transparent"
+                      >Right</mark
+                    >
+                  </div>
                   <span class="checkmark"></span>
                 </label>
               </div>
