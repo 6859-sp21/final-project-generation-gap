@@ -7,8 +7,8 @@ const final_margin = { top: 0, right: 50, bottom: 50, left: 50 },
   newsHeight = 90,
   maxLineNumber = 7,
   bylineMarginTop = 40,
-  headerContainerWidth = 50,
-  headerContainerMargin = { top: .7, left: 1 };
+  headerContainerWidth = 55,
+  headerContainerMargin = { top: .7, left: .7 };
 (strokeWidth = 5),
   (numRow = 10),
   (numFilters = 10),
@@ -41,7 +41,7 @@ sourcesMap = {
 var sourceData;
 var sources;
 var userInputSources = []; // TODO maybe add a default
-var similarityHighlighted = {} // map of newspapers that should be highlighted
+var similarityHighlighted = {}; // map of newspapers that should be highlighted
 
 // add people to this map as they are chosen to remember the random selections
 var peopleMap = {}
@@ -86,6 +86,16 @@ function updateFilter() {
 
   console.log(document.getElementById("Left").checked);
 
+  //Change color of highlight on click
+  biasFilter.forEach(function (item) {
+    label = document.querySelector(`[value="${item}"]`);
+    if (document.getElementById(item).checked == true) {
+      label.setAttribute("style", `background-color: ${biasColors[item]};`);
+    } else {
+      label.setAttribute("style", `background-color: transparent;`);
+    }
+  });
+
   filters["bias"] = biasFilter.map((f) => {
     if (document.getElementById(f).checked == true) return f;
   });
@@ -127,8 +137,7 @@ function highlightedByFilter(data) {
   for (key in filtered_data) {
     if (filtered_data.hasOwnProperty(key)) {
       // all_data[i] = filtered_data[key];
-      all_data[filtered_data[key].Index] =
-        biasColors[filtered_data[key].Bias];
+      all_data[filtered_data[key].Index] = biasColors[filtered_data[key].Bias];
       i++;
     }
   }
@@ -229,12 +238,28 @@ document.querySelector(".submit_media").addEventListener("click", function () {
     document.getElementById("user-input").scrollHeight;
   console.log("height", final_viz);
   window.scrollTo({ top: final_viz, behavior: "smooth" });
-//   sources_list = [];
+  //   sources_list = [];
   document.querySelectorAll(".fstChoiceItem").forEach(function (item) {
     userInputSources.push(item.getAttribute("data-text"));
   });
-  console.log('user', userInputSources);
+  console.log("user", userInputSources);
   render();
+});
+
+//Listen for hovering over bias filters
+[
+  ...document.querySelector("#media_filter").querySelectorAll(".container2"),
+].forEach(function (item) {
+  item.addEventListener("mouseover", function () {
+    label = item.querySelector("mark");
+    color = biasColors[label.getAttribute("value")];
+    label.setAttribute("style", `background-color: ${color};`);
+  });
+  item.addEventListener("mouseout", function () {
+    if (document.getElementById(label.getAttribute("value")).checked == false) {
+      label.setAttribute("style", `background-color: transparent`);
+    }
+  });
 });
 
 var ethnicity = "White";
@@ -245,54 +270,52 @@ var metro = "Metropolitan";
 var region = "Northeast";
 
 function updatePersonSources() {
-    // console.log('update', document.getElementById("ethnicity-option").selectedIndex)
-    // ethnicity = document.getElementById("ethnicity").options[document.getElementById("ethnicity").selectedIndex].value
-    // console.log(ethnicity)
-    // gender = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].value
-    // age = document.getElementById("age").options[document.getElementById("age").selectedIndex].value
-    // education = document.getElementById("education").options[ document.getElementById("education").selectedIndex].value
-    // metro = document.getElementById("metro").options[document.getElementById("metro").selectedIndex].value
-    // region = document.getElementById("region").options[document.getElementById("region").selectedIndex].value
+  // console.log('update', document.getElementById("ethnicity-option").selectedIndex)
+  // ethnicity = document.getElementById("ethnicity").options[document.getElementById("ethnicity").selectedIndex].value
+  // console.log(ethnicity)
+  // gender = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].value
+  // age = document.getElementById("age").options[document.getElementById("age").selectedIndex].value
+  // education = document.getElementById("education").options[ document.getElementById("education").selectedIndex].value
+  // metro = document.getElementById("metro").options[document.getElementById("metro").selectedIndex].value
+  // region = document.getElementById("region").options[document.getElementById("region").selectedIndex].value
 
-    dEthnicity = document.getElementById("ethnicity")
-    for (const option of dEthnicity.querySelectorAll(".custom-option")) {
-        if (option.classList.contains("selected")) {
-        ethnicity = option.dataset.value
-        }
+  dEthnicity = document.getElementById("ethnicity");
+  for (const option of dEthnicity.querySelectorAll(".custom-option")) {
+    if (option.classList.contains("selected")) {
+      ethnicity = option.dataset.value;
     }
-    dGender = document.getElementById("gender")
-    for (const option of dGender.querySelectorAll(".custom-option")) {
-        if (option.classList.contains("selected")) {
-        gender = option.dataset.value
-        }
+  }
+  dGender = document.getElementById("gender");
+  for (const option of dGender.querySelectorAll(".custom-option")) {
+    if (option.classList.contains("selected")) {
+      gender = option.dataset.value;
     }
-    dAge = document.getElementById("age")
-    for (const option of dAge.querySelectorAll(".custom-option")) {
-        if (option.classList.contains("selected")) {
-        age = option.dataset.value
-        }
+  }
+  dAge = document.getElementById("age");
+  for (const option of dAge.querySelectorAll(".custom-option")) {
+    if (option.classList.contains("selected")) {
+      age = option.dataset.value;
     }
-    dEducation = document.getElementById("education")
-    for (const option of dEducation.querySelectorAll(".custom-option")) {
-        if (option.classList.contains("selected")) {
-        education = option.dataset.value
-        }
+  }
+  dEducation = document.getElementById("education");
+  for (const option of dEducation.querySelectorAll(".custom-option")) {
+    if (option.classList.contains("selected")) {
+      education = option.dataset.value;
     }
-    dMetro = document.getElementById("metro")
-    for (const option of dMetro.querySelectorAll(".custom-option")) {
-        if (option.classList.contains("selected")) {
-        metro = option.dataset.value
-        }
+  }
+  dMetro = document.getElementById("metro");
+  for (const option of dMetro.querySelectorAll(".custom-option")) {
+    if (option.classList.contains("selected")) {
+      metro = option.dataset.value;
     }
-    dRegion = document.getElementById("region")
-    for (const option of dRegion.querySelectorAll(".custom-option")) {
-        if (option.classList.contains("selected")) {
-        region = option.dataset.value
-        }
+  }
+  dRegion = document.getElementById("region");
+  for (const option of dRegion.querySelectorAll(".custom-option")) {
+    if (option.classList.contains("selected")) {
+      region = option.dataset.value;
     }
-
-
-};
+  }
+}
 
 // convert source from people to allsides
 function convertSources(sources) {
@@ -325,20 +348,20 @@ function sortData(data, sources) {
       }
     }
   }
-  userSimilarData = []
-  restOfData = []
+  userSimilarData = [];
+  restOfData = [];
 
-  console.log(newData)
+  console.log(newData);
 
   for (i in newData) {
-      d = newData[i]
-      if (userInputSources.includes(d.Source)) {
-          userSimilarData.push(d)
-          similarityHighlighted[d.Index] = bridgeColor;
-      } else {
-          restOfData.push(d)
-          similarityHighlighted[d.Index] = squareColor;
-      }
+    d = newData[i];
+    if (userInputSources.includes(d.Source)) {
+      userSimilarData.push(d);
+      similarityHighlighted[d.Index] = bridgeColor;
+    } else {
+      restOfData.push(d);
+      similarityHighlighted[d.Index] = squareColor;
+    }
   }
 
   return userSimilarData.concat(restOfData);
@@ -348,7 +371,7 @@ function sortData(data, sources) {
 function render() {
   d3.csv("./data/people.csv").then(function (data) {
     sourceData = data;
-    updatePersonSources()
+    updatePersonSources();
 
       var person = {
         age: age,
@@ -409,7 +432,7 @@ function renderUnitVis() {
     // sortedData = data.filter((d) => sources.forEach(source => {if (d.Source.includes(source)) return true}))
     sortedData = sortData(data, sources);
     console.log("sorted", sortedData);
-    highlightedData = highlightedByFilter(sortedData)
+    highlightedData = highlightedByFilter(sortedData);
 
     var g = svg
       .selectAll("g")
@@ -452,7 +475,7 @@ function renderUnitVis() {
       .style("color", "black")
       .text((d) => {
         // console.log(d.Headline);
-        return d.Source;
+        return d.Source.toUpperCase();
       })
       .attr("font-size", "10px")
       .call(wrap, headerContainerWidth);
@@ -491,7 +514,7 @@ function renderUnitVis() {
       .attr("height", newsHeight)
       .attr("stroke-width", strokeWidth)
       .attr("stroke", (d) => {
-          return similarityHighlighted[d.Index]
+        return similarityHighlighted[d.Index];
       })
       //   .attr("fill", (d) => {return biasColors[d.Bias]})
       .attr("fill", (d) => {
@@ -512,20 +535,21 @@ function renderUnitVis() {
     tooltip.transition().duration(30).style("opacity", 1);
     tooltip
       .html(
-        `<div class='tooltip-header' style='background:${
+        `<div class='tooltip-source'>${d.Source.toUpperCase()} </div>
+        <div class='tooltip-header'><mark style='background-color:${
           biasColors[d.Bias]
-        }; opacity:.8'> ${d.Headline}, ${d.Source} </div> <br> 
-      <div class='tooltip-header2'> Headlines From Different Sources </div>
-      <div class='tooltip-sources' style='color:${
+        }; opacity:.8'>${d.Headline}</mark></div>
+      <div class='tooltip-header2'>Headlines from other sources:</div>
+      <div class='tooltip-sources'><mark style='background-color:${
         biasColors[d["Left Bias"]]
-      }'> ${d["Left Headline"]} </div>
-      <div class='tooltip-sources' style='color:${
+      }'>${d["Left Headline"]} </mark></div>
+      <div class='tooltip-sources'><mark style='background-color:${
         biasColors[d["Center Bias"]]
-      }'> ${d["Center Headline"]} </div>
-      <div class='tooltip-sources' style='color:${
+      }'>${d["Center Headline"]}</mark></div>
+      <div class='tooltip-sources'> <mark style='background-color:${
         biasColors[d["Right Bias"]]
-      }'> ${d["Right Headline"]} </div>
-      <div class='tooltip-more'> Click to read more </div>`
+      }'>${d["Right Headline"]}</mark></div>
+      <div class='tooltip-more'>Click to read more</div>`
       )
       .style("left", d3.event.pageX + 20 + "px")
       .style("top", d3.event.pageY - 20 + "px");

@@ -54,39 +54,53 @@ div.tooltip {
   border-radius: 3px;		
   pointer-events: none;	
   box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 500;
 }
-.tooltip-header{
+
+.tooltip-source{
   padding: 1rem;
   color: black;
   font-size: 20px;
-  font-family: 'Red Hat Display', sans-serif;
-  font-weight: 300;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 600;
+  text-align: left;
+}
+
+.tooltip-header{
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  color: black;
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 600;
+  text-align: left;
 }
 .tooltip-header2{
-  text-align: center;
+  padding-left: 1rem;
+  text-align: left;
   color: black;
   font-size: 17px;
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 300;
 }
 .tooltip-sources{
-  text-align: center;
-  margin: .5rem 2rem 0 2rem;
+  text-align: left;
+  margin: .5rem 1rem 0 1rem;
   color: black;
   font-size: 15px;
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 300;
 }
 .tooltip-more{
-  text-align: center;
+  padding-left: 1rem;
+  text-align: left;
   margin-top: 1rem;
   margin-bottom: .5rem;
   color: black;
   font-size: 15px;
-  font-family: 'Red Hat Display', sans-serif;
-  font-weight: 300;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 100;
 }
 
 /* Modal */
@@ -112,7 +126,7 @@ h1#source_name {
   font-family: Georgia, 'Times New Roman', Times, serif;
   color:black;
   font-weight: 600;
-  text-align: center;
+  text-align: left;
 }
 
 h1#modal_info {
@@ -120,7 +134,7 @@ h1#modal_info {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 300;
   color:black;
-  text-align: center;
+  text-align: left;
 }
 
 #myModal{
