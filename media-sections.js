@@ -465,7 +465,7 @@ function areaChart1() {
     // Add Y axis
     var y = d3
       .scaleLinear()
-      .domain([0, 3000])
+      .domain([0, 2500])
       .range([height - margin.bottom, margin.top]);
     mediaGenZSVG
       .append("g")
@@ -489,6 +489,15 @@ function areaChart1() {
       .attr("stroke", genZColor)
       .attr("stroke-width", 1.5)
       .attr("d", area);
+    mediaGenZSVG.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", "-2")
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Number of Readers")
+      .attr("font-family", "Roboto");;
+      
   });
   d3.csv("./data/fox.csv").then(function (data) {
     var x = d3.scaleBand().range([margin.left, width]);
@@ -532,6 +541,14 @@ function areaChart1() {
       .attr("stroke", boomerColor)
       .attr("stroke-width", 1.5)
       .attr("d", area);
+    mediaBoomerSVG.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", -2)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Number of Readers")
+      .attr("font-family", "Roboto");;
   });
 }
 function headlineExample1() {
@@ -558,6 +575,7 @@ function headlineExample1() {
     .text(
       "GOP senators to meet Biden Monday on coronavirus relief as Dems ready to pass bill without Republican support"
     );
+  
 }
 function headlineExample2() {
   mediaBoomerFigure
