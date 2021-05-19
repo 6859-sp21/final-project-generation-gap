@@ -19,7 +19,7 @@ const final_margin = { top: 0, right: 30, bottom: 50, left: 50 },
 var final_width =
     window.innerWidth * 0.6 - final_margin.left - final_margin.right,
   final_height =
-    window.innerHeight * 1.3 - final_margin.top - final_margin.bottom,
+    window.innerHeight * 0.9 - final_margin.top - final_margin.bottom,
   row = d3
     .scaleLinear()
     .domain([0, numRow])
@@ -76,11 +76,18 @@ var personIndex = 0;
 var result;
 
 var biasColors = {
-  Left: "#2E65A0",
-  "Lean Left": "#9EC8EB",
-  Center: "#9766A0",
-  "Lean Right": "#CA9A98",
-  Right: "#CB2127",
+  Left: "#00306A",
+  "Lean Left": "#2A9FD7",
+  Center: "#8F1FBC",
+  "Lean Right": "#faa7b4",
+  Right: "#E31331",
+};
+var lightBiasColors = {
+  Left: "#3690FF",
+  "Lean Left": "#94CFEB",
+  Center: "#CD82EB",
+  "Lean Right": "#FCD4DA",
+  Right: "#F58495",
 };
 
 var filters = {
@@ -116,7 +123,7 @@ window.addEventListener("resize", function (e) {
   (final_width =
     window.innerWidth * 0.6 - final_margin.left - final_margin.right),
     (final_height =
-      window.innerHeight * 1.3 - final_margin.top - final_margin.bottom);
+      window.innerHeight * 0.7 - final_margin.top - final_margin.bottom);
   row = d3
     .scaleLinear()
     .domain([0, numRow])
@@ -141,7 +148,10 @@ function updateFilter() {
   biasFilter.forEach(function (item) {
     label = document.querySelector(`[value="${item}"]`);
     if (document.getElementById(item).checked == true) {
-      label.setAttribute("style", `background-color: ${biasColors[item]};`);
+      label.setAttribute(
+        "style",
+        `background-color: ${lightBiasColors[item]};`
+      );
     } else {
       label.setAttribute("style", `background-color: transparent;`);
     }
@@ -310,7 +320,7 @@ document.querySelector(".submit_media").addEventListener("click", function () {
 ].forEach(function (item) {
   item.addEventListener("mouseover", function () {
     label = item.querySelector("mark");
-    color = biasColors[label.getAttribute("value")];
+    color = lightBiasColors[label.getAttribute("value")];
     label.setAttribute("style", `background-color: ${color};`);
   });
   item.addEventListener("mouseout", function () {
@@ -506,8 +516,8 @@ function render() {
       ethnicity + gender + age + education + metro + region;
     console.log("currentDemographics", currentDemographics);
     var numPeople = result.length;
-
-    personNum.text(`${personIndex + 1}/${numPeople}`);
+    var personDisplayInd = numPeople === 0 ? 0 : personIndex + 1;
+    personNum.text(`${personDisplayInd}/${numPeople}`);
     var randomPerson = result[personIndex];
     // if (currentDemographics in peopleMap) {
     //     console.log('in peopleMap')
@@ -699,7 +709,7 @@ function renderPie(sources) {
 function renderUnitVis() {
   // updatePersonSources()
 
-  d3.csv("./data/final_allsides.csv").then(function (data) {
+  d3.csv("./data/updated_final_allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
     // highlightedData = highlighted(data);
     updateFilter();
@@ -799,7 +809,7 @@ function renderUnitVis() {
       .attr("fill", (d) => {
         return highlightedDataMap[d.Index];
       })
-      .attr("opacity", 0.3)
+      .attr("opacity", 0.5)
       .on("mouseover", handleMouseOver)
       .on("mouseout", handleMouseOut)
       .on("click", handleClick);
@@ -815,20 +825,24 @@ function renderUnitVis() {
     tooltip
       .html(
         `<div class='tooltip-source'>${d.Source.toUpperCase()} </div>
-        <div class='tooltip-header'><mark style='background-color:${
-          biasColors[d.Bias]
-        }; opacity:.8'>${d.Headline}</mark></div>
-      <div class='tooltip-header2'>Headlines from other sources:</div>
-      <div class='tooltip-sources'><mark style='background-color:${
-        biasColors[d["Left Bias"]]
-      }'>${d["Left Headline"]} </mark></div>
-      <div class='tooltip-sources'><mark style='background-color:${
-        biasColors[d["Center Bias"]]
-      }'>${d["Center Headline"]}</mark></div>
-      <div class='tooltip-sources'> <mark style='background-color:${
-        biasColors[d["Right Bias"]]
-      }'>${d["Right Headline"]}</mark></div>
-      <div class='tooltip-more'>Click to read more</div>`
+        <div class='tooltip-extra'>
+        <div class='tooltip-header' style='color:${lightBiasColors[d.Bias]};'>${
+          d.Headline
+        }</div>
+      
+      <div class='tooltip-header2'>Headlines from other sources:<br><br></div>
+      
+      <div class='tooltip-sources' style='color:${
+        lightBiasColors[d["Left Bias"]]
+      }'>${d["Left Headline"]} </div>
+      <div class='tooltip-sources' style='color:${
+        lightBiasColors[d["Center Bias"]]
+      }'>${d["Center Headline"]}</div>
+      <div class='tooltip-sources' style='color:${
+        lightBiasColors[d["Right Bias"]]
+      }'>${d["Right Headline"]}</div>
+      <div class='tooltip-more'>Click to read more</div>
+      </div>`
       )
       .style("left", d3.event.pageX + 20 + "px")
       .style("top", d3.event.pageY - 20 + "px");
@@ -842,7 +856,7 @@ function renderUnitVis() {
     //     ? diedColor
     //     : squareColor;
     // });
-    d3.select(this).style("opacity", 0.3);
+    d3.select(this).style("opacity", 0.5);
     d3.select(this).style("fill", d3.select(this).attr("fill"));
 
     // tooltip
@@ -859,13 +873,13 @@ function renderUnitVis() {
     <h1 id="modal_byline">${d.Byline}</h1>                  
     <h1 id="modal_info">Date: ${d.Date}</h1>
     <h1 id="modal_info">Topic: ${d.Topic}</h1>
-    <h1 id="modal_info" style="color:${biasColors[d.Bias]}">Media Bias: ${
+    <h1 id="modal_info" style="color:${lightBiasColors[d.Bias]}">Media Bias: ${
       d.Bias
     }</h1>
     <div style="text-align:center"><a href=${
       d.URL
     } class="button1" target="blank" style="background-color:${
-      biasColors[d.Bias]
+      lightBiasColors[d.Bias]
     }">Read this story</a></div>
     <h1 id="modal_name">Recommended Reads for the Same Topic:</h1>  
     <div style="align-items: center; flex-direction: column; display: flex;">
@@ -875,19 +889,36 @@ function renderUnitVis() {
     <span class="line arrow-right"></span>
     </div>
     <div style="justify-items: space-between; flex-direction: row; display: flex;">
-
-    <div style="text-align:center;"><a style="background-color:${
-      biasColors["Left"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-
-    <div style="text-align:center;"><a style="background-color:${
-      biasColors["Center"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-
-    <div style="text-align:center;"><a style="background-color:${
-      biasColors["Right"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-    
+    <div style="display: block; width: 33%;"> 
+        <div class='modal-sources'><mark style='background-color:${
+          lightBiasColors[d["Left Bias"]]
+        }'>${d["Left Headline"]} </mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+          lightBiasColors[d["Left Bias"]]
+        }" href=${
+      d["Left URL"]
+    } class="button1" target="blank">Read this story</a></div>
+    </div>
+    <div style="display: block; width: 33%;">
+        <div class='modal-sources'><mark style='background-color:${
+          lightBiasColors[d["Center Bias"]]
+        }'>${d["Center Headline"]}</mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+          lightBiasColors[d["Center Bias"]]
+        }" href=${
+      d["Center URL"]
+    } class="button1" target="blank">Read this story</a></div> 
+    </div>
+        <div style="display: block; width: 33%;"> 
+        <div class='modal-sources'> <mark style='background-color:${
+          lightBiasColors[d["Right Bias"]]
+        }'>${d["Right Headline"]}</mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+          lightBiasColors[d["Right Bias"]]
+        }" href=${
+      d["Right URL"]
+    } class="button1" target="blank">Read this story</a></div> 
+    </div>
     </div>
     
     </div>
