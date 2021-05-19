@@ -10,15 +10,8 @@ var demographicsBoomerFigure = demographicsFigure.select(
 var genZColor = "#FFA67D";
 var boomerColor = "#00A08F";
 var textColor = "#282828";
-var demographicsGenZSVG = demographicsGenZFigure
-  .insert("svg", ":nth-child(2)")
-  .attr("width", "100%")
-  .attr("height", window.innerHeight * 1.5);
-var demographicsBoomerSVG = demographicsBoomerFigure
-  .insert("svg", ":nth-child(2)")
-  .attr("x", "50%")
-  .attr("width", "100%")
-  .attr("height", window.innerHeight * 1.5);
+
+
 var demographicsArticle = demographicsScrolly.select("#demographics-article");
 var demographicsStep = demographicsArticle.selectAll(".step");
 var width = 500;

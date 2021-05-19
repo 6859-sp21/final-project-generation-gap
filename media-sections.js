@@ -76,21 +76,20 @@ function handleMediaStepEnter(response) {
   } else if (response.index == 1) {
     stepReset();
     newsOutlet1();
-  } else if (response.index == 2) {
-    newsOutlet2();
-  } else if (response.index == 3) {
+  } 
+  else if (response.index == 2) {
     stepReset();
     newsOutlet3();
-  } else if (response.index == 4) {
+  } else if (response.index == 3) {
     stepReset();
     areaChart1();
-  } else if (response.index == 5) {
+  } else if (response.index == 4) {
     stepReset();
     headlineExample1();
-  } else if (response.index == 6) {
+  } else if (response.index == 5) {
     stepReset();
     headlineExample2();
-  } else if (response.index == 7) {
+  } else if (response.index == 6) {
     stepReset();
     headlineExample3();
   }
@@ -135,7 +134,7 @@ function followNews() {
     .attr("height", (d) => y(0) - y(d.percent))
     .attr("width", x.bandwidth())
     .attr("fill", (d) => {
-      if (d.category == "Very Closely") {
+      if (d.category == "Very Closely" || d.category == "Somewhat Closely") {
         return genZColor;
       }
       return textColor;
@@ -174,7 +173,7 @@ function followNews() {
     .attr("height", (d) => y(0) - y(d.percent))
     .attr("width", x.bandwidth())
     .attr("fill", (d) => {
-      if (d.category == "Very Closely") {
+      if (d.category == "Very Closely" || d.category == "Somewhat Closely") {
         return boomerColor;
       }
       return textColor;
@@ -362,7 +361,7 @@ function newsOutlet3() {
         .attr("height", (d) => y(0) - y(d.Yes))
         .attr("width", x.bandwidth())
         .attr("fill", (d) => {
-          if (d.Source == "Fox" || d.Source == "Sean Hannity Show") {
+          if (d.Source == "CNN") {
             return genZColor;
           }
           return textColor;
@@ -399,7 +398,7 @@ function newsOutlet3() {
         .attr("height", (d) => y(0) - y(d.Yes))
         .attr("width", x.bandwidth())
         .attr("fill", (d) => {
-          if (d.Source == "Fox" || d.Source == "Sean Hannity Show") {
+          if (d.Source == "Fox ") {
             return boomerColor;
           }
           return textColor;

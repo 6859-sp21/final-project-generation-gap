@@ -71,9 +71,17 @@ var userInputSources = []; // TODO maybe add a default
 var similarityHighlighted = {}; // map of newspapers that should be highlighted
 
 // add people to this map as they are chosen to remember the random selections
-var peopleMap = {};
-var personIndex = 0;
+var personIndex = 2;
 var result;
+
+// change abbreviations to full word
+var topicDisplayMap = {
+  blm: "Black Lives Matter",
+  "climate change": "Climate Change",
+  covid: "Covid-19",
+  economy: "Economy",
+  guns: "Guns",
+};
 
 var biasColors = {
   Left: "#00306A",
@@ -123,7 +131,7 @@ window.addEventListener("resize", function (e) {
   (final_width =
     window.innerWidth * 0.6 - final_margin.left - final_margin.right),
     (final_height =
-      window.innerHeight * 0.7 - final_margin.top - final_margin.bottom);
+      window.innerHeight * 0.9 - final_margin.top - final_margin.bottom);
   row = d3
     .scaleLinear()
     .domain([0, numRow])
@@ -534,12 +542,14 @@ function render() {
     // console.log(sources);
     if (result.length == 0) {
       finalLabel.text(
-        "We do not have data on this person :( Please select a different combination of demographics to continue exploring!"
+        "Sorry! We do not have data on this person :( Please select a different combination of demographics to continue exploring!"
       );
     } else if (sources.length == 0) {
-      finalLabel.text(
-        "This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!"
-      );
+      finalLabel
+        .text(
+          `This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!`
+        )
+        .style("color", bridgeColor);
     } else {
       finalLabel.text("");
     }
@@ -863,7 +873,7 @@ function renderUnitVis() {
     }</h1>
     <h1 id="modal_byline">${d.Byline}</h1>                  
     <h1 id="modal_info">Date: ${d.Date}</h1>
-    <h1 id="modal_info">Topic: ${d.Topic}</h1>
+    <h1 id="modal_info">Topic: ${topicDisplayMap[d.Topic]}</h1>
     <h1 id="modal_info">Media Bias: <mark style="background-color:${
       lightBiasColors[d.Bias]
     }">${d.Bias}</mark></h1>
