@@ -19,6 +19,15 @@
   justify-content: center;
   flex-direction: column;
 }
+
+#final_viz_section {
+  height: 120vh;
+}
+
+#outro {
+  height: 100vh;
+}
+
 .text-info{
   width: 60%;
   font-size: 16px;
@@ -40,7 +49,10 @@ body {
   margin-top: 2%;
 }
 .subtitle{
-  margin-top: 5%;
+  /* margin-top: 5%; */
+  margin-left: 25%;
+  margin-right: 25%;
+  line-height: 1.5;
   font-family: 'Roboto', 'sans-serif';
   font-size: 1rem;
 }
@@ -203,11 +215,21 @@ h1#modal_info {
   max-width: 800px;
 }
 
+.modal-sources {
+  text-align: left;
+  line-height: 1.1;
+  margin: .5rem 1rem 0 2rem;
+  color: black;
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 300;
+}
+
 a.button1 {
   display:inline-block;
   padding:0.35em 1.2em;
   border:0.1em solid black;
-  margin:0 0.3em 0.3em 0;
+  margin: 0.3em 0.3em 0 0.3em;
   border-radius:0.12em;
   box-sizing: border-box;
   text-decoration:none;

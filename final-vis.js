@@ -1,14 +1,12 @@
-const final_margin = { top: 0, right: 30, bottom: 50, left: 30 },
-  final_width =
-    window.innerWidth * 0.6 - final_margin.left - final_margin.right,
-  final_height =
-    window.innerHeight * 1.3 - final_margin.top - final_margin.bottom,
+const final_margin = { top: 0, right: 30, bottom: 50, left: 50 },
   newsWidth = 70,
   newsHeight = 90,
   maxLineNumber = 7,
   bylineMarginTop = 40,
   headerContainerWidth = 60,
-  headerContainerMargin = { top: 1, left: 0.8 };
+  headerContainerMargin = { top: 1, left: .8 },
+  maxNumNews = 63,
+  topicCap = 12;
 (strokeWidth = 5),
   (numRow = 9),
   (numFilters = 10),
@@ -17,6 +15,11 @@ const final_margin = { top: 0, right: 30, bottom: 50, left: 30 },
   (curSquareColor = squareColor),
   (bridgeColor = "#c5ac1c"),
   (highlightColor = "grey");
+
+var final_width = window.innerWidth*.6 - final_margin.left - final_margin.right,
+  final_height = window.innerHeight*.9  - final_margin.top - final_margin.bottom,
+  row = d3.scaleLinear().domain([0, numRow]).range([0, window.innerWidth*.55]),
+  col = d3.scaleLinear().domain([0, numRow]).range([0, window.innerHeight*1.1]);
 
 sourcesMap = {
   "ABC News": ["ABC News (Online)"],
@@ -79,15 +82,6 @@ var lightBiasColors = {
   Right: "#F58495",
 }
 
-var row = d3
-  .scaleLinear()
-  .domain([0, numRow])
-  .range([0, window.innerWidth * 0.55]);
-var col = d3
-  .scaleLinear()
-  .domain([0, numRow])
-  .range([0, window.innerHeight * 1.1]);
-
 var filters = {
   bias: [],
   topic: [],
@@ -107,6 +101,7 @@ var svg = d3
 //   .attr("transform", "translate(" + final_margin.left + "," + final_margin.top + ")");
 
 var finalLabel = d3.select("#final_label").text("");
+var personNum = d3.select("#personNum").text("")
 
 var tooltip = d3
   .select("body")
@@ -114,11 +109,24 @@ var tooltip = d3
   .attr("class", "tooltip")
   .style("opacity", 0);
 
+// check for resize of window
+window.addEventListener('resize', function (e) {
+    console.log('resize')
+    final_width = window.innerWidth*.6 - final_margin.left - final_margin.right,
+    final_height = window.innerHeight*.7  - final_margin.top - final_margin.bottom;
+    row = d3.scaleLinear().domain([0, numRow]).range([0, window.innerWidth*.55]);
+    col = d3.scaleLinear().domain([0, numRow]).range([0, window.innerHeight*1.1]);
+    svg
+    .attr("width", final_width + final_margin.left + final_margin.right)
+    .attr("height", final_height + margin.top + margin.bottom);
+    render()
+});
+
 function updateFilter() {
   biasFilter = ["Left", "Lean Left", "Center", "Lean Right", "Right"];
   topicFilter = ["covid", "climate change", "blm", "guns", "economy"];
 
-  console.log(document.getElementById("Left").checked);
+//   console.log(document.getElementById("Left").checked);
 
   //Change color of highlight on click
   biasFilter.forEach(function (item) {
@@ -163,7 +171,7 @@ function updateFilter() {
   return filters;
 }
 
-function highlightedByFilter(data) {
+function highlightByFilter(data) {
   filtered_data = data.filter((d) => fitsFilter(d));
   rest_of_data = data.filter((d) => !filtered_data.includes(d));
 
@@ -210,6 +218,7 @@ for (const option of document.querySelectorAll(".custom-option")) {
         ".custom-select__trigger span"
       ).textContent = this.textContent;
     }
+    personIndex = 0
     render(); // render if there's an update in person card
   });
 }
@@ -276,13 +285,13 @@ document.querySelector(".submit_media").addEventListener("click", function () {
     document.getElementById("demographics-scrolly").scrollHeight +
     document.getElementById("media-scrolly").scrollHeight +
     document.getElementById("user-input").scrollHeight;
-  console.log("height", final_viz);
+//   console.log("height", final_viz);
   window.scrollTo({ top: final_viz, behavior: "smooth" });
   //   sources_list = [];
   document.querySelectorAll(".fstChoiceItem").forEach(function (item) {
     userInputSources.push(item.getAttribute("data-text"));
   });
-  console.log("user", userInputSources);
+//   console.log("user", userInputSources);
   render();
 });
 
@@ -355,14 +364,14 @@ function updatePersonSources() {
 
 // increment the personIndex to display the next person
 function changePerson() {
-  console.log("length", result.length);
-  if (personIndex >= result.length - 1) {
-    personIndex = 0;
-  } else {
-    personIndex += 1;
-  }
-  console.log("personIndex", personIndex);
-  render();
+    // console.log('length', result.length)
+    if (personIndex>=result.length-1) {
+        personIndex = 0;
+    } else {
+        personIndex += 1;
+    }
+    // console.log('personIndex', personIndex)
+    render();
 }
 
 // convert source from people to allsides
@@ -380,11 +389,21 @@ function convertSources(sources) {
   return newSources;
 }
 
+// used to make sure the same articles are chosen for the same person
+var randomNumbersMap = {}
+
 // filters data to match the person card news sources
-// TODO make it so that it sorts by similarity to user
+// and then sorts by similarity to user
 function sortData(data, sources) {
   newData = [];
   sources = convertSources(sources);
+  topicMap = {
+    "covid": [],
+    "climate change": [],
+    "blm": [],
+    "guns": [],
+    "economy": []
+    }
 
   // filter to match person
   for (i in data) {
@@ -393,16 +412,37 @@ function sortData(data, sources) {
       source = sources[j];
       if (news.Source == source) {
         newData.push(news);
+        var topic = news.Topic
+        if (topicMap[topic].length < 12) {
+            topicMap[topic].push(news)
+            console.log('added')
+        }
       }
     }
   }
+
+  if (newData.length>maxNumNews) {
+    var cappedData = [];
+
+    for (topic in topicMap) {
+        console.log('topic', topic)
+        data = topicMap[topic]
+        console.log('data', data)
+        cappedData = cappedData.concat(data)
+    }
+    console.log('capped', cappedData)
+  } else {
+      var cappedData = newData;
+  }
+
+  console.log('cappedData', cappedData)
   userSimilarData = [];
   restOfData = [];
 
-  console.log(newData);
+//   console.log(newData);
 
-  for (i in newData) {
-    d = newData[i];
+  for (i in cappedData) {
+    d = cappedData[i];
     if (userInputSources.includes(d.Source)) {
       userSimilarData.push(d);
       similarityHighlighted[d.Index] = bridgeColor;
@@ -415,22 +455,31 @@ function sortData(data, sources) {
   return userSimilarData.concat(restOfData);
 }
 
+function randomNums(length) {
+    var nums = [];
+    while(nums.length < topicCap){
+        var r = Math.floor(Math.random() * length);
+        if(nums.indexOf(r) === -1) nums.push(r);
+    }
+    return nums
+}
+
 // RENDER
 function render() {
   d3.csv("./data/people.csv").then(function (data) {
     sourceData = data;
     updatePersonSources();
 
-    var person = {
-      age: age,
-      region: region,
-      metro: metro,
-      sex: gender,
-      education: education,
-      race: ethnicity,
-    };
-    console.log(person.age);
-    console.log("sourcess", sourceData);
+      var person = {
+        age: age,
+        region: region,
+        metro: metro,
+        sex: gender,
+        education: education,
+        race: ethnicity,
+      };
+    // console.log(person.age);
+    // console.log("sourcess", sourceData);
 
     result = sourceData.filter((d) => {
       return (
@@ -447,6 +496,9 @@ function render() {
     var currentDemographics =
       ethnicity + gender + age + education + metro + region;
     console.log("currentDemographics", currentDemographics);
+    var numPeople = result.length
+    var personDisplayInd = numPeople===0 ? 0 : personIndex+1
+    personNum.text(`${personDisplayInd}/${numPeople}`)
     var randomPerson = result[personIndex];
     // if (currentDemographics in peopleMap) {
     //     console.log('in peopleMap')
@@ -458,9 +510,10 @@ function render() {
     //     peopleMap[currentDemographics] = randomPerson
     // }
 
-    console.log("sourcessss", result);
+      
+    // console.log("sourcessss", result);
     // var randomPerson = result[1];
-    console.log(randomPerson);
+    // console.log(randomPerson);
 
     sources = [];
     for (const property in randomPerson) {
@@ -468,17 +521,11 @@ function render() {
         sources.push(property);
       }
     }
-    console.log(sources);
-    if (result.length == 0) {
-      console.log("potate");
-      finalLabel.text(
-        "We do not have data on this person :( Please select a different combination of demographics to continue exploring!"
-      );
-    } else if (sources.length == 0) {
-      console.log("potate");
-      finalLabel.text(
-        "This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!"
-      );
+    // console.log(sources);
+    if (result.length==0) {
+        finalLabel.text("We do not have data on this person :( Please select a different combination of demographics to continue exploring!")
+    } else if (sources.length==0) {
+        finalLabel.text("This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!")
     } else {
       finalLabel.text("");
     }
@@ -489,14 +536,19 @@ function render() {
 function renderUnitVis() {
   // updatePersonSources()
 
-  d3.csv("./data/final_allsides.csv").then(function (data) {
+  d3.csv("./data/updated_final_allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
     // highlightedData = highlighted(data);
     updateFilter();
     // sortedData = data.filter((d) => sources.forEach(source => {if (d.Source.includes(source)) return true}))
     sortedData = sortData(data, sources);
-    console.log("sorted", sortedData);
-    highlightedData = highlightedByFilter(sortedData);
+    // console.log("sorted", sortedData);
+    // if (sortedData.length>maxNumNews) {
+    //     var cappedData = capData(sortedData);
+    // } else {
+    //     var cappedData = sortedData;
+    // }
+    highlightedDataMap = highlightByFilter(sortedData)
 
     var g = svg
       .selectAll("g")
@@ -582,7 +634,7 @@ function renderUnitVis() {
       })
       //   .attr("fill", (d) => {return biasColors[d.Bias]})
       .attr("fill", (d) => {
-        return highlightedData[d.Index];
+        return highlightedDataMap[d.Index];
       })
       .attr("opacity", 0.5)
       .on("mouseover", handleMouseOver)
@@ -664,19 +716,30 @@ function renderUnitVis() {
     <span class="line arrow-right"></span>
     </div>
     <div style="justify-items: space-between; flex-direction: row; display: flex;">
-
-    <div style="text-align:center;"><a style="background-color:${
-      lightBiasColors["Left"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-
-    <div style="text-align:center;"><a style="background-color:${
-      lightBiasColors["Center"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-
-    <div style="text-align:center;"><a style="background-color:${
-      lightBiasColors["Right"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-    
+    <div style="display: block; width: 33%;"> 
+        <div class='modal-sources'><mark style='background-color:${
+          lightBiasColors[d["Left Bias"]]
+        }'>${d["Left Headline"]} </mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+          lightBiasColors[d["Left Bias"]]
+        }" href=${d["Left URL"]} class="button1" target="blank">Read this story</a></div>
+    </div>
+    <div style="display: block; width: 33%;">
+        <div class='modal-sources'><mark style='background-color:${
+          lightBiasColors[d["Center Bias"]]
+        }'>${d["Center Headline"]}</mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+          lightBiasColors[d["Center Bias"]]
+        }" href=${d["Center URL"]} class="button1" target="blank">Read this story</a></div> 
+    </div>
+        <div style="display: block; width: 33%;"> 
+        <div class='modal-sources'> <mark style='background-color:${
+          lightBiasColors[d["Right Bias"]]
+        }'>${d["Right Headline"]}</mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+          lightBiasColors[d["Right Bias"]]
+        }" href=${d["Right URL"]} class="button1" target="blank">Read this story</a></div> 
+    </div>
     </div>
     
     </div>

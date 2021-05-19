@@ -304,17 +304,22 @@ And while it feels like our lives now our incomparable to the lives our parents 
         <select class="multipleSelect" multiple id="news_select"></select>
         <button class="submit_media">Submit</button>
       </section>
-      <section id="outro">
+      <section id="final_viz_section">
         <div>
           <div class="title" id="final_viz" style="text-align: center">
             Bridge the Gap: Explore Another's Newsfeed
           </div>
           <div
             class="subtitle"
-            style="margin-bottom: 2%; text-align: center; margin-top: 2%"
+            style="text-align: center; margin-top: 2%"
           >
-            Select a reader and read their newfeed. Hover over articles to read
-            headlines. Articles are sorted by similarity to your news sources.
+            Start by building a reader to explore their newfeed. Articles similar to your news sources are outlined. 
+          </div>
+          <div
+            class="subtitle"
+            style="margin-bottom: 2%; text-align: center; margin-top: .5%"
+          >
+            Hover over articles to see the headline and learn more about related articles from other sources. 
           </div>
           <div style="display: flex; flex-direction: row">
             <div
@@ -329,12 +334,12 @@ And while it feels like our lives now our incomparable to the lives our parents 
                 width: 310px;
               "
             >
-              <img src="img/jess.png" style="width: 180px" />
+              <!-- <img src="img/jess.png" style="width: 180px" /> -->
               <h1
                 id="demographic_category"
                 style="margin-top: 10px; white-space: nowrap"
               >
-                Meet Jess
+                Build a Reader
               </h1>
               <div style="display: flex; justify-content: center; width: 200px">
                 <span class="custom-dropdown-words">A</span>
@@ -486,11 +491,12 @@ And while it feels like our lives now our incomparable to the lives our parents 
                   Shuffle through different people of the same demographic
                 </div>
                 <button type="button" id="changePerson">Next Person</button>
+                <div id="personNum"></div>
               </div>
             </div>
             <div
               id="final_news"
-              style="width: 80%; height: 500px; text-align: center"
+              style="width: 80%; height: 500px; text-align: center;"
             >
               <div
                 id="final_label"
@@ -505,8 +511,8 @@ And while it feels like our lives now our incomparable to the lives our parents 
                 background-color: white;
                 border: 1px solid black;
                 padding: 30px;
-                margin-right: 10vw;
-                margin-left: 10px;
+                margin-right: 20vw;
+                margin-left: 20px;
               "
             >
               <div
@@ -597,10 +603,10 @@ And while it feels like our lives now our incomparable to the lives our parents 
                 <label class="container2">
                   <input
                     type="checkbox"
-                    id="covid"
+                    id="blm"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">Covid-19</div>
+                  <div class="custom-label">BLM</div>
                   <span class="checkmark"></span>
                 </label>
                 <label class="container2">
@@ -615,19 +621,10 @@ And while it feels like our lives now our incomparable to the lives our parents 
                 <label class="container2">
                   <input
                     type="checkbox"
-                    id="blm"
+                    id="covid"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">BLM</div>
-                  <span class="checkmark"></span>
-                </label>
-                <label class="container2">
-                  <input
-                    type="checkbox"
-                    id="guns"
-                    onclick="updateFilter(); render();"
-                  />
-                  <div class="custom-label">Guns</div>
+                  <div class="custom-label">Covid-19</div>
                   <span class="checkmark"></span>
                 </label>
                 <label class="container2">
@@ -639,6 +636,15 @@ And while it feels like our lives now our incomparable to the lives our parents 
                   <div class="custom-label">Economy</div>
                   <span class="checkmark"></span>
                 </label>
+                <label class="container2">
+                  <input
+                    type="checkbox"
+                    id="guns"
+                    onclick="updateFilter(); render();"
+                  />
+                  <div class="custom-label">Guns</div>
+                  <span class="checkmark"></span>
+                </label>
               </div>
             </div>
           </div>
@@ -647,6 +653,25 @@ And while it feels like our lives now our incomparable to the lives our parents 
           <img src="img/final_image1.png" style="width: 100%" /> -->
         </div>
         <div id="myModal" style="background-color: white" class="modal"></div>
+      </section>
+      <section id="outro">
+        <div class="title" style="text-align: center">
+          What's next?
+        </div>
+        <div
+            class="subtitle"
+            style="margin-bottom: 2%; text-align: center; margin-top: 2%"
+          >
+            We've taken a look at each generation and saw how they have more in common than one would think.
+        </div>
+        <div
+            class="subtitle"
+            style="margin-bottom: 2%; text-align: left; margin-top: 2%"
+          >
+            We hope that the story told here between GenZers and Boomers will be remembered even beyond this visualization. While we may have contrasting
+            viewpoints and news sources, our stories are still built together. Our media, political leanings, and even 
+            lifestyles can be different, but we can learn from one another and bridge the gap.
+        </div>
       </section>
     </main>
   </body>
