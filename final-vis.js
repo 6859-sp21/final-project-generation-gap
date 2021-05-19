@@ -17,7 +17,7 @@ const final_margin = { top: 0, right: 30, bottom: 50, left: 50 },
   (highlightColor = "grey");
 
 var final_width = window.innerWidth*.6 - final_margin.left - final_margin.right,
-  final_height = window.innerHeight*1.3  - final_margin.top - final_margin.bottom,
+  final_height = window.innerHeight*.9  - final_margin.top - final_margin.bottom,
   row = d3.scaleLinear().domain([0, numRow]).range([0, window.innerWidth*.55]),
   col = d3.scaleLinear().domain([0, numRow]).range([0, window.innerHeight*1.1]);
 
@@ -106,7 +106,7 @@ var tooltip = d3
 window.addEventListener('resize', function (e) {
     console.log('resize')
     final_width = window.innerWidth*.6 - final_margin.left - final_margin.right,
-    final_height = window.innerHeight*1.3  - final_margin.top - final_margin.bottom;
+    final_height = window.innerHeight*.7  - final_margin.top - final_margin.bottom;
     row = d3.scaleLinear().domain([0, numRow]).range([0, window.innerWidth*.55]);
     col = d3.scaleLinear().domain([0, numRow]).range([0, window.innerHeight*1.1]);
     svg
@@ -489,7 +489,7 @@ function render() {
       ethnicity + gender + age + education + metro + region;
     console.log("currentDemographics", currentDemographics);
     var numPeople = result.length
-    
+
     personNum.text(`${personIndex+1}/${numPeople}`)
     var randomPerson = result[personIndex];
     // if (currentDemographics in peopleMap) {
@@ -704,19 +704,30 @@ function renderUnitVis() {
     <span class="line arrow-right"></span>
     </div>
     <div style="justify-items: space-between; flex-direction: row; display: flex;">
-
-    <div style="text-align:center;"><a style="background-color:${
-      biasColors["Left"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-
-    <div style="text-align:center;"><a style="background-color:${
-      biasColors["Center"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-
-    <div style="text-align:center;"><a style="background-color:${
-      biasColors["Right"]
-    }" href=${d.URL} class="button1" target="blank">Read this story</a></div> 
-    
+    <div style="display: block; width: 33%;"> 
+        <div class='modal-sources'><mark style='background-color:${
+            biasColors[d["Left Bias"]]
+        }'>${d["Left Headline"]} </mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+        biasColors[d["Left Bias"]]
+        }" href=${d["Left URL"]} class="button1" target="blank">Read this story</a></div>
+    </div>
+    <div style="display: block; width: 33%;">
+        <div class='modal-sources'><mark style='background-color:${
+            biasColors[d["Center Bias"]]
+        }'>${d["Center Headline"]}</mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+        biasColors[d["Center Bias"]]
+        }" href=${d["Center URL"]} class="button1" target="blank">Read this story</a></div> 
+    </div>
+        <div style="display: block; width: 33%;"> 
+        <div class='modal-sources'> <mark style='background-color:${
+            biasColors[d["Right Bias"]]
+        }'>${d["Right Headline"]}</mark></div>
+        <div style="text-align:center;"><a style="background-color:${
+        biasColors[d["Right Bias"]]
+        }" href=${d["Right URL"]} class="button1" target="blank">Read this story</a></div> 
+    </div>
     </div>
     
     </div>
