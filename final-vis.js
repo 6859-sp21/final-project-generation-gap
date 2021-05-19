@@ -71,7 +71,7 @@ var userInputSources = []; // TODO maybe add a default
 var similarityHighlighted = {}; // map of newspapers that should be highlighted
 
 // add people to this map as they are chosen to remember the random selections
-var personIndex = 0;
+var personIndex = 2;
 var result;
 
 // change abbreviations to full word
@@ -544,12 +544,12 @@ function render() {
     // console.log(sources);
     if (result.length == 0) {
       finalLabel.text(
-        "We do not have data on this person :( Please select a different combination of demographics to continue exploring!"
+        "Sorry! We do not have data on this person :( Please select a different combination of demographics to continue exploring!"
       );
     } else if (sources.length == 0) {
       finalLabel.text(
-        "This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!"
-      );
+        `This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!`
+      ).style("color", bridgeColor);
     } else {
       finalLabel.text("");
     }
