@@ -717,27 +717,27 @@ function renderUnitVis() {
     </div>
     <div style="justify-items: space-between; flex-direction: row; display: flex;">
     <div style="display: block; width: 33%;"> 
-        <div class='modal-sources'><mark style='background-color:${
+        <div class='modal-sources' style='color:${
           lightBiasColors[d["Left Bias"]]
-        }'>${d["Left Headline"]} </mark></div>
+        };'>${d["Left Headline"]} </div>
         <div style="text-align:center;"><a style="background-color:${
           lightBiasColors[d["Left Bias"]]
         }" href=${d["Left URL"]} class="button1" target="blank">Read this story</a></div>
     </div>
     <div style="display: block; width: 33%;">
-        <div class='modal-sources'><mark style='background-color:${
+        <div class='modal-sources' style='color:${
           lightBiasColors[d["Center Bias"]]
-        }'>${d["Center Headline"]}</mark></div>
+        }'>${d["Center Headline"]}</div>
         <div style="text-align:center;"><a style="background-color:${
           lightBiasColors[d["Center Bias"]]
         }" href=${d["Center URL"]} class="button1" target="blank">Read this story</a></div> 
     </div>
         <div style="display: block; width: 33%;"> 
-        <div class='modal-sources'> <mark style='background-color:${
+        <div class='modal-sources' style='color:${
           lightBiasColors[d["Right Bias"]]
-        }'>${d["Right Headline"]}</mark></div>
+        }'> ${d["Right Headline"]}</div>
         <div style="text-align:center;"><a style="background-color:${
-          lightBiasColors[d["Right Bias"]]
+        lightBiasColors[d["Right Bias"]]
         }" href=${d["Right URL"]} class="button1" target="blank">Read this story</a></div> 
     </div>
     </div>
