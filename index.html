@@ -2,12 +2,16 @@
 <html>
   <head>
     <title>Bridging the Generational Gap</title>
-    <meta name="description" content="Souls of the Titanic" />
+    <link rel="shortcut icon" type="image/jpg" href="img/favicon.ico"/>
+    <meta name="description" content="Bridging the Generational Gap" />
     <link rel="stylesheet" href="./style.css" />
     <script src="./node_modules/scrollama/build/scrollama.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Source+Sans+Pro:wght@900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Source+Sans+Pro:wght@900&display=swap"
+      rel="stylesheet"
+    />
     <!-- <script type="text/javascript" src="./node_modules/d3-textwrap/src/textwrap.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -37,7 +41,7 @@
   <body>
     <main>
       <section id="intro">
-        <img style="width: 65%;"src="./img/front2.png">
+        <img style="width: 65%" src="./img/front2.png" />
         <div class="title">Bridging the Generational Gap</div>
         <div class="authors">By Shirley Cao, Jessica Lee, and Annie Zhang</div>
         <div class="subtitle">
@@ -65,7 +69,7 @@ And while it feels like our lives now our incomparable to the lives our parents 
               <div class="timeline-line"></div>
               <div class="container left">
                 <div class="content" , id="gen-z-1">
-                  <div id="year">1997-<br>2012</div>
+                  <div id="year">1997-<br />2012</div>
                   <div class="circle" id="circle-1"></div>
                   <p id="timeline-description">Beginning of Generation Z</p>
                 </div>
@@ -116,7 +120,7 @@ And while it feels like our lives now our incomparable to the lives our parents 
               <div class="timeline-line"></div>
               <div class="container left">
                 <div class="content" , id="boomer-1">
-                  <div id="year">1946-<br>1964</div>
+                  <div id="year">1946-<br />1964</div>
                   <div class="circle" id="circle-1"></div>
                   <p id="timeline-description">Beginning of Baby Boomers</p>
                 </div>
@@ -178,7 +182,9 @@ And while it feels like our lives now our incomparable to the lives our parents 
               <mark style="background-color: #ffa67d">Gen Z</mark> grew up with
               headlines of the War on Terror. While
               <mark style="background-color: #00a08f">Boomers</mark> grew up
-              with Cold War and Vietnam War Drafts. <br /><br />Hover over the highlighted events to see the headlines from when the events occurred. 
+              with Cold War and Vietnam War Drafts. <br /><br />Hover over the
+              highlighted events to see the headlines from when the events
+              occurred.
             </p>
           </div>
           <div class="step" id="step-style" data-step="5">
@@ -300,10 +306,12 @@ And while it feels like our lives now our incomparable to the lives our parents 
       >
         <div
           class="title"
-          style="margin-bottom: 3%; text-align: center; width: 75%"
+          style="margin-bottom: 2%; text-align: center; width: 75%"
         >
-          How does your news feed 
-          compare with other people's?
+          How does your news feed compare with other people's?
+        </div>
+        <div class="subtitle" style="text-align: center; margin-bottom: 3%">
+          Choose the news sources you read and hit submit to continue!
         </div>
         <select class="multipleSelect" multiple id="news_select"></select>
         <button class="submit_media">Submit</button>
@@ -313,17 +321,16 @@ And while it feels like our lives now our incomparable to the lives our parents 
           <div class="title" id="final_viz" style="text-align: center">
             Bridge the Gap: Explore Another's Newsfeed
           </div>
-          <div
-            class="subtitle"
-            style="text-align: center; margin-top: 2%"
-          >
-            Start by building a reader to explore their newfeed. Articles similar to your news sources are outlined. 
+          <div class="subtitle" style="text-align: center; margin-top: 2%">
+            Start by building a reader to explore their newfeed. Articles
+            similar to your news sources are outlined.
           </div>
           <div
             class="subtitle"
-            style="margin-bottom: 2%; text-align: center; margin-top: .5%"
+            style="margin-bottom: 2%; text-align: center; margin-top: 0.5%"
           >
-            Hover over articles to see the headline and learn more about related articles from other sources. 
+            Hover over articles to see the headline and learn more about related
+            articles from other sources.
           </div>
           <div style="display: flex; flex-direction: row">
             <div
@@ -490,6 +497,17 @@ And while it feels like our lives now our incomparable to the lives our parents 
                   </div>
                 </div>
               </div>
+              <h1
+                id="demographic_category"
+                style="
+                  margin-top: 20px;
+                  margin-bottom: 0px;
+                  white-space: nowrap;
+                "
+              >
+                Source Bias
+              </h1>
+              <div id="chart"></div>
               <div style="text-align: center; margin-top: 20px">
                 <div>
                   Shuffle through different people of the same demographic
@@ -500,7 +518,7 @@ And while it feels like our lives now our incomparable to the lives our parents 
             </div>
             <div
               id="final_news"
-              style="width: 80%; height: 500px; text-align: center;"
+              style="width: 80%; height: 500px; text-align: center"
             >
               <div
                 id="final_label"
@@ -517,6 +535,7 @@ And while it feels like our lives now our incomparable to the lives our parents 
                 padding: 30px;
                 margin-right: 20vw;
                 margin-left: 20px;
+                margin-bottom: 30vh;
               "
             >
               <div
@@ -659,22 +678,91 @@ And while it feels like our lives now our incomparable to the lives our parents 
         <div id="myModal" style="background-color: white" class="modal"></div>
       </section>
       <section id="outro">
-        <div class="title" style="text-align: center">
-          What's next?
+        <div class="title" style="text-align: center">What's next?</div>
+        <div
+          class="subtitle"
+          style="margin-bottom: 2%; text-align: center; margin-top: 2%"
+        >
+          We've taken a look at each generation and saw how they have more in
+          common than one would think.
         </div>
         <div
-            class="subtitle"
-            style="margin-bottom: 2%; text-align: center; margin-top: 2%"
-          >
-            We've taken a look at each generation and saw how they have more in common than one would think.
+          class="subtitle"
+          style="margin-bottom: 2%; text-align: left; margin-top: 2%"
+        >
+          We hope that the story told here between GenZers and Boomers will be
+          remembered even beyond this visualization. While we may have
+          contrasting viewpoints and news sources, our stories are still built
+          together. Our media, political leanings, and even lifestyles can be
+          different, but we can learn from one another and bridge the gap.
         </div>
         <div
             class="subtitle"
             style="margin-bottom: 2%; text-align: left; margin-top: 2%"
           >
-            We hope that the story told here between GenZers and Boomers will be remembered even beyond this visualization. While we may have contrasting
-            viewpoints and news sources, our stories are still built together. Our media, political leanings, and even 
-            lifestyles can be different, but we can learn from one another and bridge the gap.
+            <b>Methodology.</b> 
+            The methodology for our scrolly telly was to start off with demographic facts and historical events to paint a picture
+            of who the Generation Z and Baby Boomers were. By giving background information, the reader can better grasp
+            what events shaped each generation and perhaps even gain insight into the reasoning for media choices and
+            political leanings. Next, we take a deeper dive into the media sources and biases of both generations to compare
+            the similarities and differences. Before opening up the Martini Glass in the final visualization, we add an area
+            chart to highlight political ideologies as well as interesting comparisons between the wording of headlines in the 
+            news sources of each generation. In the final unit visualization, the reader can build a hypothetical person to explore 
+            their newsfeed. Here, the reader can visualize the different news sources that people of different demographics tend 
+            to look at and compare them to their own news sources. Each created person's feed is generated based on survey 
+            results from real people. Furthermore, readers can hover over each article and see the article header and additional
+            recommended articles from other news sources with different media biases. This is one of the bridges we have included:
+            the reader has easy access to articles of the same topic that people of other political leanings may read. 
+
+        </div>
+        <div
+            class="subtitle"
+            style="margin-bottom: 2%; text-align: left; margin-top: 2%"
+          >
+            <b>Limitations.</b> 
+            We recognize that the selection of people and their corresponding news intake 
+            is not fully representative of all the people in that demographic. There are definitely people 
+            and news sources that we have missed or were not able to include within the scope of this project.
+            We apologize if we missed any major news sources or made any simplifying generalizations. We tried
+            to consider as many different perspectives and ideologies as possible and avoid introducing bias 
+            while processing the data, but we acknowledge that there still may be assumptions we made.
+            There were too many articles, sources, people, and variables to consider
+            all of them within the scope of this project.
+            However, we hope that this visualization still creates an awareness and even appreciation for the 
+            different news that others may read.
+        </div>
+        <div
+            class="subtitle"
+            style="margin-bottom: 2%; text-align: left; margin-top: 2%"
+          >
+            <b>Future Work.</b> 
+            Instead of highlighting more generations (i.e. Millenials), we narrowed the scope to
+            GenZ and Boomers, which most closely represents our generation and our parents generation. 
+            In future work, it could definitely be interesting to add more generations to explore.
+            Ultimately, our goal would continue to be bridging the gaps in perspectives and encouraging
+            people to try to read more about opposing views. 
+        </div>
+        <div
+            class="subtitle"
+            style="margin-bottom: 2%; text-align: left; margin-top: 2%"
+          >
+          <b>Inspiration.</b> 
+            Our main inspiration and people data came from the 
+            <a class="outro-link" href="https://www.journalism.org/dataset/american-trends-panel-wave-57/" target="_blank">Pew Research Center</a>. 
+            News articles were scraped from the 
+            <a class="outro-link" href="https://www.allsides.com/unbiased-balanced-news" target="_blank">AllSides Website</a>.
+            The original idea stemmed from Annie's experience at home with her parents. Upon discovering they had different 
+            views on current events and media reliability, Annie suggested for them to trade news articles to read. This helped
+            both sides come to a better understanding of the other. Thus, we wanted to utilize this idea of "I'll read your
+            article if you read mine" to bridge the gap between readers in our visualization. In terms of visual design, we
+            drew inspiration for our scrolly telly and styling from 
+            <a class="outro-link" href="https://cartographers-nk.wonyoung.so/" target="_blank">Wonyoung's Cartographers of North Korea</a> and 
+            <a class="outro-link" href="https://pudding.cool/2018/12/brief-history/?fbclid=IwAR0zg_5nFtLZAWp9DnrexRnzvJcq1huMqWqYhj0Ab29ux-xx_VmeKRQ7-f4" target="_blank">The Pudding's A Brief History of the Past 100 Years</a>.
+        </div>
+        <div class="subtitle">
+          This project was created as the Final Project for <a class="outro-link" href="http://vis.csail.mit.edu/classes/6.859/" target="_blank">6.859 Interactive Data Visualization</a>.
+          To learn more, please visit our <a class="outro-link" href="projectpage.html" target="_blank">project page</a> or 
+          <a class="outro-link" href="https://github.com/6859-sp21/final-project-generation-gap" target="_blank">github repo</a>. 
         </div>
       </section>
     </main>
