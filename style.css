@@ -20,6 +20,15 @@
   flex-direction: column;
 }
 
+#intro-info-more {
+  height: 70vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 #final_viz_section {
   height: 120vh;
 }
