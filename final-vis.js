@@ -1,12 +1,13 @@
 const final_margin = { top: 0, right: 30, bottom: 50, left: 30 },
-  final_width = window.innerWidth*.6 - final_margin.left - final_margin.right,
-  final_height = window.innerHeight  - final_margin.top - final_margin.bottom,
+  final_width =
+    window.innerWidth * 0.6 - final_margin.left - final_margin.right,
+  final_height = window.innerHeight - final_margin.top - final_margin.bottom,
   newsWidth = 70,
   newsHeight = 90,
   maxLineNumber = 7,
   bylineMarginTop = 40,
   headerContainerWidth = 60,
-  headerContainerMargin = { top: 1, left: .8 };
+  headerContainerMargin = { top: 1, left: 0.8 };
 (strokeWidth = 5),
   (numRow = 9),
   (numFilters = 10),
@@ -46,8 +47,7 @@ sourcesMap = {
   "The Hill": ["The Hill"],
   "Washington Examiner": ["Washington Examiner"],
   "New York Post": ["New York Post"],
-  "The Guardian": ["The Guardian"]
-
+  "The Guardian": ["The Guardian"],
 };
 
 var sourceData;
@@ -56,7 +56,7 @@ var userInputSources = []; // TODO maybe add a default
 var similarityHighlighted = {}; // map of newspapers that should be highlighted
 
 // add people to this map as they are chosen to remember the random selections
-var peopleMap = {}
+var peopleMap = {};
 
 var biasColors = {
   Left: "#2E65A0",
@@ -66,8 +66,14 @@ var biasColors = {
   Right: "#CB2127",
 };
 
-var row = d3.scaleLinear().domain([0, numRow]).range([0, window.innerWidth*.55]);
-var col = d3.scaleLinear().domain([0, numRow]).range([0, window.innerHeight*1.1]);
+var row = d3
+  .scaleLinear()
+  .domain([0, numRow])
+  .range([0, window.innerWidth * 0.55]);
+var col = d3
+  .scaleLinear()
+  .domain([0, numRow])
+  .range([0, window.innerHeight * 1.1]);
 
 var filters = {
   bias: [],
@@ -386,14 +392,14 @@ function render() {
     sourceData = data;
     updatePersonSources();
 
-      var person = {
-        age: age,
-        region: region,
-        metro: metro,
-        sex: gender,
-        education: education,
-        race: ethnicity,
-      };
+    var person = {
+      age: age,
+      region: region,
+      metro: metro,
+      sex: gender,
+      education: education,
+      race: ethnicity,
+    };
     console.log(person.age);
     console.log("sourcess", sourceData);
 
@@ -409,19 +415,19 @@ function render() {
     });
 
     // determine random person
-    var currentDemographics = ethnicity+gender+age+education+metro+region
-    console.log('currentDemographics', currentDemographics)
+    var currentDemographics =
+      ethnicity + gender + age + education + metro + region;
+    console.log("currentDemographics", currentDemographics);
     if (currentDemographics in peopleMap) {
-        console.log('in peopleMap')
-        var randomPerson = peopleMap[currentDemographics]
+      console.log("in peopleMap");
+      var randomPerson = peopleMap[currentDemographics];
     } else {
-        // var randomPerson = result[Math.floor(Math.random() * result.length)];
-        console.log('min', Math.min(0,1))
-        var randomPerson = result[Math.min(1, result.length-1)]
-        peopleMap[currentDemographics] = randomPerson
+      // var randomPerson = result[Math.floor(Math.random() * result.length)];
+      console.log("min", Math.min(0, 1));
+      var randomPerson = result[Math.min(1, result.length - 1)];
+      peopleMap[currentDemographics] = randomPerson;
     }
 
-      
     console.log("sourcessss", result);
     // var randomPerson = result[1];
     console.log(randomPerson);
@@ -609,7 +615,7 @@ function renderUnitVis() {
     <span class="line arrow-left"></span>
     <label>Media Bias</label>
     <span class="line arrow-right"></span>
-  </div>
+    </div>
     <div style="justify-items: space-between; flex-direction: row; display: flex;">
 
     <div style="text-align:center;"><a style="background-color:${
