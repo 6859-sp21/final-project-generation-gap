@@ -316,10 +316,10 @@ document.querySelector(".submit_media").addEventListener("click", function () {
   //   console.log("height", final_viz);
   window.scrollTo({ top: final_viz, behavior: "smooth" });
   //   sources_list = [];
+  userInputSources = [];
   document.querySelectorAll(".fstChoiceItem").forEach(function (item) {
     userInputSources.push(item.getAttribute("data-text"));
   });
-  //   console.log("user", userInputSources);
   render();
 });
 
