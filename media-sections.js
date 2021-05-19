@@ -36,7 +36,7 @@ const boomersFollowNews = [
 
 var width = 600;
 var height = 500;
-var margin = { top: 50, right: 0, bottom: 50, left: 40 };
+var margin = { top: 50, right: 0, bottom: 50, left: 50 };
 
 var scroller = scrollama();
 
@@ -106,6 +106,22 @@ function followNews() {
     .domain(d3.range(genZFollowNews.length))
     .range([margin.left, width - margin.right])
     .padding(0.1);
+  mediaGenZSVG.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("%Gen Z")
+    .attr("font-family", "Roboto");;
+  mediaBoomerSVG.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("%Boomer")
+    .attr("font-family", "Roboto");;
 
   mediaGenZSVG
     .selectAll("rect")
@@ -190,6 +206,7 @@ function followNews() {
 function newsOutlet1() {
   d3.csv("./data/genZNewsSource2.csv").then(function (genZData) {
     d3.csv("./data/boomerNewsSource2.csv").then(function (boomerData) {
+      
       var y = d3
         .scaleLinear()
         .domain([0, 1])
@@ -209,11 +226,12 @@ function newsOutlet1() {
         .attr("height", (d) => y(0) - y(d.Yes))
         .attr("width", x.bandwidth())
         .attr("fill", (d) => {
-          if (d.Source == "CNN") {
+          if (d.Source == "CNN" || d.Source == "New York Times") {
             return genZColor;
           }
           return textColor;
         });
+   
       var genZxAxis = (g) =>
         g.attr("transform", `translate(0,${height - margin.bottom})`).call(
           d3
@@ -237,6 +255,22 @@ function newsOutlet1() {
           );
       mediaGenZSVG.append("g").call(genZxAxis);
       mediaGenZSVG.append("g").call(genZyAxis);
+      mediaGenZSVG.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("%Gen Z uses News Source")
+      .attr("font-family", "Roboto");;
+      mediaBoomerSVG.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("%Boomer uses News Source")
+      .attr("font-family", "Roboto");;
       mediaBoomerSVG
         .selectAll("rect")
         .data(boomerData)
@@ -246,11 +280,12 @@ function newsOutlet1() {
         .attr("height", (d) => y(0) - y(d.Yes))
         .attr("width", x.bandwidth())
         .attr("fill", (d) => {
-          if (d.Source == "CNN") {
+          if (d.Source == "CNN" || d.Source == "New York Times") {
             return boomerColor;
           }
           return textColor;
         });
+      
       var boomerXAxis = (g) =>
         g.attr("transform", `translate(0,${height - margin.bottom})`).call(
           d3
@@ -288,6 +323,22 @@ function newsOutlet2() {
       }
     })
     .transition();
+    mediaGenZSVG.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("%Gen Z uses News Source")
+    .attr("font-family", "Roboto");;
+    mediaBoomerSVG.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("%Boomer uses News Source")
+    .attr("font-family", "Roboto");;
 }
 function newsOutlet3() {
   d3.csv("./data/genZNewsSource2.csv").then(function (genZData) {
@@ -354,6 +405,22 @@ function newsOutlet3() {
           return textColor;
         })
         .transition();
+        mediaGenZSVG.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("%Gen Z uses News Source")
+        .attr("font-family", "Roboto");
+        mediaBoomerSVG.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("%Boomer uses News Source")
+        .attr("font-family", "Roboto");;
       var boomerXAxis = (g) =>
         g.attr("transform", `translate(0,${height - margin.bottom})`).call(
           d3
@@ -382,7 +449,7 @@ function newsOutlet3() {
 }
 function areaChart1() {
   d3.csv("./data/cnn.csv").then(function (data) {
-    var x = d3.scaleBand().range([margin.left, width - margin.left]);
+    var x = d3.scaleBand().range([margin.left, width]);
     x.domain([
       "Very liberal",
       "Liberal",

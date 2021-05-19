@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="./style.css" />
     <script src="./node_modules/scrollama/build/scrollama.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Source+Sans+Pro:wght@900&display=swap" rel="stylesheet">
     <!-- <script type="text/javascript" src="./node_modules/d3-textwrap/src/textwrap.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -57,7 +59,7 @@
               <div class="timeline-line"></div>
               <div class="container left">
                 <div class="content" , id="gen-z-1">
-                  <div id="year">1997-2012</div>
+                  <div id="year">1997-<br>2012</div>
                   <div class="circle" id="circle-1"></div>
                   <p id="timeline-description">Beginning of Generation Z</p>
                 </div>
@@ -108,7 +110,7 @@
               <div class="timeline-line"></div>
               <div class="container left">
                 <div class="content" , id="boomer-1">
-                  <div id="year">1946-1964</div>
+                  <div id="year">1946-<br>1964</div>
                   <div class="circle" id="circle-1"></div>
                   <p id="timeline-description">Beginning of Baby Boomers</p>
                 </div>
@@ -281,7 +283,7 @@
       <section
         id="user-input"
         style="
-          height: 175vh;
+          height: 100vh;
           width: 100%;
           display: flex;
           align-items: center;
@@ -293,9 +295,8 @@
           class="title"
           style="margin-bottom: 3%; text-align: center; width: 75%"
         >
-          Have you ever wondered how
-          <mark style="background-color: #c5ac1cc0">your newsfeed</mark>
-          compares with other people?
+          How does your news feed 
+          compare with other people's?
         </div>
         <select class="multipleSelect" multiple id="news_select"></select>
         <button class="submit_media">Submit</button>
@@ -309,8 +310,8 @@
             class="subtitle"
             style="margin-bottom: 2%; text-align: center; margin-top: 2%"
           >
-            Select a reader and read their newfeed. Hover over articles to read
-            headlines. Articles are sorted by similarity to your news sources.
+            Build a reader and read their newfeed. Hover over articles to read
+            headlines. Articles similar to your news sources are outlined.
           </div>
           <div style="display: flex; flex-direction: row">
             <div
@@ -325,12 +326,12 @@
                 width: 310px;
               "
             >
-              <img src="img/jess.png" style="width: 180px" />
+              <!-- <img src="img/jess.png" style="width: 180px" /> -->
               <h1
                 id="demographic_category"
                 style="margin-top: 10px; white-space: nowrap"
               >
-                Meet Jess
+                Build a Reader
               </h1>
               <div style="display: flex; justify-content: center; width: 200px">
                 <span class="custom-dropdown-words">A</span>
@@ -482,11 +483,12 @@
                   Shuffle through different people of the same demographic
                 </div>
                 <button type="button" id="changePerson">Next Person</button>
+                <div id="personNum"></div>
               </div>
             </div>
             <div
               id="final_news"
-              style="width: 80%; height: 500px; text-align: center"
+              style="width: 80%; height: 500px; text-align: center;"
             >
               <div
                 id="final_label"
@@ -501,8 +503,8 @@
                 background-color: white;
                 border: 1px solid black;
                 padding: 30px;
-                margin-right: 10vw;
-                margin-left: 10px;
+                margin-right: 20vw;
+                margin-left: 20px;
               "
             >
               <div
@@ -593,10 +595,10 @@
                 <label class="container2">
                   <input
                     type="checkbox"
-                    id="covid"
+                    id="blm"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">Covid-19</div>
+                  <div class="custom-label">BLM</div>
                   <span class="checkmark"></span>
                 </label>
                 <label class="container2">
@@ -611,19 +613,10 @@
                 <label class="container2">
                   <input
                     type="checkbox"
-                    id="blm"
+                    id="covid"
                     onclick="updateFilter(); render();"
                   />
-                  <div class="custom-label">BLM</div>
-                  <span class="checkmark"></span>
-                </label>
-                <label class="container2">
-                  <input
-                    type="checkbox"
-                    id="guns"
-                    onclick="updateFilter(); render();"
-                  />
-                  <div class="custom-label">Guns</div>
+                  <div class="custom-label">Covid-19</div>
                   <span class="checkmark"></span>
                 </label>
                 <label class="container2">
@@ -633,6 +626,15 @@
                     onclick="updateFilter(); render();"
                   />
                   <div class="custom-label">Economy</div>
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container2">
+                  <input
+                    type="checkbox"
+                    id="guns"
+                    onclick="updateFilter(); render();"
+                  />
+                  <div class="custom-label">Guns</div>
                   <span class="checkmark"></span>
                 </label>
               </div>
