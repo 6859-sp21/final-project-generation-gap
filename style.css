@@ -213,6 +213,23 @@ button.submit_media{
 
 button.submit_media:hover{
   background-color: #c5ac1c;
+  cursor: pointer;
+}
+
+button#changePerson{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 15px;
+  margin-top: 5px;
+  border: 2px solid black;
+  border-radius: 0px;
+  color: black;
+  padding: 10px;
+  background-color: transparent;
+}
+
+button#changePerson:hover{
+  background-color: #c5ac1c;
+  cursor: pointer;
 }
 
 .line-container {
