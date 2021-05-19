@@ -25,7 +25,7 @@
 }
 
 #outro {
-  height: 100vh;
+  height: 120vh;
 }
 
 .text-info{
@@ -771,4 +771,10 @@ h1#demographic_category{
 .open .arrow::after {
   left: 5.5px;
   transform: rotate(45deg);
+}
+
+/* Outro */
+
+a.outro-link {
+  color: #c5ac1c;
 }
