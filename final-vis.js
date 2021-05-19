@@ -311,7 +311,8 @@ document.querySelector(".submit_media").addEventListener("click", function () {
     document.getElementById("intro-info").scrollHeight +
     document.getElementById("demographics-scrolly").scrollHeight +
     document.getElementById("media-scrolly").scrollHeight +
-    document.getElementById("user-input").scrollHeight;
+    document.getElementById("user-input").scrollHeight +
+    document.getElementById("intro-info-more").scrollHeight;
   //   console.log("height", final_viz);
   window.scrollTo({ top: final_viz, behavior: "smooth" });
   //   sources_list = [];
