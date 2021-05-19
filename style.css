@@ -199,7 +199,7 @@ h1#modal_name {
   font-size: 25px;
   font-family: Georgia, 'Times New Roman', Times, serif;
   color:black;
-  text-align: justify;
+  text-align: left;
   text-transform: uppercase;
 }
 
@@ -224,7 +224,7 @@ h1#modal_info {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 300;
   color:black;
-  text-align: left;
+  text-align: center;
 }
 
 #myModal{

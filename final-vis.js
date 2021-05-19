@@ -878,7 +878,7 @@ function renderUnitVis() {
     }</h1>
     <div style="text-align:center"><a href=${
       d.URL
-    } class="button1" target="blank" style="background-color:${
+    } class="button1" target="blank" style="color:${
       lightBiasColors[d.Bias]
     }">Read this story</a></div>
     <h1 id="modal_name">Recommended Reads for the Same Topic:</h1>  
@@ -893,7 +893,7 @@ function renderUnitVis() {
         <div class='modal-sources'><mark style='background-color:${
           lightBiasColors[d["Left Bias"]]
         }'>${d["Left Headline"]} </mark></div>
-        <div style="text-align:center;"><a style="background-color:${
+        <div style="text-align:center;"><a style="color:${
           lightBiasColors[d["Left Bias"]]
         }" href=${
       d["Left URL"]
@@ -903,7 +903,7 @@ function renderUnitVis() {
         <div class='modal-sources'><mark style='background-color:${
           lightBiasColors[d["Center Bias"]]
         }'>${d["Center Headline"]}</mark></div>
-        <div style="text-align:center;"><a style="background-color:${
+        <div style="text-align:center;"><a style="color:${
           lightBiasColors[d["Center Bias"]]
         }" href=${
       d["Center URL"]
@@ -913,7 +913,7 @@ function renderUnitVis() {
         <div class='modal-sources'> <mark style='background-color:${
           lightBiasColors[d["Right Bias"]]
         }'>${d["Right Headline"]}</mark></div>
-        <div style="text-align:center;"><a style="background-color:${
+        <div style="text-align:center;"><a style="color:${
           lightBiasColors[d["Right Bias"]]
         }" href=${
       d["Right URL"]
