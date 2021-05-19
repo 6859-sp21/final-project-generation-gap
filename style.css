@@ -109,7 +109,7 @@ div.timeline_tooltip {
   padding: 0.3rem;
   color: black;
   font-size: 20px;
-  font-family: 'Franklin Gothic', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   text-align: left;
 }
@@ -363,16 +363,16 @@ label {
 
   .gen-z-title {
     display: flex;
-    margin-left:17%;
-    margin-bottom: 10px;
+    margin:auto;
+    padding-bottom: 10px;
     font-size: 24px;
     color:#282828;
   }
 
   .boomer-title {
     display: flex;
-    margin-left:17%;
-    margin-bottom: 10px;
+    margin:auto;
+    padding-bottom: 10px;
     /* width:80%; */
     font-size: 24px;
     color:#282828;
@@ -398,8 +398,9 @@ label {
     flex-direction: column;
   }
   .step-header {
-    font-family: 'Franklin Gothic', sans-serif;
-    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 1.125rem;
     padding-bottom: 2rem;
   }
   .step:last-child {
@@ -466,7 +467,10 @@ span {
   display: flex;
 }
 #year {
-  font-family: "Franklin Gothic Medium", "Franklin Gothic";
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  padding-left: 7%;
   width: 20%;
 }
 #timeline-description{
