@@ -874,3 +874,9 @@ h1#demographic_category{
 a.outro-link {
   color: #c5ac1c;
 }
+
+.abstract {
+  width: 40vw;
+  text-align: justify;
+  line-height: 1;
+}
