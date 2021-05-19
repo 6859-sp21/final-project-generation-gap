@@ -20,7 +20,7 @@
   flex-direction: column;
 }
 .text-info{
-  width: 70%;
+  width: 60%;
   font-size: 16px;
   line-height: 1.7;
 }
@@ -30,13 +30,13 @@ body {
   width: 100vw;
 }
 .title{
-  font-size: 4rem;
+  font-size: 3.5rem;
   /* font-weight: 600; */
 }
 .authors{
   font-size: 1rem;
   font-family: 'Roboto', 'sans-serif';
-  font-weight:bolder;
+  font-weight:bold;
   margin-top: 2%;
 }
 .subtitle{
@@ -73,14 +73,15 @@ body {
 div.tooltip {	
   position: absolute;			
   text-align: center;
-  display: inline-block;
-  width: 20rem;
-  min-height: 2rem;								
+  display: flex;
+  flex-direction: column;
+  width: 21rem;
+  height: 27rem;								
   padding: .5rem;
   color: black;
   font-size: 20px;	
 
-  background: white;	
+  background: #f2f2f2;	
   border-radius: 3px;		
   pointer-events: none;	
   box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
@@ -116,25 +117,31 @@ div.timeline_tooltip {
 
 .tooltip-source{
   padding: 1rem;
+  align-self: flex-start;
   color: black;
-  font-size: 20px;
+  font-size: 28px;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: 600;
   text-align: left;
+  margin-bottom: 3rem;
+}
+.tooltip-extra{
+  line-height: 1.1;
+  background-color: #FEFDFC;
 }
 
 .tooltip-header{
-  padding-left: 1rem;
-  padding-bottom: 1rem;
+  
+  padding: 1rem;
   color: black;
   font-size: 20px;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: 600;
   text-align: left;
+  line-height: 1.1;
 }
 .tooltip-header2{
   padding-left: 1rem;
-  text-align: left;
+  justify-content: flex-end;
+  text-align: center;
   color: black;
   font-size: 17px;
   font-family: Georgia, 'Times New Roman', Times, serif;
@@ -145,8 +152,6 @@ div.timeline_tooltip {
   margin: .5rem 1rem 0 1rem;
   color: black;
   font-size: 15px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: 300;
 }
 .tooltip-more{
   padding-left: 1rem;
@@ -608,8 +613,9 @@ span {
 
 h1#filter_category{
   font-size: 30px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Roboto', 'sans-serif';
   color:black;
+  
 }
 
 
@@ -640,7 +646,8 @@ table {
 
 h1#demographic_category{
   font-size: 30px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: 'Roboto', 'sans-serif';
+  font-weight: 900;
   color:black;
 }
 
@@ -734,19 +741,19 @@ h1#demographic_category{
 }
 .arrow::before {
   left: 0px;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
   background-color: black;
 }
 .arrow::after {
   left: 5.5px;
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
   background-color: black;
 }
 .open .arrow::before {
   left: 0px;
-  transform: rotate(-45deg);
+  transform: rotate(45deg);
 }
 .open .arrow::after {
   left: 5.5px;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
 }
