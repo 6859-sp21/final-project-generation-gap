@@ -417,11 +417,11 @@ function sortData(data, sources) {
   newData = [];
   sources = convertSources(sources);
   topicMap = {
-    covid: [],
-    "climate change": [],
     blm: [],
-    guns: [],
+    "climate change": [],
+    covid: [],
     economy: [],
+    guns: [],
   };
 
   // filter to match person
@@ -472,15 +472,6 @@ function sortData(data, sources) {
   }
 
   return userSimilarData.concat(restOfData);
-}
-
-function randomNums(length) {
-  var nums = [];
-  while (nums.length < topicCap) {
-    var r = Math.floor(Math.random() * length);
-    if (nums.indexOf(r) === -1) nums.push(r);
-  }
-  return nums;
 }
 
 // RENDER
