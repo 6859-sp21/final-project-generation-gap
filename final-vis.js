@@ -76,14 +76,12 @@ var result;
 
 // change abbreviations to full word
 var topicDisplayMap = {
-    blm: "Black Lives Matter",
-    "climate change": "Climate Change",
-    covid: "Covid-19",
-    economy: "Economy",
-    guns: "Guns",
-}
-
-
+  blm: "Black Lives Matter",
+  "climate change": "Climate Change",
+  covid: "Covid-19",
+  economy: "Economy",
+  guns: "Guns",
+};
 
 var biasColors = {
   Left: "#00306A",
@@ -313,7 +311,8 @@ document.querySelector(".submit_media").addEventListener("click", function () {
     document.getElementById("intro-info").scrollHeight +
     document.getElementById("demographics-scrolly").scrollHeight +
     document.getElementById("media-scrolly").scrollHeight +
-    document.getElementById("user-input").scrollHeight;
+    document.getElementById("user-input").scrollHeight +
+    document.getElementById("intro-info-more").scrollHeight;
   //   console.log("height", final_viz);
   window.scrollTo({ top: final_viz, behavior: "smooth" });
   //   sources_list = [];
@@ -547,9 +546,11 @@ function render() {
         "Sorry! We do not have data on this person :( Please select a different combination of demographics to continue exploring!"
       );
     } else if (sources.length == 0) {
-      finalLabel.text(
-        `This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!`
-      ).style("color", bridgeColor);
+      finalLabel
+        .text(
+          `This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!`
+        )
+        .style("color", bridgeColor);
     } else {
       finalLabel.text("");
     }
@@ -682,11 +683,11 @@ function renderPie(sources) {
       pie_tooltip.transition().duration(30).style("opacity", 1);
       pie_tooltip
         .html(
-          `<div class='tooltip-header'>${d.data.bias} ${(
+          `<div class='tooltip-pie-header'>${d.data.bias} ${(
             ((d.endAngle - d.startAngle) / (2 * Math.PI)) *
             100
           ).toFixed(1)}%</div>
-          <div class='tooltip-header'>${d.data.news_sources} </div>
+          <div class='tooltip-pie-header'>${d.data.news_sources} </div>
         `
         )
         .style("left", d3.event.pageX + 20 + "px")
@@ -819,29 +820,29 @@ function renderUnitVis() {
   // MouseOvers
   function handleMouseOver(d) {
     d3.select(this).style("fill", d3.select(this).attr("fill"));
-    d3.select(this).style("opacity", 0.7);
+    d3.select(this).style("opacity", 0.85);
 
     // tooltip
     tooltip.transition().duration(30).style("opacity", 1);
     tooltip
       .html(
         `<div class='tooltip-source'>${d.Source.toUpperCase()} </div>
+        <div class='tooltip-header' style='margin-top: 0px'><mark style='background-color:${
+          lightBiasColors[d.Bias]
+        }'>${d.Headline}</mark></div>
         <div class='tooltip-extra'>
-        <div class='tooltip-header' style='color:${lightBiasColors[d.Bias]};'>${
-          d.Headline
-        }</div>
       
-      <div class='tooltip-header2'>Headlines from other sources:<br><br></div>
+      <div class='tooltip-header2' style='padding-top: 20px'>Headlines from other sources:<br><br></div>
       
-      <div class='tooltip-sources' style='color:${
+      <div class='tooltip-sources'><mark style='background-color:${
         lightBiasColors[d["Left Bias"]]
-      }'>${d["Left Headline"]} </div>
-      <div class='tooltip-sources' style='color:${
+      }'>${d["Left Headline"]} </mark></div>
+      <div class='tooltip-sources'><mark style='background-color:${
         lightBiasColors[d["Center Bias"]]
-      }'>${d["Center Headline"]}</div>
-      <div class='tooltip-sources' style='color:${
+      }'>${d["Center Headline"]}</mark></div>
+      <div class='tooltip-sources'><mark style='background-color:${
         lightBiasColors[d["Right Bias"]]
-      }'>${d["Right Headline"]}</div>
+      }'>${d["Right Headline"]}</mark></div>
       <div class='tooltip-more'>Click to read more</div>
       </div>`
       )
@@ -874,12 +875,12 @@ function renderUnitVis() {
     <h1 id="modal_byline">${d.Byline}</h1>                  
     <h1 id="modal_info">Date: ${d.Date}</h1>
     <h1 id="modal_info">Topic: ${topicDisplayMap[d.Topic]}</h1>
-    <h1 id="modal_info" style="color:${lightBiasColors[d.Bias]}">Media Bias: ${
-      d.Bias
-    }</h1>
+    <h1 id="modal_info">Media Bias: <mark style="background-color:${
+      lightBiasColors[d.Bias]
+    }">${d.Bias}</mark></h1>
     <div style="text-align:center"><a href=${
       d.URL
-    } class="button1" target="blank" style="color:${
+    } class="button2" target="blank" style="color:${
       lightBiasColors[d.Bias]
     }">Read this story</a></div>
     <h1 id="modal_name">Recommended Reads for the Same Topic:</h1>  
@@ -891,34 +892,34 @@ function renderUnitVis() {
     </div>
     <div style="justify-items: space-between; flex-direction: row; display: flex;">
     <div style="display: block; width: 33%;"> 
-        <div class='modal-sources' style='color:${
+      <div style="text-align:center;"><a style="color:${
+        lightBiasColors[d["Left Bias"]]
+      }" href=${
+      d["Left URL"]
+    } class="button2" target="blank">Read this story</a></div>
+        <div class='modal-sources'><mark style='background-color:${
           lightBiasColors[d["Left Bias"]]
         }'>${d["Left Headline"]} </mark></div>
-        <div style="text-align:center;"><a style="color:${
-          lightBiasColors[d["Left Bias"]]
-        }" href=${
-      d["Left URL"]
-    } class="button1" target="blank">Read this story</a></div>
     </div>
     <div style="display: block; width: 33%;">
-        <div class='modal-sources' style='color:${
-          lightBiasColors[d["Center Bias"]]
-        }'>${d["Center Headline"]}</mark></div>
         <div style="text-align:center;"><a style="color:${
           lightBiasColors[d["Center Bias"]]
         }" href=${
       d["Center URL"]
-    } class="button1" target="blank">Read this story</a></div> 
+    } class="button2" target="blank">Read this story</a></div> 
+        <div class='modal-sources'><mark style='background-color:${
+          lightBiasColors[d["Center Bias"]]
+        }'>${d["Center Headline"]}</mark></div>
     </div>
         <div style="display: block; width: 33%;"> 
-        <div class='modal-sources' style='color:${
-          lightBiasColors[d["Right Bias"]]
-        }'>${d["Right Headline"]}</mark></div>
         <div style="text-align:center;"><a style="color:${
           lightBiasColors[d["Right Bias"]]
         }" href=${
       d["Right URL"]
-    } class="button1" target="blank">Read this story</a></div> 
+    } class="button2" target="blank">Read this story</a></div> 
+        <div class='modal-sources'> <mark style='background-color:${
+          lightBiasColors[d["Right Bias"]]
+        }'>${d["Right Headline"]}</mark></div>
     </div>
     </div>
     
