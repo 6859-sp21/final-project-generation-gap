@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="./style.css" />
     <script src="./node_modules/scrollama/build/scrollama.min.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Source+Sans+Pro:wght@900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Source+Sans+Pro:wght@900&display=swap"
+      rel="stylesheet"
+    />
     <!-- <script type="text/javascript" src="./node_modules/d3-textwrap/src/textwrap.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -38,6 +41,7 @@
   <body>
     <main>
       <section id="intro">
+        <img style="width: 65%" src="./img/front2.png" />
         <div class="title">Bridging the Generational Gap</div>
         <div class="authors">By Shirley Cao, Jessica Lee, and Annie Zhang</div>
         <div class="subtitle">
@@ -48,8 +52,11 @@
       <section id="intro-info">
         <div class="text-info">
           In 2020, we've spent more time at home than before. We've begun to
-          have the hard conversations with our parents on race, politics,
+          have the difficult conversations with our parents on identity, race,
+          and politics.
           <br />
+          And while it feels like our lives now our incomparable to the lives
+          our parents lead, some of the key events are the same.
         </div>
       </section>
       <section class="scrolly" id="demographics-scrolly">
@@ -60,7 +67,7 @@
               <div class="timeline-line"></div>
               <div class="container left">
                 <div class="content" , id="gen-z-1">
-                  <div id="year">1997-<br>2012</div>
+                  <div id="year">1997-<br />2012</div>
                   <div class="circle" id="circle-1"></div>
                   <p id="timeline-description">Beginning of Generation Z</p>
                 </div>
@@ -111,7 +118,7 @@
               <div class="timeline-line"></div>
               <div class="container left">
                 <div class="content" , id="boomer-1">
-                  <div id="year">1946-<br>1964</div>
+                  <div id="year">1946-<br />1964</div>
                   <div class="circle" id="circle-1"></div>
                   <p id="timeline-description">Beginning of Baby Boomers</p>
                 </div>
@@ -173,7 +180,9 @@
               <mark style="background-color: #ffa67d">Gen Z</mark> grew up with
               headlines of the War on Terror. While
               <mark style="background-color: #00a08f">Boomers</mark> grew up
-              with Cold War and Vietnam War Drafts.
+              with Cold War and Vietnam War Drafts. <br /><br />Hover over the
+              highlighted events to see the headlines from when the events
+              occurred.
             </p>
           </div>
           <div class="step" id="step-style" data-step="5">
@@ -181,7 +190,7 @@
               <span class="step-header"> Technology </span><br /><br />
               While <mark style="background-color: #ffa67d">Gen Z</mark> is the
               generation that grew up with the smartphone,
-              <mark style="background-color: #00a08f">Boomers</mark>became the
+              <mark style="background-color: #00a08f">Boomers </mark>became the
               generation who grew up with color television.
             </p>
           </div>
@@ -225,27 +234,29 @@
         <article id="media-article">
           <div class="step" id="step-style" data-step="1">
             <p class="progress" id="section-text">
-              <span class="step-header"> Political Engagement </span><br><br>
+              <span class="step-header"> Political Engagement </span
+              ><br /><br />
               Baby boomers tend to follow political news more closely
             </p>
           </div>
           <div class="step" id="step-style" data-step="2">
             <p class="progress" id="section-text">
-              <span class="step-header"> Similar News Outlets </span><br><br>
+              <span class="step-header"> Similar News Outlets </span
+              ><br /><br />
               There's also differences in news outlets Gen Z and Baby Boomers
               read. While both generations rely on National TV,
             </p>
           </div>
           <div class="step" id="step-style" data-step="2">
             <p class="progress" id="section-text">
-              <span class="step-header"> Gen Z News  </span><br><br>
+              <span class="step-header"> Gen Z News </span><br /><br />
               Gen Z typically uses the New York Times and the Washington Post,
               both left wing media sources
             </p>
           </div>
           <div class="step" id="step-style" data-step="2">
             <p class="progress" id="section-text">
-              <span class="step-header"> Baby Boomer News </span><br><br>
+              <span class="step-header"> Baby Boomer News </span><br /><br />
               While Baby Boomers use Fox and Talk Radio, which are both right
               wing media sources. Let's see how the headlines for these
               different news sources to see this media bias.
@@ -253,30 +264,30 @@
           </div>
           <div class="step" id="step-style" data-step="3">
             <p class="progress" id="section-text">
-              <span class="step-header"> Political Ideology </span><br><br>
-              Here's how The New York Times reported on the Coronavirus Relief
-              Bill compared to how Fox news reported it.
+              <span class="step-header"> Political Ideology </span><br /><br />
+              Here's how CNN reported on the Coronavirus Relief Bill compared to
+              how Fox news reported it.
             </p>
           </div>
           <div class="step" id="step-style" data-step="3">
             <p class="progress" id="section-text">
-              <span class="step-header"> Covid Headlines </span><br><br>
-              Here's how The New York Times reported on the Coronavirus Relief
-              Bill compared to how Fox news reported it.
+              <span class="step-header"> Covid Headlines </span><br /><br />
+              Here's how CNN reported on the Coronavirus Relief Bill compared to
+              how Fox News reported it.
             </p>
           </div>
           <div class="step" id="step-style" data-step="4">
             <p class="progress" id="section-text">
-              <span class="step-header"> Economy Headlines </span><br><br>
-              Here's how The New York Times reported on the Economy compared to
-              how Fox news reported it.
+              <span class="step-header"> Economy Headlines </span><br /><br />
+              Here's how CNN reported on the Economy compared to how Fox News
+              reported it.
             </p>
           </div>
           <div class="step" id="step-style" data-step="5">
             <p class="progress" id="section-text">
-              <span class="step-header"> Climate Headlines </span><br><br>
-              Here's how The New York Times reported on Climate compared to how
-              Fox news reported it.
+              <span class="step-header"> Climate Headlines </span><br /><br />
+              Here's how CNN reported on Climate compared to how Fox News
+              reported it.
             </p>
           </div>
         </article>
@@ -296,8 +307,7 @@
           class="title"
           style="margin-bottom: 3%; text-align: center; width: 75%"
         >
-          How does your news feed 
-          compare with other people's?
+          How does your news feed compare with other people's?
         </div>
         <select class="multipleSelect" multiple id="news_select"></select>
         <button class="submit_media">Submit</button>
@@ -307,17 +317,16 @@
           <div class="title" id="final_viz" style="text-align: center">
             Bridge the Gap: Explore Another's Newsfeed
           </div>
-          <div
-            class="subtitle"
-            style="text-align: center; margin-top: 2%"
-          >
-            Start by building a reader to explore their newfeed. Articles similar to your news sources are outlined. 
+          <div class="subtitle" style="text-align: center; margin-top: 2%">
+            Start by building a reader to explore their newfeed. Articles
+            similar to your news sources are outlined.
           </div>
           <div
             class="subtitle"
-            style="margin-bottom: 2%; text-align: center; margin-top: .5%"
+            style="margin-bottom: 2%; text-align: center; margin-top: 0.5%"
           >
-            Hover over articles to see the headline and learn more about related articles from other sources. 
+            Hover over articles to see the headline and learn more about related
+            articles from other sources.
           </div>
           <div style="display: flex; flex-direction: row">
             <div
@@ -484,6 +493,17 @@
                   </div>
                 </div>
               </div>
+              <h1
+                id="demographic_category"
+                style="
+                  margin-top: 20px;
+                  margin-bottom: 0px;
+                  white-space: nowrap;
+                "
+              >
+                Source Bias
+              </h1>
+              <div id="chart"></div>
               <div style="text-align: center; margin-top: 20px">
                 <div>
                   Shuffle through different people of the same demographic
@@ -494,7 +514,7 @@
             </div>
             <div
               id="final_news"
-              style="width: 80%; height: 500px; text-align: center;"
+              style="width: 80%; height: 500px; text-align: center"
             >
               <div
                 id="final_label"
@@ -653,22 +673,23 @@
         <div id="myModal" style="background-color: white" class="modal"></div>
       </section>
       <section id="outro">
-        <div class="title" style="text-align: center">
-          What's next?
+        <div class="title" style="text-align: center">What's next?</div>
+        <div
+          class="subtitle"
+          style="margin-bottom: 2%; text-align: center; margin-top: 2%"
+        >
+          We've taken a look at each generation and saw how they have more in
+          common than one would think.
         </div>
         <div
-            class="subtitle"
-            style="margin-bottom: 2%; text-align: center; margin-top: 2%"
-          >
-            We've taken a look at each generation and saw how they have more in common than one would think.
-        </div>
-        <div
-            class="subtitle"
-            style="margin-bottom: 2%; text-align: left; margin-top: 2%"
-          >
-            We hope that the story told here between GenZers and Boomers will be remembered even beyond this visualization. While we may have contrasting
-            viewpoints and news sources, our stories are still built together. Our media, political leanings, and even 
-            lifestyles can be different, but we can learn from one another and bridge the gap.
+          class="subtitle"
+          style="margin-bottom: 2%; text-align: left; margin-top: 2%"
+        >
+          We hope that the story told here between GenZers and Boomers will be
+          remembered even beyond this visualization. While we may have
+          contrasting viewpoints and news sources, our stories are still built
+          together. Our media, political leanings, and even lifestyles can be
+          different, but we can learn from one another and bridge the gap.
         </div>
         <div
             class="subtitle"
