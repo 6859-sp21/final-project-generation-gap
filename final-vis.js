@@ -489,8 +489,8 @@ function render() {
       ethnicity + gender + age + education + metro + region;
     console.log("currentDemographics", currentDemographics);
     var numPeople = result.length
-
-    personNum.text(`${personIndex+1}/${numPeople}`)
+    var personDisplayInd = numPeople===0 ? 0 : personIndex+1
+    personNum.text(`${personDisplayInd}/${numPeople}`)
     var randomPerson = result[personIndex];
     // if (currentDemographics in peopleMap) {
     //     console.log('in peopleMap')
@@ -527,7 +527,7 @@ function render() {
 
 function renderUnitVis() {
   // updatePersonSources()
-  
+
   d3.csv("./data/updated_final_allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
     // highlightedData = highlighted(data);
