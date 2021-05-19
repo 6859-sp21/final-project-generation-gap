@@ -422,7 +422,7 @@ span {
 .timeline {
   position: relative;
 }
-.line {
+.timeline-line {
   content: '';
   position: absolute;
   width: 2px;
@@ -476,7 +476,20 @@ span {
   margin-top: 5px;
 }
 #headline-example{
-  padding-top: 10rem;
+  margin-top: 30px;
+  background-color: #FDFCF9;
+  border:1px solid #282828;
+  width: 50%;
+  height: 300%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 20px;
+}
+#headline-text{
+  font-size: 24px;
+  padding: 15px;
+  line-height: 1.3;
+  text-align: left;
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
