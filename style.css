@@ -88,6 +88,32 @@ div.tooltip {
   font-weight: 500;
 }
 
+div.timeline_tooltip {	
+  position: absolute;			
+  text-align: center;
+  display: inline-block;
+  min-height: 2rem;								
+  padding: .5rem;
+  color: black;
+  font-size: 20px;	
+
+  background: white;	
+  border-radius: 3px;		
+  pointer-events: none;	
+  box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+.tooltip-timeline-more{
+  padding: 0.3rem;
+  color: black;
+  font-size: 20px;
+  font-family: 'Franklin Gothic', sans-serif;
+  font-weight: 300;
+  text-align: left;
+}
+
 .tooltip-source{
   padding: 1rem;
   color: black;
@@ -240,17 +266,18 @@ button#changePerson:hover{
 }
 
 .line {
-  flex-grow: 1;
-  height: 1px;
+  flex-grow: 1 !important;
+  height: 1px !important;
   background: black;
-  position: relative;
+  position: relative !important;
+  left:0 !important;
 }
 
 .line.arrow-right:after {
   position: absolute;
   content: '';
   bottom: -10px;
-  right: 0;
+  right: -1px;
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -262,7 +289,7 @@ button#changePerson:hover{
   position: absolute;
   content: '';
   top: -10px;
-  left: 0;
+  left: -1px;
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -272,6 +299,7 @@ button#changePerson:hover{
 
 label {
   margin: 0 15px;
+  white-space: nowrap;
 }
 
 
@@ -394,7 +422,7 @@ span {
 .timeline {
   position: relative;
 }
-.line {
+.timeline-line {
   content: '';
   position: absolute;
   width: 2px;
@@ -448,7 +476,20 @@ span {
   margin-top: 5px;
 }
 #headline-example{
-  padding-top: 10rem;
+  margin-top: 30px;
+  background-color: #FDFCF9;
+  border:1px solid #282828;
+  width: 50%;
+  height: 300%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 20px;
+}
+#headline-text{
+  font-size: 24px;
+  padding: 15px;
+  line-height: 1.3;
+  text-align: left;
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */

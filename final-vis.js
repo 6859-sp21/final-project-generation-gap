@@ -22,36 +22,39 @@ var final_width = window.innerWidth*.6 - final_margin.left - final_margin.right,
   col = d3.scaleLinear().domain([0, numRow]).range([0, window.innerHeight*1.1]);
 
 sourcesMap = {
-    "ABC News": ["ABC News (Online)"],
-    "BBC": ["BBC News"],
-    "BrietBart": ["Breitbart News"],
-    "Business Insider": ["Insider"],
-    "Buzzfeed": ["BuzzFeed News"],
-    "CBS News": ["CBS News (Online)"],
-    "CNN": ["CNN (Online News)", "CNN (Opinion)"],
-    "Daily Caller": ["The Daily Caller"],
-    "Fox News": ["Fox News (Online News)"],
-    "HuffPost": ["HuffPost"],
-    "MSNBC": ["MSNBC"],
-    "NBC News": ["NBC News (Online)"],
-    "NPR": ["NPR (Opinion)", "NPR (Online News)"],
-    "New York Post": ["New York Post"],
-    "Newsweek": ["Newsweek"],
-    "PBS": ["PBS NewsHour"],
-    "Politico": ["Politico"],
-    "Rush Limbaugh Show (radio)": ["Rush Limbaugh"],
-    "Sean Hannity Show (radio)": ["Sean Hannity"],
-    "The Guardian": ["The Guardian"],
-    "The Hill": ["The Hill"],
-    "The New York Times": ["New York Times (Opinion)", "New York Times (News)"],
-    "The Wall Street Journal": ["Wall Street Journal (News)","Wall Street Journal (Opinion)"],
-    "Time": ["Time Magazine"],
-    "USA TODAY": ["USA TODAY"],
-    "Univision": ["Univision"],
-    "Vice": ["Vice"],
-    "Vox": ["Vox"],
-    "Washington Examiner": ["Washington Examiner"],
-    "Washington Post": ["Washington Post"],
+  "ABC News": ["ABC News (Online)"],
+  BBC: ["BBC News"],
+  BrietBart: ["Breitbart News"],
+  "Business Insider": ["Insider"],
+  Buzzfeed: ["BuzzFeed News"],
+  "CBS News": ["CBS News (Online)"],
+  CNN: ["CNN (Online News)", "CNN (Opinion)"],
+  "Daily Caller": ["The Daily Caller"],
+  "Fox News": ["Fox News (Online News)"],
+  HuffPost: ["HuffPost"],
+  MSNBC: ["MSNBC"],
+  "NBC News": ["NBC News (Online)"],
+  NPR: ["NPR (Opinion)", "NPR (Online News)"],
+  "New York Post": ["New York Post"],
+  Newsweek: ["Newsweek"],
+  PBS: ["PBS NewsHour"],
+  Politico: ["Politico"],
+  "Rush Limbaugh Show (radio)": ["Rush Limbaugh"],
+  "Sean Hannity Show (radio)": ["Sean Hannity"],
+  "The Guardian": ["The Guardian"],
+  "The Hill": ["The Hill"],
+  "The New York Times": ["New York Times (Opinion)", "New York Times (News)"],
+  "The Wall Street Journal": [
+    "Wall Street Journal (News)",
+    "Wall Street Journal (Opinion)",
+  ],
+  Time: ["Time Magazine"],
+  "USA TODAY": ["USA TODAY"],
+  Univision: ["Univision"],
+  Vice: ["Vice"],
+  Vox: ["Vox"],
+  "Washington Examiner": ["Washington Examiner"],
+  "Washington Post": ["Washington Post"],
 };
 
 var sourceData;
@@ -90,7 +93,8 @@ var svg = d3
 //   .append("g")
 //   .attr("transform", "translate(" + final_margin.left + "," + final_margin.top + ")");
 
-var finalLabel = d3.select("#final_label").text("")
+var finalLabel = d3.select("#final_label").text("");
+var personNum = d3.select("#personNum").text("")
 
 var tooltip = d3
   .select("body")
@@ -206,6 +210,7 @@ for (const option of document.querySelectorAll(".custom-option")) {
         ".custom-select__trigger span"
       ).textContent = this.textContent;
     }
+    personIndex = 0
     render(); // render if there's an update in person card
   });
 }
@@ -224,41 +229,40 @@ $(".multipleSelect").fastselect({
 });
 var options = "";
 [
-    "ABC News (Online)",
-    "BBC News",
-    "Breitbart News",
-    "BuzzFeed News",
-    "CBS News (Online)",
-    "CNN (Online News)", 
-    "CNN (Opinion)",
-    "Fox News (Online News)",
-    "HuffPost",
-    "Insider",
-    "MSNBC",
-    "NBC News (Online)",
-    "NPR (Online News)",
-    "NPR (Opinion)", 
-    "New York Post",
-    "New York Times (News)",
-    "New York Times (Opinion)", 
-    "Newsweek",
-    "PBS NewsHour",
-    "Politico",
-    "Rush Limbaugh",
-    "Sean Hannity",
-    "The Daily Caller",
-    "The Guardian",
-    "The Hill",
-    "Time Magazine",
-    "USA TODAY",
-    "Univision",
-    "Vice",
-    "Vox",
-    "Wall Street Journal (News)",
-    "Wall Street Journal (Opinion)",
-    "Washington Examiner",
-    "Washington Post",
-
+  "ABC News (Online)",
+  "BBC News",
+  "Breitbart News",
+  "BuzzFeed News",
+  "CBS News (Online)",
+  "CNN (Online News)",
+  "CNN (Opinion)",
+  "Fox News (Online News)",
+  "HuffPost",
+  "Insider",
+  "MSNBC",
+  "NBC News (Online)",
+  "NPR (Online News)",
+  "NPR (Opinion)",
+  "New York Post",
+  "New York Times (News)",
+  "New York Times (Opinion)",
+  "Newsweek",
+  "PBS NewsHour",
+  "Politico",
+  "Rush Limbaugh",
+  "Sean Hannity",
+  "The Daily Caller",
+  "The Guardian",
+  "The Hill",
+  "Time Magazine",
+  "USA TODAY",
+  "Univision",
+  "Vice",
+  "Vox",
+  "Wall Street Journal (News)",
+  "Wall Street Journal (Opinion)",
+  "Washington Examiner",
+  "Washington Post",
 ].forEach((element) => {
   options +=
     `<option value=${element.split(" ").join("")}>` + element + `</option>`;
@@ -269,6 +273,7 @@ document.getElementById("news_select").innerHTML = options;
 document.querySelector(".submit_media").addEventListener("click", function () {
   var final_viz =
     document.getElementById("intro").scrollHeight +
+    document.getElementById("intro-info").scrollHeight +
     document.getElementById("demographics-scrolly").scrollHeight +
     document.getElementById("media-scrolly").scrollHeight +
     document.getElementById("user-input").scrollHeight;
@@ -300,10 +305,8 @@ document.querySelector(".submit_media").addEventListener("click", function () {
 
 //Listen for change person
 document.querySelector("#changePerson").addEventListener("click", function () {
-    changePerson();
-  });
-
-
+  changePerson();
+});
 
 var ethnicity = "White";
 var gender = "Female";
@@ -453,46 +456,6 @@ function randomNums(length) {
     return nums
 }
 
-// if too many articles, cap within each topic
-function capData(data) {
-    // map of data keyed by topic
-    topicMap = {
-        "covid": [],
-        "climate change": [],
-        "blm": [],
-        "guns": [],
-        "economy": []
-    }
-    for (i in data) {
-        news = data[i]
-        if (topicMap.hasOwnProperty(news.Topic)) {
-            topicMap[news.Topic].push(news)
-        }
-    }
-
-    cappedData = [];
-    i = 0;
-
-    for (topic in topicMap) {
-        data = topicMap[topic]
-        length = data.length
-        if (length in randomNumbersMap) {
-            var randomNumbers = randomNumbersMap[length]
-        } else {
-            var randomNumbers = randomNums(data.length)
-            randomNumbersMap[length] = randomNumbers
-        }
-        // randomly select from data of each topic
-        randomNumbers.forEach((element) => {
-            cappedData.push(data[element])
-        })
-    }
-    console.log('randomNumbersMap', randomNumbersMap)
-    // console.log('cappedData', cappedData)
-    return cappedData
-
-}
-
 // RENDER
 function render() {
   d3.csv("./data/people.csv").then(function (data) {
@@ -522,9 +485,13 @@ function render() {
     });
 
     // determine random person
-    var currentDemographics = ethnicity+gender+age+education+metro+region
-    // console.log('currentDemographics', currentDemographics)
-    var randomPerson = result[personIndex]
+    var currentDemographics =
+      ethnicity + gender + age + education + metro + region;
+    console.log("currentDemographics", currentDemographics);
+    var numPeople = result.length
+    
+    personNum.text(`${personIndex+1}/${numPeople}`)
+    var randomPerson = result[personIndex];
     // if (currentDemographics in peopleMap) {
     //     console.log('in peopleMap')
     //     var randomPerson = peopleMap[currentDemographics]
@@ -552,7 +519,7 @@ function render() {
     } else if (sources.length==0) {
         finalLabel.text("This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!")
     } else {
-        finalLabel.text("")
+      finalLabel.text("");
     }
     renderUnitVis();
   });
@@ -735,7 +702,7 @@ function renderUnitVis() {
     <span class="line arrow-left"></span>
     <label>Media Bias</label>
     <span class="line arrow-right"></span>
-  </div>
+    </div>
     <div style="justify-items: space-between; flex-direction: row; display: flex;">
 
     <div style="text-align:center;"><a style="background-color:${
