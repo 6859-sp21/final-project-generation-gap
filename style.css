@@ -422,7 +422,7 @@ span {
 .timeline {
   position: relative;
 }
-.line {
+.timeline-line {
   content: '';
   position: absolute;
   width: 2px;
