@@ -88,6 +88,32 @@ div.tooltip {
   font-weight: 500;
 }
 
+div.timeline_tooltip {	
+  position: absolute;			
+  text-align: center;
+  display: inline-block;
+  min-height: 2rem;								
+  padding: .5rem;
+  color: black;
+  font-size: 20px;	
+
+  background: white;	
+  border-radius: 3px;		
+  pointer-events: none;	
+  box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.75);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 500;
+}
+
+.tooltip-timeline-more{
+  padding: 0.3rem;
+  color: black;
+  font-size: 20px;
+  font-family: 'Franklin Gothic', sans-serif;
+  font-weight: 300;
+  text-align: left;
+}
+
 .tooltip-source{
   padding: 1rem;
   color: black;
@@ -213,6 +239,23 @@ button.submit_media{
 
 button.submit_media:hover{
   background-color: #c5ac1c;
+  cursor: pointer;
+}
+
+button#changePerson{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 15px;
+  margin-top: 5px;
+  border: 2px solid black;
+  border-radius: 0px;
+  color: black;
+  padding: 10px;
+  background-color: transparent;
+}
+
+button#changePerson:hover{
+  background-color: #c5ac1c;
+  cursor: pointer;
 }
 
 .line-container {
@@ -223,17 +266,18 @@ button.submit_media:hover{
 }
 
 .line {
-  flex-grow: 1;
-  height: 1px;
+  flex-grow: 1 !important;
+  height: 1px !important;
   background: black;
-  position: relative;
+  position: relative !important;
+  left:0 !important;
 }
 
 .line.arrow-right:after {
   position: absolute;
   content: '';
   bottom: -10px;
-  right: 0;
+  right: -1px;
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -245,7 +289,7 @@ button.submit_media:hover{
   position: absolute;
   content: '';
   top: -10px;
-  left: 0;
+  left: -1px;
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -255,6 +299,7 @@ button.submit_media:hover{
 
 label {
   margin: 0 15px;
+  white-space: nowrap;
 }
 
 

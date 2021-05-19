@@ -1,12 +1,14 @@
 const final_margin = { top: 0, right: 30, bottom: 50, left: 30 },
-  final_width = window.innerWidth*.6 - final_margin.left - final_margin.right,
-  final_height = window.innerHeight  - final_margin.top - final_margin.bottom,
+  final_width =
+    window.innerWidth * 0.6 - final_margin.left - final_margin.right,
+  final_height =
+    window.innerHeight * 1.3 - final_margin.top - final_margin.bottom,
   newsWidth = 70,
   newsHeight = 90,
   maxLineNumber = 7,
   bylineMarginTop = 40,
   headerContainerWidth = 60,
-  headerContainerMargin = { top: 1, left: .8 };
+  headerContainerMargin = { top: 1, left: 0.8 };
 (strokeWidth = 5),
   (numRow = 9),
   (numFilters = 10),
@@ -17,37 +19,39 @@ const final_margin = { top: 0, right: 30, bottom: 50, left: 30 },
   (highlightColor = "grey");
 
 sourcesMap = {
-  CNN: ["CNN (Online News)", "CNN (Opinion)"],
-  "The New York Times": ["New York Times (Opinion)", "New York Times (News)"],
-  "NBC News": ["NBC News (Online)"],
-  "CBS News": ["CBS News (Online)"],
-  "ABC News": ["ABC News (online)"],
-  "Washington Post": ["Washington Post"],
-  NPR: ["NPR (Opinion)", "NPR (Online News)"],
+  "ABC News": ["ABC News (Online)"],
   BBC: ["BBC News"],
-  "USA TODAY": ["USA TODAY"],
+  BrietBart: ["Breitbart News"],
+  "Business Insider": ["Insider"],
+  Buzzfeed: ["BuzzFeed News"],
+  "CBS News": ["CBS News (Online)"],
+  CNN: ["CNN (Online News)", "CNN (Opinion)"],
+  "Daily Caller": ["The Daily Caller"],
+  "Fox News": ["Fox News (Online News)"],
+  HuffPost: ["HuffPost"],
+  MSNBC: ["MSNBC"],
+  "NBC News": ["NBC News (Online)"],
+  NPR: ["NPR (Opinion)", "NPR (Online News)"],
+  "New York Post": ["New York Post"],
+  Newsweek: ["Newsweek"],
+  PBS: ["PBS NewsHour"],
+  Politico: ["Politico"],
+  "Rush Limbaugh Show (radio)": ["Rush Limbaugh"],
+  "Sean Hannity Show (radio)": ["Sean Hannity"],
+  "The Guardian": ["The Guardian"],
+  "The Hill": ["The Hill"],
+  "The New York Times": ["New York Times (Opinion)", "New York Times (News)"],
   "The Wall Street Journal": [
     "Wall Street Journal (News)",
     "Wall Street Journal (Opinion)",
   ],
-  "Fox News": ["Fox News (Online News)"],
-  // "Drudge Report",
-  // "TheBlaze.com",
-  BrietBart: ["Breitbart News"],
-  HuffPost: ["HuffPost"],
   Time: ["Time Magazine"],
+  "USA TODAY": ["USA TODAY"],
+  Univision: ["Univision"],
   Vice: ["Vice"],
-  "Daily Caller": ["The Daily Caller"],
-  MSNBC: ["MSNBC"],
-  Politico: ["Politico"],
-  Buzzfeed: ["BuzzFeed News"],
-  Newsweek: ["Newsweek"],
   Vox: ["Vox"],
-  "The Hill": ["The Hill"],
   "Washington Examiner": ["Washington Examiner"],
-  "New York Post": ["New York Post"],
-  "The Guardian": ["The Guardian"]
-
+  "Washington Post": ["Washington Post"],
 };
 
 var sourceData;
@@ -56,7 +60,9 @@ var userInputSources = []; // TODO maybe add a default
 var similarityHighlighted = {}; // map of newspapers that should be highlighted
 
 // add people to this map as they are chosen to remember the random selections
-var peopleMap = {}
+var peopleMap = {};
+var personIndex = 0;
+var result;
 
 var biasColors = {
   Left: "#2E65A0",
@@ -66,8 +72,14 @@ var biasColors = {
   Right: "#CB2127",
 };
 
-var row = d3.scaleLinear().domain([0, numRow]).range([0, window.innerWidth*.55]);
-var col = d3.scaleLinear().domain([0, numRow]).range([0, window.innerHeight*1.1]);
+var row = d3
+  .scaleLinear()
+  .domain([0, numRow])
+  .range([0, window.innerWidth * 0.55]);
+var col = d3
+  .scaleLinear()
+  .domain([0, numRow])
+  .range([0, window.innerHeight * 1.1]);
 
 var filters = {
   bias: [],
@@ -86,6 +98,8 @@ var svg = d3
   .attr("height", final_height + margin.top + margin.bottom);
 //   .append("g")
 //   .attr("transform", "translate(" + final_margin.left + "," + final_margin.top + ")");
+
+var finalLabel = d3.select("#final_label").text("");
 
 var tooltip = d3
   .select("body")
@@ -206,36 +220,40 @@ $(".multipleSelect").fastselect({
 });
 var options = "";
 [
-  "The Daily Caller",
-  "USA TODAY",
-  "HuffPost",
-  "Wall Street Journal (News)",
-  "New York Post (News)",
-  "New York Times (News)",
-  "CNN (Online News)",
-  "Wall Street Journal (Opinion)",
-  "The Hill",
-  "Vox",
-  "Time Magazine",
-  "Breitbart News",
-  "CBS News (Online)",
-  "BBC News",
-  "NBC News (Online)",
-  "Washington Examiner",
-  "Vice",
-  "Fox News (Online News)",
-  "The Guardian",
-  "NPR (Online News)",
-  "Politico",
-  "Newsweek",
   "ABC News (Online)",
-  "CNN (Opinion)",
-  "New York Post (Opinion)",
-  "NPR (Opinion)",
-  "Washington Post",
+  "BBC News",
+  "Breitbart News",
   "BuzzFeed News",
-  "New York Times (Opinion)",
+  "CBS News (Online)",
+  "CNN (Online News)",
+  "CNN (Opinion)",
+  "Fox News (Online News)",
+  "HuffPost",
+  "Insider",
   "MSNBC",
+  "NBC News (Online)",
+  "NPR (Online News)",
+  "NPR (Opinion)",
+  "New York Post",
+  "New York Times (News)",
+  "New York Times (Opinion)",
+  "Newsweek",
+  "PBS NewsHour",
+  "Politico",
+  "Rush Limbaugh",
+  "Sean Hannity",
+  "The Daily Caller",
+  "The Guardian",
+  "The Hill",
+  "Time Magazine",
+  "USA TODAY",
+  "Univision",
+  "Vice",
+  "Vox",
+  "Wall Street Journal (News)",
+  "Wall Street Journal (Opinion)",
+  "Washington Examiner",
+  "Washington Post",
 ].forEach((element) => {
   options +=
     `<option value=${element.split(" ").join("")}>` + element + `</option>`;
@@ -275,6 +293,11 @@ document.querySelector(".submit_media").addEventListener("click", function () {
   });
 });
 
+//Listen for change person
+document.querySelector("#changePerson").addEventListener("click", function () {
+  changePerson();
+});
+
 var ethnicity = "White";
 var gender = "Female";
 var age = "18-29";
@@ -283,15 +306,6 @@ var metro = "Metropolitan";
 var region = "Northeast";
 
 function updatePersonSources() {
-  // console.log('update', document.getElementById("ethnicity-option").selectedIndex)
-  // ethnicity = document.getElementById("ethnicity").options[document.getElementById("ethnicity").selectedIndex].value
-  // console.log(ethnicity)
-  // gender = document.getElementById("gender").options[document.getElementById("gender").selectedIndex].value
-  // age = document.getElementById("age").options[document.getElementById("age").selectedIndex].value
-  // education = document.getElementById("education").options[ document.getElementById("education").selectedIndex].value
-  // metro = document.getElementById("metro").options[document.getElementById("metro").selectedIndex].value
-  // region = document.getElementById("region").options[document.getElementById("region").selectedIndex].value
-
   dEthnicity = document.getElementById("ethnicity");
   for (const option of dEthnicity.querySelectorAll(".custom-option")) {
     if (option.classList.contains("selected")) {
@@ -328,6 +342,18 @@ function updatePersonSources() {
       region = option.dataset.value;
     }
   }
+}
+
+// increment the personIndex to display the next person
+function changePerson() {
+  console.log("length", result.length);
+  if (personIndex >= result.length - 1) {
+    personIndex = 0;
+  } else {
+    personIndex += 1;
+  }
+  console.log("personIndex", personIndex);
+  render();
 }
 
 // convert source from people to allsides
@@ -386,18 +412,18 @@ function render() {
     sourceData = data;
     updatePersonSources();
 
-      var person = {
-        age: age,
-        region: region,
-        metro: metro,
-        sex: gender,
-        education: education,
-        race: ethnicity,
-      };
+    var person = {
+      age: age,
+      region: region,
+      metro: metro,
+      sex: gender,
+      education: education,
+      race: ethnicity,
+    };
     console.log(person.age);
     console.log("sourcess", sourceData);
 
-    var result = sourceData.filter((d) => {
+    result = sourceData.filter((d) => {
       return (
         d.F_AGECAT == person.age &&
         d.F_CREGION == person.region &&
@@ -409,19 +435,20 @@ function render() {
     });
 
     // determine random person
-    var currentDemographics = ethnicity+gender+age+education+metro+region
-    console.log('currentDemographics', currentDemographics)
-    if (currentDemographics in peopleMap) {
-        console.log('in peopleMap')
-        var randomPerson = peopleMap[currentDemographics]
-    } else {
-        // var randomPerson = result[Math.floor(Math.random() * result.length)];
-        console.log('min', Math.min(0,1))
-        var randomPerson = result[Math.min(1, result.length-1)]
-        peopleMap[currentDemographics] = randomPerson
-    }
+    var currentDemographics =
+      ethnicity + gender + age + education + metro + region;
+    console.log("currentDemographics", currentDemographics);
+    var randomPerson = result[personIndex];
+    // if (currentDemographics in peopleMap) {
+    //     console.log('in peopleMap')
+    //     var randomPerson = peopleMap[currentDemographics]
+    // } else {
+    //     // var randomPerson = result[Math.floor(Math.random() * result.length)];
+    //     console.log('min', Math.min(0,1))
+    //     var randomPerson = result[personIndex]
+    //     peopleMap[currentDemographics] = randomPerson
+    // }
 
-      
     console.log("sourcessss", result);
     // var randomPerson = result[1];
     console.log(randomPerson);
@@ -433,6 +460,19 @@ function render() {
       }
     }
     console.log(sources);
+    if (result.length == 0) {
+      console.log("potate");
+      finalLabel.text(
+        "We do not have data on this person :( Please select a different combination of demographics to continue exploring!"
+      );
+    } else if (sources.length == 0) {
+      console.log("potate");
+      finalLabel.text(
+        "This person does not read the news sources we have or does not read the news! Click the Next Person button to see if any others of this demographic do!"
+      );
+    } else {
+      finalLabel.text("");
+    }
     renderUnitVis();
   });
 }
@@ -609,7 +649,7 @@ function renderUnitVis() {
     <span class="line arrow-left"></span>
     <label>Media Bias</label>
     <span class="line arrow-right"></span>
-  </div>
+    </div>
     <div style="justify-items: space-between; flex-direction: row; display: flex;">
 
     <div style="text-align:center;"><a style="background-color:${
