@@ -681,11 +681,11 @@ function renderPie(sources) {
       pie_tooltip.transition().duration(30).style("opacity", 1);
       pie_tooltip
         .html(
-          `<div class='tooltip-source'>${d.data.bias} ${(
+          `<div class='tooltip-header'>${d.data.bias} ${(
             ((d.endAngle - d.startAngle) / (2 * Math.PI)) *
             100
           ).toFixed(1)}%</div>
-          <div class='tooltip-source'>${d.data.news_sources} </div>
+          <div class='tooltip-header'>${d.data.news_sources} </div>
         `
         )
         .style("left", d3.event.pageX + 20 + "px")
