@@ -395,7 +395,7 @@ function sortData(data, sources) {
     "blm": [],
     "guns": [],
     "economy": []
-    }       
+    }
 
   // filter to match person
   for (i in data) {
@@ -527,8 +527,8 @@ function render() {
 
 function renderUnitVis() {
   // updatePersonSources()
-
-  d3.csv("./data/final_allsides.csv").then(function (data) {
+  
+  d3.csv("./data/updated_final_allsides.csv").then(function (data) {
     svg.selectAll("g").remove();
     // highlightedData = highlighted(data);
     updateFilter();
