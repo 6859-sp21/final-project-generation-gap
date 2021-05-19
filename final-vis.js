@@ -264,6 +264,7 @@ document.getElementById("news_select").innerHTML = options;
 document.querySelector(".submit_media").addEventListener("click", function () {
   var final_viz =
     document.getElementById("intro").scrollHeight +
+    document.getElementById("intro-info").scrollHeight +
     document.getElementById("demographics-scrolly").scrollHeight +
     document.getElementById("media-scrolly").scrollHeight +
     document.getElementById("user-input").scrollHeight;
