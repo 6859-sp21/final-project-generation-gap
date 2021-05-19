@@ -364,13 +364,14 @@ function timelineReset() {
     .on("mouseover", null)
     .on("mouseout", null);
 
-  demographicsBoomerFigure
+  demographicsGenZFigure
     .selectAll(".circle")
     .style("background-color", "#f7f2ea")
     .on("mouseover", null)
     .on("mouseout", null)
     .transition()
     .attr("opacity", 1);
+
   demographicsBoomerFigure
     .selectAll(".circle")
     .style("background-color", "#f7f2ea")
