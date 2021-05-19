@@ -71,9 +71,19 @@ var userInputSources = []; // TODO maybe add a default
 var similarityHighlighted = {}; // map of newspapers that should be highlighted
 
 // add people to this map as they are chosen to remember the random selections
-var peopleMap = {};
 var personIndex = 0;
 var result;
+
+// change abbreviations to full word
+var topicDisplayMap = {
+    blm: "Black Lives Matter",
+    "climate change": "Climate Change",
+    covid: "Covid-19",
+    economy: "Economy",
+    guns: "Guns",
+}
+
+
 
 var biasColors = {
   Left: "#00306A",
@@ -123,7 +133,7 @@ window.addEventListener("resize", function (e) {
   (final_width =
     window.innerWidth * 0.6 - final_margin.left - final_margin.right),
     (final_height =
-      window.innerHeight * 0.7 - final_margin.top - final_margin.bottom);
+      window.innerHeight * 0.9 - final_margin.top - final_margin.bottom);
   row = d3
     .scaleLinear()
     .domain([0, numRow])
@@ -863,7 +873,7 @@ function renderUnitVis() {
     }</h1>
     <h1 id="modal_byline">${d.Byline}</h1>                  
     <h1 id="modal_info">Date: ${d.Date}</h1>
-    <h1 id="modal_info">Topic: ${d.Topic}</h1>
+    <h1 id="modal_info">Topic: ${topicDisplayMap[d.Topic]}</h1>
     <h1 id="modal_info" style="color:${lightBiasColors[d.Bias]}">Media Bias: ${
       d.Bias
     }</h1>
